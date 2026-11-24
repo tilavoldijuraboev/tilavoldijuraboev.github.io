@@ -40,7 +40,7 @@ header {
 .box {
   margin: auto;
   width: 94%;
-  max-width: 380px;
+  max-width: 360px;
   background: #fff;
   padding: 16px;
   border-radius: 20px;
@@ -48,7 +48,7 @@ header {
 }
 #ekran {
   width: 100%;
-  height: 65px;
+  height: 60px;
   background: #064e3b;
   color: #fff;
   border: none;
@@ -57,7 +57,7 @@ header {
   padding: 10px 15px;
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 .grid {
   display: grid;
@@ -73,9 +73,6 @@ button {
   cursor: pointer;
   background: #f0f4f2;
   color: #064e3b;
-}
-button:active {
-  transform: scale(0.95);
 }
 .ilmiy {
   background: #e0f2fe;
@@ -93,7 +90,6 @@ button:active {
 .teng {
   background: #e11d48;
   color: #fff;
-  grid-column: span 2;
 }
 </style>
 </head>
@@ -107,15 +103,15 @@ button:active {
 <div class="box">
   <input type="text" id="ekran" value="0" readonly>
   <div class="grid">
-    <button class="ilmiy" onclick="funk('sqrt')">√x</button>
-    <button class="ilmiy" onclick="funk('sq')">x²</button>
-    <button class="ilmiy" onclick="qosh('^')">xʸ</button>
-    <button class="ilmiy" onclick="funk('fact')">n!</button>
+    <button class="ilmiy" onclick="ildiz()">√x</button>
+    <button class="ilmiy" onclick="kvadrat()">x²</button>
+    <button class="ilmiy" onclick="qosh('**')">xʸ</button>
+    <button class="ilmiy" onclick="faktorial()">n!</button>
 
-    <button class="ilmiy" onclick="funk('ln')">ln</button>
-    <button class="ilmiy" onclick="funk('log')">lg</button>
-    <button class="ilmiy" onclick="qosh('π')">π</button>
-    <button class="ilmiy" onclick="qosh('e')">e</button>
+    <button class="ilmiy" onclick="lnHisob()">ln</button>
+    <button class="ilmiy" onclick="lgHisob()">lg</button>
+    <button class="ilmiy" onclick="qosh('3.141592')">π</button>
+    <button class="ilmiy" onclick="qosh('2.718281')">e</button>
 
     <button class="ilmiy" onclick="qosh('(')">(</button>
     <button class="ilmiy" onclick="qosh(')')">)</button>
@@ -140,59 +136,66 @@ button:active {
     <button onclick="qosh('0')">0</button>
     <button onclick="qosh('.')">.</button>
     <button class="amal" onclick="qosh('+')">+</button>
-    <button class="teng" onclick="hisobla()" style="grid-column: span 1;">=</button>
+    <button class="teng" onclick="hisobla()">=</button>
   </div>
 </div>
 
 <script>
-const ekran = document.getElementById('ekran');
+var e = document.getElementById('ekran');
 
-function qosh(belgi) {
-  if (ekran.value === '0' && belgi !== '.') {
-    ekran.value = belgi;
+function qosh(b) {
+  if (e.value === '0' && b !== '.') {
+    e.value = b;
   } else {
-    ekran.value += belgi;
+    e.value += b;
   }
 }
 
 function tozala() {
-  ekran.value = '0';
+  e.value = '0';
 }
 
 function ochir() {
-  ekran.value = ekran.value.slice(0, -1) || '0';
+  e.value = e.value.slice(0, -1) || '0';
 }
 
-function funk(tur) {
-  let son = parseFloat(ekran.value);
-  if (isNaN(son)) return;
-  let natija;
-  if (tur === 'sqrt') natija = Math.sqrt(son);if (tur === 'sq') natija = son * son;
-  if (tur === 'ln') natija = Math.log(son);
-  if (tur === 'log') natija = Math.log10(son);
-  if (tur === 'fact') {
-    if (son < 0  !Number.isInteger(son)  son > 170) {
-      ekran.value = 'Xato';
-      setTimeout(tozala, 1200);
-      return;
-    }
-    natija = 1;
-    for (let i = 2; i <= son; i++) natija *= i;
+function ildiz() {
+  var s = parseFloat(e.value);
+  e.value = s >= 0 ? parseFloat(Math.sqrt(s).toFixed(6)) : 'Xato';
+}
+
+function kvadrat() {
+  var s = parseFloat(e.value);
+  e.value = parseFloat((s * s).toFixed(6));
+}
+
+function lnHisob() {
+  var s = parseFloat(e.value);
+  e.value = s > 0 ? parseFloat(Math.log(s).toFixed(6)) : 'Xato';
+}
+
+function lgHisob() {
+  var s = parseFloat(e.value);
+  e.value = s > 0 ? parseFloat(Math.log10(s).toFixed(6)) : 'Xato';
+}function faktorial() {
+  var s = parseInt(e.value);
+  if (isNaN(s)  s < 0  s > 170) {
+    e.value = 'Xato';
+    return;
   }
-  ekran.value = Number.isInteger(natija) ? natija : parseFloat(natija.toFixed(6));
+  var n = 1;
+  for (var i = 2; i <= s; i++) {
+    n = n * i;
+  }
+  e.value = n;
 }
 
 function hisobla() {
   try {
-    let ifoda = ekran.value
-      .replace(/π/g, Math.PI)
-      .replace(/e/g, Math.E)
-      .replace(/\^/g, '**');
-    let natija = eval(ifoda);
-    ekran.value = Number.isInteger(natija) ? natija : parseFloat(natija.toFixed(6));
-  } catch {
-    ekran.value = 'Xato';
-    setTimeout(tozala, 1200);
+    var r = eval(e.value);
+    e.value = Number.isInteger(r) ? r : parseFloat(r.toFixed(6));
+  } catch (err) {
+    e.value = 'Xato';
   }
 }
 </script>
