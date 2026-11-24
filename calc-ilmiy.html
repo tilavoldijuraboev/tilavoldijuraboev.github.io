@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ilmiy kalkulyator</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+body {
+  background: #eef5f1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: #064e3b;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 4px solid #e11d48;
+  position: relative;
+}
+.back {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  text-decoration: none;
+  background: #059669;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.box {
+  margin: auto;
+  width: 94%;
+  max-width: 380px;
+  background: #fff;
+  padding: 16px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+#ekran {
+  width: 100%;
+  height: 65px;
+  background: #064e3b;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  text-align: right;
+  padding: 10px 15px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+button {
+  padding: 14px 0;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #f0f4f2;
+  color: #064e3b;
+}
+button:active {
+  transform: scale(0.95);
+}
+.ilmiy {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 15px;
+}
+.amal {
+  background: #d1fae5;
+  color: #059669;
+}
+.toza {
+  background: #ffe4e6;
+  color: #e11d48;
+}
+.teng {
+  background: #e11d48;
+  color: #fff;
+  grid-column: span 2;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="kalkulyator.html" class="back">← Orqaga</a>
+  <h3>Ilmiy kalkulyator</h3>
+</header>
+
+<div class="box">
+  <input type="text" id="ekran" value="0" readonly>
+  <div class="grid">
+    <button class="ilmiy" onclick="funk('sqrt')">√x</button>
+    <button class="ilmiy" onclick="funk('sq')">x²</button>
+    <button class="ilmiy" onclick="qosh('^')">xʸ</button>
+    <button class="ilmiy" onclick="funk('fact')">n!</button>
+
+    <button class="ilmiy" onclick="funk('ln')">ln</button>
+    <button class="ilmiy" onclick="funk('log')">lg</button>
+    <button class="ilmiy" onclick="qosh('π')">π</button>
+    <button class="ilmiy" onclick="qosh('e')">e</button>
+
+    <button class="ilmiy" onclick="qosh('(')">(</button>
+    <button class="ilmiy" onclick="qosh(')')">)</button>
+    <button class="toza" onclick="tozala()">C</button>
+    <button class="toza" onclick="ochir()">⌫</button>
+
+    <button onclick="qosh('7')">7</button>
+    <button onclick="qosh('8')">8</button>
+    <button onclick="qosh('9')">9</button>
+    <button class="amal" onclick="qosh('/')">÷</button>
+
+    <button onclick="qosh('4')">4</button>
+    <button onclick="qosh('5')">5</button>
+    <button onclick="qosh('6')">6</button>
+    <button class="amal" onclick="qosh('*')">×</button>
+
+    <button onclick="qosh('1')">1</button>
+    <button onclick="qosh('2')">2</button>
+    <button onclick="qosh('3')">3</button>
+    <button class="amal" onclick="qosh('-')">−</button>
+
+    <button onclick="qosh('0')">0</button>
+    <button onclick="qosh('.')">.</button>
+    <button class="amal" onclick="qosh('+')">+</button>
+    <button class="teng" onclick="hisobla()" style="grid-column: span 1;">=</button>
+  </div>
+</div>
+
+<script>
+const ekran = document.getElementById('ekran');
+
+function qosh(belgi) {
+  if (ekran.value === '0' && belgi !== '.') {
+    ekran.value = belgi;
+  } else {
+    ekran.value += belgi;
+  }
+}
+
+function tozala() {
+  ekran.value = '0';
+}
+
+function ochir() {
+  ekran.value = ekran.value.slice(0, -1) || '0';
+}
+
+function funk(tur) {
+  let son = parseFloat(ekran.value);
+  if (isNaN(son)) return;
+  let natija;
+  if (tur === 'sqrt') natija = Math.sqrt(son);if (tur === 'sq') natija = son * son;
+  if (tur === 'ln') natija = Math.log(son);
+  if (tur === 'log') natija = Math.log10(son);
+  if (tur === 'fact') {
+    if (son < 0  !Number.isInteger(son)  son > 170) {
+      ekran.value = 'Xato';
+      setTimeout(tozala, 1200);
+      return;
+    }
+    natija = 1;
+    for (let i = 2; i <= son; i++) natija *= i;
+  }
+  ekran.value = Number.isInteger(natija) ? natija : parseFloat(natija.toFixed(6));
+}
+
+function hisobla() {
+  try {
+    let ifoda = ekran.value
+      .replace(/π/g, Math.PI)
+      .replace(/e/g, Math.E)
+      .replace(/\^/g, '**');
+    let natija = eval(ifoda);
+    ekran.value = Number.isInteger(natija) ? natija : parseFloat(natija.toFixed(6));
+  } catch {
+    ekran.value = 'Xato';
+    setTimeout(tozala, 1200);
+  }
+}
+</script>
+
+</body>
+</html>
