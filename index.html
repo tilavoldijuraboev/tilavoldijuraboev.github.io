@@ -1,4 +1,4 @@
-[24.11.2026 13:44] Dadasi: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
@@ -9,12 +9,14 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
         }
         body {
             background-color: #f0f4f2;
-            color: #1f2937;
-            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         header {
             background: linear-gradient(135deg, #064e3b 0%, #059669 100%);
@@ -24,121 +26,56 @@
             border-bottom: 4px solid #e11d48;
         }
         header h1 {
-            font-size: 2.2rem;
-            letter-spacing: 0.5px;
+            font-size: 2rem;
         }
-        .container {
-            max-width: 750px;
-            margin: 2rem auto;
+        .menu-column {
+            max-width: 500px;
+            width: 100%;
+            margin: 3rem auto;
             padding: 0 1rem;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.2rem;
         }
-        .column-card {
+        .menu-item {
+            display: block;
             background: white;
-            padding: 1.8rem;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(6, 78, 59, 0.08);
-            border-left: 6px solid #059669;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-        .column-card:hover {
-            transform: translateY(-3px);
-            border-left-color: #e11d48;
-        }
-        .column-card h2 {
             color: #064e3b;
-            font-size: 1.6rem;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .badge {
-            background-color: #ffe4e6;
-            color: #e11d48;
-            font-size: 0.8rem;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
-        .formula {
-            background: #ecfdf5;
-            border: 1px dashed #059669;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: #064e3b;
-            margin: 12px 0;
-        }
-        .btn {
-            display: inline-block;
-            background: #e11d48;
-            color: white;
-            padding: 0.65rem 1.4rem;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            margin-top: 0.8rem;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .btn:hover {
-            background: #be123c;
-        }
-        /* Kalkulyator uslubi */
-        .calc-box {
-            margin-top: 1rem;
-            background: #f8fafc;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid #d1fae5;
-        }
-        .calc-inputs {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
-        .calc-inputs input {
-            width: 80px;
-            padding: 8px;
-            border: 1px solid #10b981;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-        #calc-result {
-            margin-top: 10px;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #e11d48;
+            padding: 1.4rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(6, 78, 59, 0.1);
+            border-left: 8px solid #059669;
+            transition: all 0.25s ease;
+        }
+        .menu-item:hover {
+            background: #059669;
+            color: white;
+            border-left-color: #e11d48;
+            transform: translateY(-3px);
         }
         footer {
             text-align: center;
-            padding: 2rem 1rem;
+            padding: 1.5rem 1rem;
             background: #064e3b;
             color: white;
-            margin-top: 3rem;
-        }
-        .tg-links {
-            margin-top: 0.8rem;
         }
         .tg-links a {
             display: inline-block;
             color: white;
-            background: #059669;
+            background: #e11d48;
             padding: 8px 16px;
             border-radius: 6px;
             text-decoration: none;
             margin: 4px;
             font-weight: 600;
-            border: 1px solid #34d399;
+            font-size: 0.95rem;
         }
         .tg-links a:hover {
-            background: #e11d48;
-            border-color: #e11d48;
+            background: #be123c;
         }
     </style>
 </head>
@@ -147,46 +84,12 @@
     <header>
         <h1>Fizika va Matematika</h1>
     </header>
-[24.11.2026 13:44] Dadasi: <div class="container">
 
-        <!-- 1. FIZIKA -->
-        <div class="column-card" id="fizika">
-            <h2>⚛️ Fizika <span class="badge">Qonunlar va Masalalar</span></h2>
-            <p>Mexanika, molekulyar fizika, elektromagnetizm va optika bo'yicha asosiy qonuniyatlar.</p>
-            <div class="formula">F = m · a &nbsp;|&nbsp; I = U / R &nbsp;|&nbsp; E = m · c²</div>
-            <a href="#" class="btn">Fizika bo'limiga kirish</a>
-        </div>
-
-        <!-- 2. MATEMATIKA -->
-        <div class="column-card" id="matematika">
-            <h2>📐 Matematika <span class="badge">Algebra va Geometriya</span></h2>
-            <p>Tenglamalar, funksiyalar, trigonometriya, hosila va integrallar to'plami.</p>
-            <div class="formula">ax² + bx + c = 0 &nbsp;|&nbsp; sin²α + cos²α = 1</div>
-            <a href="#" class="btn">Matematika bo'limiga kirish</a>
-        </div>
-
-        <!-- 3. BLOG -->
-        <div class="column-card" id="blog">
-            <h2>✍️ Blog <span class="badge">Maqolalar</span></h2>
-            <p>Ilmiy maqolalar, masalalar tahlili va shaxsiy fikrlar kundaligi.</p>
-            <a href="#" class="btn">Maqolalarni o'qish</a>
-        </div>
-
-        <!-- 4. KALKULYATOR -->
-        <div class="column-card" id="kalkulyator">
-            <h2>🧮 Kalkulyator <span class="badge">Kvadrat tenglama</span></h2>
-            <p>Kvadrat tenglama (ax² + bx + c = 0) ildizlarini tezkor hisoblash:</p>
-            <div class="calc-box">
-                <div class="calc-inputs">
-                    <input type="number" id="a" placeholder="a =">
-                    <input type="number" id="b" placeholder="b =">
-                    <input type="number" id="c" placeholder="c =">
-                </div>
-                <button class="btn" onclick="hisobla()">Hisoblash</button>
-                <div id="calc-result"></div>
-            </div>
-        </div>
-
+    <div class="menu-column">
+        <a href="fizika.html" class="menu-item">⚛️ Fizika</a>
+        <a href="matematika.html" class="menu-item">📐 Matematika</a>
+        <a href="blog.html" class="menu-item">✍️ Blog</a>
+        <a href="kalkulyator.html" class="menu-item">🧮 Kalkulyator</a>
     </div>
 
     <footer>
@@ -194,34 +97,7 @@
             <a href="https://t.me" target="_blank">@Phismath21</a>
             <a href="https://t.me" target="_blank">@Abdullayev2104</a>
         </div>
-        <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.8;">© 2026 Fizika va Matematika</p>
     </footer>
-
-    <script>
-        function hisobla() {
-            let a = parseFloat(document.getElementById('a').value);
-            let b = parseFloat(document.getElementById('b').value);
-            let c = parseFloat(document.getElementById('c').value);
-            let res = document.getElementById('calc-result');
-
-            if (isNaN(a)  isNaN(b)  isNaN(c) || a === 0) {
-                res.innerText = "Iltimos, a, b, c koeffitsiyentlarini to'g'ri kiriting (a ≠ 0).";
-                return;
-            }
-
-            let d = b * b - 4 * a * c;
-            if (d > 0) {
-                let x1 = (-b + Math.sqrt(d)) / (2 * a);
-                let x2 = (-b - Math.sqrt(d)) / (2 * a);
-                res.innerText = D = ${d} | x₁ = ${x1.toFixed(2)}, x₂ = ${x2.toFixed(2)};
-            } else if (d === 0) {
-                let x = -b / (2 * a);
-                res.innerText = D = 0 | Yagona ildiz: x = ${x.toFixed(2)};
-            } else {
-                res.innerText = D = ${d} < 0 | Haqiqiy ildizlari yo'q.;
-            }
-        }
-    </script>
 
 </body>
 </html>
