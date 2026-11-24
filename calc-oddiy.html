@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oddiy kalkulyator</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+body {
+  background: #eef5f1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: #064e3b;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 4px solid #e11d48;
+  position: relative;
+}
+.back {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  text-decoration: none;
+  background: #059669;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.box {
+  margin: auto;
+  width: 92%;
+  max-width: 340px;
+  background: #fff;
+  padding: 18px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+#ekran {
+  width: 100%;
+  height: 65px;
+  background: #064e3b;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  text-align: right;
+  padding: 10px 15px;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+button {
+  padding: 16px 0;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #f0f4f2;
+  color: #064e3b;
+}
+button:active {
+  transform: scale(0.95);
+}
+.amal {
+  background: #d1fae5;
+  color: #059669;
+}
+.toza {
+  background: #ffe4e6;
+  color: #e11d48;
+}
+.teng {
+  background: #e11d48;
+  color: #fff;
+  grid-column: span 2;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="kalkulyator.html" class="back">← Orqaga</a>
+  <h3>Oddiy kalkulyator</h3>
+</header>
+
+<div class="box">
+  <input type="text" id="ekran" value="0" readonly>
+  <div class="grid">
+    <button class="toza" onclick="tozala()">C</button>
+    <button class="toza" onclick="ochir()">⌫</button>
+    <button class="amal" onclick="qosh('%')">%</button>
+    <button class="amal" onclick="qosh('/')">÷</button>
+
+    <button onclick="qosh('7')">7</button>
+    <button onclick="qosh('8')">8</button>
+    <button onclick="qosh('9')">9</button>
+    <button class="amal" onclick="qosh('*')">×</button>
+
+    <button onclick="qosh('4')">4</button>
+    <button onclick="qosh('5')">5</button>
+    <button onclick="qosh('6')">6</button>
+    <button class="amal" onclick="qosh('-')">−</button>
+
+    <button onclick="qosh('1')">1</button>
+    <button onclick="qosh('2')">2</button>
+    <button onclick="qosh('3')">3</button>
+    <button class="amal" onclick="qosh('+')">+</button>
+
+    <button onclick="qosh('0')">0</button>
+    <button onclick="qosh('.')">.</button>
+    <button class="teng" onclick="hisobla()">=</button>
+  </div>
+</div>
+
+<script>
+const ekran = document.getElementById('ekran');
+
+function qosh(belgi) {
+  if (ekran.value === '0' && belgi !== '.') {
+    ekran.value = belgi;
+  } else {
+    ekran.value += belgi;
+  }
+}
+
+function tozala() {
+  ekran.value = '0';
+}
+
+function ochir() {
+  ekran.value = ekran.value.slice(0, -1) || '0';
+}
+
+function hisobla() {
+  try {
+    let ifoda = ekran.value.replace(/%/g, '/100');
+    let natija = eval(ifoda);
+    ekran.value = Number.isInteger(natija) ? natija : parseFloat(natija.toFixed(6));
+  } catch {
+    ekran.value = 'Xato';
+    setTimeout(tozala, 1200);
+  }
+}
+</script>
+
+</body>
+</html>
