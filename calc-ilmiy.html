@@ -110,8 +110,8 @@ button {
 
     <button class="ilmiy" onclick="lnHisob()">ln</button>
     <button class="ilmiy" onclick="lgHisob()">lg</button>
-    <button class="ilmiy" onclick="qosh('3.141592')">π</button>
-    <button class="ilmiy" onclick="qosh('2.718281')">e</button>
+    <button class="ilmiy" onclick="qosh('3.141593')">π</button>
+    <button class="ilmiy" onclick="qosh('2.718282')">e</button>
 
     <button class="ilmiy" onclick="qosh('(')">(</button>
     <button class="ilmiy" onclick="qosh(')')">)</button>
@@ -141,64 +141,71 @@ button {
 </div>
 
 <script>
-var e = document.getElementById('ekran');
+const ekran = document.getElementById('ekran');
 
-function qosh(b) {
-  if (e.value === '0' && b !== '.') {
-    e.value = b;
+function qosh(belgi) {
+  if (ekran.value === '0' && belgi !== '.') {
+    ekran.value = belgi;
   } else {
-    e.value += b;
+    ekran.value += belgi;
   }
 }
 
 function tozala() {
-  e.value = '0';
+  ekran.value = '0';
 }
 
 function ochir() {
-  e.value = e.value.slice(0, -1) || '0';
+  ekran.value = ekran.value.slice(0, -1) || '0';
 }
 
 function ildiz() {
-  var s = parseFloat(e.value);
-  e.value = s >= 0 ? parseFloat(Math.sqrt(s).toFixed(6)) : 'Xato';
+  let son = parseFloat(e_val());
+  ekran.value = son >= 0 ? parseFloat(Math.sqrt(son).toFixed(6)) : 'Xato';
 }
 
 function kvadrat() {
-  var s = parseFloat(e.value);
-  e.value = parseFloat((s * s).toFixed(6));
+  let son = parseFloat(e_val());
+  ekran.value = parseFloat((son * son).toFixed(6));
 }
 
 function lnHisob() {
-  var s = parseFloat(e.value);
-  e.value = s > 0 ? parseFloat(Math.log(s).toFixed(6)) : 'Xato';
+  let son = parseFloat(e_val());
+  ekran.value = son > 0 ? parseFloat(Math.log(son).toFixed(6)) : 'Xato';
 }
 
 function lgHisob() {
-  var s = parseFloat(e.value);
-  e.value = s > 0 ? parseFloat(Math.log10(s).toFixed(6)) : 'Xato';
-}function faktorial() {
-  var s = parseInt(e.value);
-  if (isNaN(s)  s < 0  s > 170) {
-    e.value = 'Xato';
+  let son = parseFloat(e_val());
+  ekran.value = son > 0 ? parseFloat(Math.log10(son).toFixed(6)) : 'Xato';
+}
+  function faktorial() {
+  let son = parseInt(e_val());
+  if (isNaN(son)  son < 0  son > 170) {
+    ekran.value = 'Xato';
     return;
   }
-  var n = 1;
-  for (var i = 2; i <= s; i++) {
-    n = n * i;
+  let res = 1;
+  for (let i = 2; i <= son; i++) {
+    res *= i;
   }
-  e.value = n;
+  ekran.value = res;
+}
+
+function e_val() {
+  return ekran.value;
 }
 
 function hisobla() {
   try {
-    var r = eval(e.value);
-    e.value = Number.isInteger(r) ? r : parseFloat(r.toFixed(6));
-  } catch (err) {
-    e.value = 'Xato';
+    let natija = eval(ekran.value);
+    ekran.value = Number.isInteger(natija) ? natija : parseFloat(natija.toFixed(6));
+  } catch {
+    ekran.value = 'Xato';
+    setTimeout(tozala, 1200);
   }
 }
 </script>
 
 </body>
 </html>
+  
