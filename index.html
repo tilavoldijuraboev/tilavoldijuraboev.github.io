@@ -1,123 +1,144 @@
-[24.11.2026 13:34] Dadasi: <!DOCTYPE html>
+[24.11.2026 13:44] Dadasi: <!DOCTYPE html>
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fizika, Matematika va Blog</title>
+    <title>Fizika va Matematika</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
         body {
-            background-color: #f4f7f6;
-            color: #333;
+            background-color: #f0f4f2;
+            color: #1f2937;
             line-height: 1.6;
         }
         header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #064e3b 0%, #059669 100%);
             color: white;
-            padding: 2.5rem 1rem;
+            padding: 2rem 1rem;
             text-align: center;
+            border-bottom: 4px solid #e11d48;
         }
         header h1 {
             font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-        }
-        nav {
-            background-color: #162b52;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 1rem 2rem;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: background 0.3s;
-        }
-        nav a:hover {
-            background-color: #2a5298;
+            letter-spacing: 0.5px;
         }
         .container {
-            max-width: 1100px;
+            max-width: 750px;
             margin: 2rem auto;
             padding: 0 1rem;
-        }
-        .section-title {
-            border-bottom: 2px solid #2a5298;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-            color: #1e3c72;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 1.5rem;
-            margin-bottom: 3rem;
         }
-        .card {
+        .column-card {
             background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
-            border-top: 4px solid #2a5298;
+            padding: 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(6, 78, 59, 0.08);
+            border-left: 6px solid #059669;
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
-        .card h3 {
-            color: #1e3c72;
+        .column-card:hover {
+            transform: translateY(-3px);
+            border-left-color: #e11d48;
+        }
+        .column-card h2 {
+            color: #064e3b;
+            font-size: 1.6rem;
             margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .formula-box {
-            background: #eef2f7;
-            padding: 10px;
-            border-radius: 5px;
-            font-family: 'Courier New', Courier, monospace;
+        .badge {
+            background-color: #ffe4e6;
+            color: #e11d48;
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 20px;
             font-weight: bold;
-            margin: 10px 0;
-            color: #d63031;
+        }
+        .formula {
+            background: #ecfdf5;
+            border: 1px dashed #059669;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #064e3b;
+            margin: 12px 0;
         }
         .btn {
             display: inline-block;
-            background: #2a5298;
+            background: #e11d48;
             color: white;
-            padding: 0.6rem 1.2rem;
+            padding: 0.65rem 1.4rem;
             text-decoration: none;
-            border-radius: 5px;
-            margin-top: 1rem;
-            font-size: 0.9rem;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 0.8rem;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
         }
         .btn:hover {
-            background: #1e3c72;
+            background: #be123c;
         }
-        .telegram-links {
+        /* Kalkulyator uslubi */
+        .calc-box {
             margin-top: 1rem;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #d1fae5;
         }
-        .tg-btn {
-            display: inline-block;
-            background-color: #0088cc;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 5px;
-            text-decoration: none;
-            margin: 0.3rem;
+        .calc-inputs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .calc-inputs input {
+            width: 80px;
+            padding: 8px;
+            border: 1px solid #10b981;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        #calc-result {
+            margin-top: 10px;
             font-weight: bold;
-        }
-        .tg-btn:hover {
-            background-color: #006699;
+            color: #e11d48;
         }
         footer {
             text-align: center;
-            padding: 2.5rem 1rem;
-            background: #162b52;
+            padding: 2rem 1rem;
+            background: #064e3b;
             color: white;
             margin-top: 3rem;
+        }
+        .tg-links {
+            margin-top: 0.8rem;
+        }
+        .tg-links a {
+            display: inline-block;
+            color: white;
+            background: #059669;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: 4px;
+            font-weight: 600;
+            border: 1px solid #34d399;
+        }
+        .tg-links a:hover {
+            background: #e11d48;
+            border-color: #e11d48;
         }
     </style>
 </head>
@@ -125,76 +146,82 @@
 
     <header>
         <h1>Fizika va Matematika</h1>
-        <p>Talabalar va o'qituvchilar uchun o'quv materiallari, formulalar va shaxsiy blog</p>
     </header>
+[24.11.2026 13:44] Dadasi: <div class="container">
 
-    <nav>
-        <a href="#fizika">Fizika</a>
-        <a href="#matematika">Matematika</a>
-        <a href="#blog">Blog</a>
-    </nav>
-
-    <div class="container">
-        
-        <!-- FIZIKA BO'LIMI -->
-        <h2 id="fizika" class="section-title">⚛️ Fizika</h2>
-        <div class="grid">
-[24.11.2026 13:34] Dadasi: <div class="card">
-                <h3>Mexanika asoslari</h3>
-                <p>Kinematika, dinamika, Nyuton qonunlari va energiyaning saqlanish qonuni bo'yicha qo'llanmalar.</p>
-                <div class="formula-box">F = m · a | E = mv² / 2</div>
-                <a href="#" class="btn">Batafsil o'qish</a>
-            </div>
-            <div class="card">
-                <h3>Elektromagnetizm</h3>
-                <p>O'zgarmas elektr toki, Om qonuni, magnit maydoni va masalalar yechish usullari.</p>
-                <div class="formula-box">I = U / R | P = I · U</div>
-                <a href="#" class="btn">Batafsil o'qish</a>
-            </div>
+        <!-- 1. FIZIKA -->
+        <div class="column-card" id="fizika">
+            <h2>⚛️ Fizika <span class="badge">Qonunlar va Masalalar</span></h2>
+            <p>Mexanika, molekulyar fizika, elektromagnetizm va optika bo'yicha asosiy qonuniyatlar.</p>
+            <div class="formula">F = m · a &nbsp;|&nbsp; I = U / R &nbsp;|&nbsp; E = m · c²</div>
+            <a href="#" class="btn">Fizika bo'limiga kirish</a>
         </div>
 
-        <!-- MATEMATIKA BO'LIMI -->
-        <h2 id="matematika" class="section-title">📐 Matematika</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Algebra va Analiz</h3>
-                <p>Kvadrat tenglamalar, funksiyalar, hosila va integrallar bo'yicha talaba va o'qituvchilar uchun eslatmalar.</p>
-                <div class="formula-box">ax² + bx + c = 0 | D = b² - 4ac</div>
-                <a href="#" class="btn">Batafsil o'qish</a>
-            </div>
-            <div class="card">
-                <h3>Geometriya</h3>
-                <p>Planimetriya va stereometriya formulalari, uchburchaklar va aylana xossalari.</p>
-                <div class="formula-box">sin²α + cos²α = 1 | S = πr²</div>
-                <a href="#" class="btn">Batafsil o'qish</a>
-            </div>
+        <!-- 2. MATEMATIKA -->
+        <div class="column-card" id="matematika">
+            <h2>📐 Matematika <span class="badge">Algebra va Geometriya</span></h2>
+            <p>Tenglamalar, funksiyalar, trigonometriya, hosila va integrallar to'plami.</p>
+            <div class="formula">ax² + bx + c = 0 &nbsp;|&nbsp; sin²α + cos²α = 1</div>
+            <a href="#" class="btn">Matematika bo'limiga kirish</a>
         </div>
 
-        <!-- BLOG BO'LIMI -->
-        <h2 id="blog" class="section-title">✍️ Blog</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Aniq fanlarni o'rganish sirlari</h3>
-                <p>Talaba va o'qituvchi sifatidagi tajribalarim, dars o'tish metodikasi va foydali maslahatlar.</p>
-                <a href="#" class="btn">Maqolani o'qish</a>
-            </div>
-            <div class="card">
-                <h3>Yangi o'quv qo'llanmalar va yangiliklar</h3>
-                <p>Telegram kanalimizda e'lon qilinayotgan eng so'nggi testlar, kitoblar va tahlillar.</p>
-                <a href="https://t.me" target="_blank" class="btn">Kanalga o'tish</a>
+        <!-- 3. BLOG -->
+        <div class="column-card" id="blog">
+            <h2>✍️ Blog <span class="badge">Maqolalar</span></h2>
+            <p>Ilmiy maqolalar, masalalar tahlili va shaxsiy fikrlar kundaligi.</p>
+            <a href="#" class="btn">Maqolalarni o'qish</a>
+        </div>
+
+        <!-- 4. KALKULYATOR -->
+        <div class="column-card" id="kalkulyator">
+            <h2>🧮 Kalkulyator <span class="badge">Kvadrat tenglama</span></h2>
+            <p>Kvadrat tenglama (ax² + bx + c = 0) ildizlarini tezkor hisoblash:</p>
+            <div class="calc-box">
+                <div class="calc-inputs">
+                    <input type="number" id="a" placeholder="a =">
+                    <input type="number" id="b" placeholder="b =">
+                    <input type="number" id="c" placeholder="c =">
+                </div>
+                <button class="btn" onclick="hisobla()">Hisoblash</button>
+                <div id="calc-result"></div>
             </div>
         </div>
 
     </div>
 
     <footer>
-        <p>Savol va takliflar uchun Telegram orqali bog'laning:</p>
-        <div class="telegram-links">
-            <a href="https://t.me" target="_blank" class="tg-btn">📢 Kanal: @Phismath21</a>
-            <a href="https://t.me" target="_blank" class="tg-btn">👤 Shaxsiy: @Abdullayev2104</a>
+        <div class="tg-links">
+            <a href="https://t.me" target="_blank">@Phismath21</a>
+            <a href="https://t.me" target="_blank">@Abdullayev2104</a>
         </div>
-        <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8;">© 2026 Fizika va Matematika Portali</p>
+        <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.8;">© 2026 Fizika va Matematika</p>
     </footer>
+
+    <script>
+        function hisobla() {
+            let a = parseFloat(document.getElementById('a').value);
+            let b = parseFloat(document.getElementById('b').value);
+            let c = parseFloat(document.getElementById('c').value);
+            let res = document.getElementById('calc-result');
+
+            if (isNaN(a)  isNaN(b)  isNaN(c) || a === 0) {
+                res.innerText = "Iltimos, a, b, c koeffitsiyentlarini to'g'ri kiriting (a ≠ 0).";
+                return;
+            }
+
+            let d = b * b - 4 * a * c;
+            if (d > 0) {
+                let x1 = (-b + Math.sqrt(d)) / (2 * a);
+                let x2 = (-b - Math.sqrt(d)) / (2 * a);
+                res.innerText = D = ${d} | x₁ = ${x1.toFixed(2)}, x₂ = ${x2.toFixed(2)};
+            } else if (d === 0) {
+                let x = -b / (2 * a);
+                res.innerText = D = 0 | Yagona ildiz: x = ${x.toFixed(2)};
+            } else {
+                res.innerText = D = ${d} < 0 | Haqiqiy ildizlari yo'q.;
+            }
+        }
+    </script>
 
 </body>
 </html>
