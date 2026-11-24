@@ -1,0 +1,200 @@
+[24.11.2026 13:34] Dadasi: <!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fizika, Matematika va Blog</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        nav {
+            background-color: #162b52;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background-color: #2a5298;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .section-title {
+            border-bottom: 2px solid #2a5298;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: #1e3c72;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+            border-top: 4px solid #2a5298;
+        }
+        .card h3 {
+            color: #1e3c72;
+            margin-bottom: 0.8rem;
+        }
+        .formula-box {
+            background: #eef2f7;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #d63031;
+        }
+        .btn {
+            display: inline-block;
+            background: #2a5298;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .btn:hover {
+            background: #1e3c72;
+        }
+        .telegram-links {
+            margin-top: 1rem;
+        }
+        .tg-btn {
+            display: inline-block;
+            background-color: #0088cc;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 0.3rem;
+            font-weight: bold;
+        }
+        .tg-btn:hover {
+            background-color: #006699;
+        }
+        footer {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            background: #162b52;
+            color: white;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Fizika va Matematika</h1>
+        <p>Talabalar va o'qituvchilar uchun o'quv materiallari, formulalar va shaxsiy blog</p>
+    </header>
+
+    <nav>
+        <a href="#fizika">Fizika</a>
+        <a href="#matematika">Matematika</a>
+        <a href="#blog">Blog</a>
+    </nav>
+
+    <div class="container">
+        
+        <!-- FIZIKA BO'LIMI -->
+        <h2 id="fizika" class="section-title">⚛️ Fizika</h2>
+        <div class="grid">
+[24.11.2026 13:34] Dadasi: <div class="card">
+                <h3>Mexanika asoslari</h3>
+                <p>Kinematika, dinamika, Nyuton qonunlari va energiyaning saqlanish qonuni bo'yicha qo'llanmalar.</p>
+                <div class="formula-box">F = m · a | E = mv² / 2</div>
+                <a href="#" class="btn">Batafsil o'qish</a>
+            </div>
+            <div class="card">
+                <h3>Elektromagnetizm</h3>
+                <p>O'zgarmas elektr toki, Om qonuni, magnit maydoni va masalalar yechish usullari.</p>
+                <div class="formula-box">I = U / R | P = I · U</div>
+                <a href="#" class="btn">Batafsil o'qish</a>
+            </div>
+        </div>
+
+        <!-- MATEMATIKA BO'LIMI -->
+        <h2 id="matematika" class="section-title">📐 Matematika</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Algebra va Analiz</h3>
+                <p>Kvadrat tenglamalar, funksiyalar, hosila va integrallar bo'yicha talaba va o'qituvchilar uchun eslatmalar.</p>
+                <div class="formula-box">ax² + bx + c = 0 | D = b² - 4ac</div>
+                <a href="#" class="btn">Batafsil o'qish</a>
+            </div>
+            <div class="card">
+                <h3>Geometriya</h3>
+                <p>Planimetriya va stereometriya formulalari, uchburchaklar va aylana xossalari.</p>
+                <div class="formula-box">sin²α + cos²α = 1 | S = πr²</div>
+                <a href="#" class="btn">Batafsil o'qish</a>
+            </div>
+        </div>
+
+        <!-- BLOG BO'LIMI -->
+        <h2 id="blog" class="section-title">✍️ Blog</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Aniq fanlarni o'rganish sirlari</h3>
+                <p>Talaba va o'qituvchi sifatidagi tajribalarim, dars o'tish metodikasi va foydali maslahatlar.</p>
+                <a href="#" class="btn">Maqolani o'qish</a>
+            </div>
+            <div class="card">
+                <h3>Yangi o'quv qo'llanmalar va yangiliklar</h3>
+                <p>Telegram kanalimizda e'lon qilinayotgan eng so'nggi testlar, kitoblar va tahlillar.</p>
+                <a href="https://t.me" target="_blank" class="btn">Kanalga o'tish</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Savol va takliflar uchun Telegram orqali bog'laning:</p>
+        <div class="telegram-links">
+            <a href="https://t.me" target="_blank" class="tg-btn">📢 Kanal: @Phismath21</a>
+            <a href="https://t.me" target="_blank" class="tg-btn">👤 Shaxsiy: @Abdullayev2104</a>
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8;">© 2026 Fizika va Matematika Portali</p>
+    </footer>
+
+</body>
+</html>
