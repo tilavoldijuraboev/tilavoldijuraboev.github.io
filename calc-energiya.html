@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ish, Quvvat va Energiya</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  background: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: #ffffff;
+  color: #312e81;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 3px solid #4f46e5;
+  position: relative;
+}
+.back {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4f46e5;
+  text-decoration: none;
+  background: #eef2ff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.container {
+  margin: 1.5rem auto;
+  width: 94%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+.box {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 22px;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.07);
+  border: 1px solid #e2e8f0;
+}
+h4 {
+  color: #312e81;
+  margin-bottom: 10px;
+  font-size: 1.08rem;
+}
+.inputs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+input {
+  width: 100%;
+  padding: 11px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+  background: #f8fafc;
+  text-align: center;
+}
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #4338ca;
+}
+.natija {
+  margin-top: 12px;
+  background: #eef2ff;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #1e293b;
+  font-weight: 600;
+  line-height: 1.6;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="kalkulyator.html" class="back">← Orqaga</a>
+  <h3>Ish, Quvvat va Energiya</h3>
+</header>
+
+<div class="container">
+
+  <!-- 1. Ish va Quvvat -->
+  <div class="box">
+    <h4>1. Mexanik ish va Quvvat (A = F · s, N = A / t)</h4>
+    <div class="inputs">
+      <input type="number" id="f1" placeholder="Kuch F (N)" step="any">
+      <input type="number" id="s1" placeholder="Yo'l s (m)" step="any">
+      <input type="number" id="t1" placeholder="Vaqt t (s)" step="any">
+    </div>
+    <button class="btn" onclick="hisobIsh()">Hisoblash</button>
+    <div class="natija" id="res-ish"></div>
+  </div>
+
+  <!-- 2. Kinetik energiya -->
+  <div class="box">
+    <h4>2. Kinetik energiya (E<sub>k</sub> = mv² / 2)</h4>
+    <div class="inputs">
+      <input type="number" id="mk" placeholder="Massa m (kg)" step="any">
+      <input type="number" id="vk" placeholder="Tezlik v (m/s)" step="any">
+    </div>
+    <button class="btn" onclick="hisobKinetik()">Hisoblash</button>
+    <div class="natija" id="res-kin"></div>
+  </div>
+
+  <!-- 3. Potensial energiya -->
+  <div class="box">
+    <h4>3. Potensial energiya (E<sub>p</sub> = m · g · h)</h4>
+    <div class="inputs">
+      <input type="number" id="mp" placeholder="Massa m (kg)" step="any">
+      <input type="number" id="hp" placeholder="Balandlik h (m)" step="any">
+    </div>
+    <button class="btn" onclick="hisobPotensial()">Hisoblash</button>
+    <div class="natija" id="res-pot"></div>
+  </div>
+
+</div>
+
+<script>
+function hisobIsh() {
+  const f = parseFloat(document.getElementById('f1').value);
+  const s = parseFloat(document.getElementById('s1').value);
+  const tVal = document.getElementById('t1').value;
+  const res = document.getElementById('res-ish');
+  res.style.display = 'block';
+
+  if (isNaN(f) || isNaN(s)) {
+    res.innerText = "Iltimos, kuch (F) va yo'l (s) qiymatlarini kiriting!";
+    return;
+  }
+
+  const a = f * s;
+  let html = `Mexanik ish: A = ${parseFloat(a.toFixed(6))} J`;
+
+  if (tVal !== '') {
+    const t = parseFloat(tVal);
+    if (!isNaN(t) && t > 0) {
+      const n = a / t;
+      html += `<br>Quvvat: N = ${parseFloat(n.toFixed(6))} W (Vatt)`;
+    } else {
+      html += `<br>Quvvatni topish uchun vaqt musbat bo'lishi kerak!`;
+    }
+  }
+  res.innerHTML = html;
+}
+
+function hisobKinetik() {
+  const m = parseFloat(document.getElementById('mk').value);
+  const v = parseFloat(document.getElementById('vk').value);
+  const res = document.getElementById('res-kin');
+  res.style.display = 'block';
+
+  if (isNaN(m) || isNaN(v) || m < 0) {
+    res.innerText = "Massa (m ≥ 0) va tezlikni to'g'ri kiriting!";
+    return;
+  }
+
+  const ek = (m * v * v) / 2;
+  res.innerHTML = `Kinetik energiya: E<sub>k</sub> = ${parseFloat(ek.toFixed(6))} J`;
+}
+
+function hisobPotensial() {
+  const m = parseFloat(document.getElementById('mp').value);
+  const h = parseFloat(document.getElementById('hp').value);
+  const res = document.getElementById('res-pot');
+  res.style.display = 'block';
+
+  if (isNaN(m) || isNaN(h) || m < 0) {
+    res.innerText = "Massa (m ≥ 0) va balandlikni to'g'ri kiriting!";
+    return;
+  }
+
+  const g = 9.81;
+  const ep = m * g * h;
+  res.innerHTML = `Potensial energiya: E<sub>p</sub> = ${parseFloat(ep.toFixed(6))} J (g = 9.81 m/s²)`;
+}
+</script>
+
+</body>
+</html>
