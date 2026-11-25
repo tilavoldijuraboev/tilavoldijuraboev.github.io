@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geometriya: Yuzalar va Perimetrlar</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  background: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: #ffffff;
+  color: #312e81;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 3px solid #4f46e5;
+  position: relative;
+}
+.back {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4f46e5;
+  text-decoration: none;
+  background: #eef2ff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.box {
+  margin: 2rem auto;
+  width: 94%;
+  max-width: 460px;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.08);
+  border: 1px solid #e2e8f0;
+}
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #334155;
+}
+select, input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 16px;
+  background: #f8fafc;
+  color: #1e293b;
+  margin-bottom: 14px;
+}
+select {
+  font-weight: 600;
+  color: #4f46e5;
+}
+.btn {
+  width: 100%;
+  padding: 14px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #4338ca;
+}
+.natija {
+  margin-top: 18px;
+  background: #eef2ff;
+  padding: 14px;
+  border-radius: 12px;
+  color: #1e293b;
+  font-weight: 600;
+  line-height: 1.6;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="kalkulyator.html" class="back">← Orqaga</a>
+  <h3>Geometriya kalkulyatori</h3>
+</header>
+
+<div class="box">
+  <label for="shakl">Geometrik shaklni tanlang:</label>
+  <select id="shakl" onchange="maydonYangila()">
+    <option value="uchburchak">Uchburchak (3 tomoni bo'yicha)</option>
+    <option value="tortburchak">To'g'ri to'rtburchak</option>
+    <option value="kvadrat">Kvadrat</option>
+    <option value="aylana">Doira / Aylana</option>
+    <option value="trapetsiya">Trapetsiya</option>
+  </select>
+
+  <div id="inputs-box"></div>
+
+  <button class="btn" onclick="hisoblaGeo()">Hisoblash</button>
+  <div class="natija" id="res-geo"></div>
+</div>
+
+<script>
+function maydonYangila() {
+  const s = document.getElementById('shakl').value;
+  const box = document.getElementById('inputs-box');
+  document.getElementById('res-geo').style.display = 'none';
+
+  if (s === 'uchburchak') {
+    box.innerHTML = `
+      <input type="number" id="a" placeholder="a tomoni" step="any">
+      <input type="number" id="b" placeholder="b tomoni" step="any">
+      <input type="number" id="c" placeholder="c tomoni" step="any">`;
+  } else if (s === 'tortburchak') {
+    box.innerHTML = `
+      <input type="number" id="a" placeholder="Bo'yi (a)" step="any">
+      <input type="number" id="b" placeholder="Eni (b)" step="any">`;
+  } else if (s === 'kvadrat') {
+    box.innerHTML = `<input type="number" id="a" placeholder="Tomoni (a)" step="any">`;
+  } else if (s === 'aylana') {
+    box.innerHTML = `<input type="number" id="r" placeholder="Radiusi (r)" step="any">`;
+  } else if (s === 'trapetsiya') {
+    box.innerHTML = `
+      <input type="number" id="a" placeholder="Katta asosi (a)" step="any">
+      <input type="number" id="b" placeholder="Kichik asosi (b)" step="any">
+      <input type="number" id="h" placeholder="Balandligi (h)" step="any">`;
+  }
+}
+
+function hisoblaGeo() {
+  const s = document.getElementById('shakl').value;
+  const res = document.getElementById('res-geo');
+  res.style.display = 'block';
+
+  if (s === 'uchburchak') {
+    const a = parseFloat(document.getElementById('a').value);
+    const b = parseFloat(document.getElementById('b').value);
+    const c = parseFloat(document.getElementById('c').value);
+    if ([a, b, c].some(v => isNaN(v) || v <= 0)) {
+      res.innerText = "Barcha tomonlarni musbat sonda kiriting!";
+      return;
+    }
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      res.innerText = "Bunday tomonli uchburchak mavjud emas!";
+      return;
+    }
+    const p = a + b + c;
+    const sp = p / 2;
+    const area = Math.sqrt(sp * (sp - a) * (sp - b) * (sp - c));
+    res.innerHTML = `Yuzasi: S = ${parseFloat(area.toFixed(6))}<br>Perimetri: P = ${parseFloat(p.toFixed(6))}`;
+  } else if (s === 'tortburchak') {
+    const a = parseFloat(document.getElementById('a').value);
+    const b = parseFloat(document.getElementById('b').value);
+    if (isNaN(a) || isNaN(b) || a <= 0 || b <= 0) {
+      res.innerText = "Tomonlarni musbat sonda kiriting!";
+      return;
+    }
+    res.innerHTML = `Yuzasi: S = ${parseFloat((a * b).toFixed(6))}<br>Perimetri: P = ${parseFloat((2 * (a + b)).toFixed(6))}`;
+  } else if (s === 'kvadrat') {
+    const a = parseFloat(document.getElementById('a').value);
+    if (isNaN(a) || a <= 0) {
+      res.innerText = "Tomonni musbat sonda kiriting!";
+      return;
+    }
+    res.innerHTML = `Yuzasi: S = ${parseFloat((a * a).toFixed(6))}<br>Perimetri: P = ${parseFloat((4 * a).toFixed(6))}`;
+  } else if (s === 'aylana') {
+    const r = parseFloat(document.getElementById('r').value);
+    if (isNaN(r) || r <= 0) {
+      res.innerText = "Radiusni musbat sonda kiriting!";
+      return;
+    }
+    const area = Math.PI * r * r;
+    const len = 2 * Math.PI * r;
+    res.innerHTML = `Doira yuzasi: S = ${parseFloat(area.toFixed(6))}<br>Aylana uzunligi: L = ${parseFloat(len.toFixed(6))}`;
+  } else if (s === 'trapetsiya') {
+    const a = parseFloat(document.getElementById('a').value);
+    const b = parseFloat(document.getElementById('b').value);
+    const h = parseFloat(document.getElementById('h').value);
+    if ([a, b, h].some(v => isNaN(v) || v <= 0)) {
+      res.innerText = "Asoslar va balandlikni musbat sonda kiriting!";
+      return;
+    }
+    const area = ((a + b) / 2) * h;
+    res.innerHTML = `Trapetsiya yuzasi: S = ${parseFloat(area.toFixed(6))}`;
+  }
+}
+
+maydonYangila();
+</script>
+
+</body>
+</html>
