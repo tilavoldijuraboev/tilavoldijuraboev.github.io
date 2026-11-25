@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elektromagnetizm (Om qonuni)</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  background: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: #ffffff;
+  color: #312e81;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 3px solid #4f46e5;
+  position: relative;
+}
+.back {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4f46e5;
+  text-decoration: none;
+  background: #eef2ff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.container {
+  margin: 1.5rem auto;
+  width: 94%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.box {
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 22px;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.07);
+  border: 1px solid #e2e8f0;
+}
+h4 {
+  color: #312e81;
+  margin-bottom: 8px;
+  font-size: 1.08rem;
+}
+.hint {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+.inputs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+input {
+  width: 100%;
+  padding: 11px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+  background: #f8fafc;
+  text-align: center;
+}
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #4338ca;
+}
+.natija {
+  margin-top: 14px;
+  background: #eef2ff;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #1e293b;
+  font-weight: 600;
+  line-height: 1.6;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="kalkulyator.html" class="back">← Orqaga</a>
+  <h3>Om qonuni va Qarshilik</h3>
+</header>
+
+<div class="container">
+
+  <!-- 1. Om qonuni -->
+  <div class="box">
+    <h4>1. Om qonuni (I = U / R) va Quvvat</h4>
+    <p class="hint">Istalgan 2 ta qiymatni kiriting, 3-sini bo'sh qoldiring:</p>
+    <div class="inputs">
+      <input type="number" id="u" placeholder="U (V)" step="any">
+      <input type="number" id="i" placeholder="I (A)" step="any">
+      <input type="number" id="r" placeholder="R (Ω)" step="any">
+    </div>
+    <button class="btn" onclick="hisobOm()">Hisoblash</button>
+    <div class="natija" id="res-om"></div>
+  </div>
+
+  <!-- 2. Qarshiliklarni ulash -->
+  <div class="box">
+    <h4>2. Umumiy qarshilik (R₃ ixtiyoriy)</h4>
+    <p class="hint">Rezistor qarshiliklarini Om (Ω) da kiriting:</p>
+    <div class="inputs">
+      <input type="number" id="r1" placeholder="R₁ (Ω)" step="any">
+      <input type="number" id="r2" placeholder="R₂ (Ω)" step="any">
+      <input type="number" id="r3" placeholder="R₃ (Ω)" step="any">
+    </div>
+    <button class="btn" onclick="hisobUlanish()">Hisoblash</button>
+    <div class="natija" id="res-ul"></div>
+  </div>
+
+</div>
+
+<script>
+function hisobOm() {
+  const uVal = document.getElementById('u').value;
+  const iVal = document.getElementById('i').value;
+  const rVal = document.getElementById('r').value;
+  const res = document.getElementById('res-om');
+  res.style.display = 'block';
+
+  let u = parseFloat(uVal);
+  let i = parseFloat(iVal);
+  let r = parseFloat(rVal);
+
+  if (uVal === '' && !isNaN(i) && !isNaN(r)) {
+    u = i * r;
+    const p = u * i;
+    res.innerHTML = `Kuchlanish: U = ${parseFloat(u.toFixed(6))} V<br>Elektr quvvati: P = ${parseFloat(p.toFixed(6))} W`;
+  } else if (iVal === '' && !isNaN(u) && !isNaN(r) && r !== 0) {
+    i = u / r;
+    const p = u * i;
+    res.innerHTML = `Tok kuchi: I = ${parseFloat(i.toFixed(6))} A<br>Elektr quvvati: P = ${parseFloat(p.toFixed(6))} W`;
+  } else if (rVal === '' && !isNaN(u) && !isNaN(i) && i !== 0) {
+    r = u / i;
+    const p = u * i;
+    res.innerHTML = `Qarshilik: R = ${parseFloat(r.toFixed(6))} Ω<br>Elektr quvvati: P = ${parseFloat(p.toFixed(6))} W`;
+  } else {
+    res.innerText = "Iltimos, faqat 2 ta qiymatni to'g'ri kiriting (bo'luvchi ≠ 0)!";
+  }
+}
+
+function hisobUlanish() {
+  const r1 = parseFloat(document.getElementById('r1').value);
+  const r2 = parseFloat(document.getElementById('r2').value);
+  const r3Val = document.getElementById('r3').value;
+  const r3 = r3Val !== '' ? parseFloat(r3Val) : null;
+
+  const res = document.getElementById('res-ul');
+  res.style.display = 'block';
+
+  if (isNaN(r1) || isNaN(r2) || r1 <= 0 || r2 <= 0 || (r3 !== null && (isNaN(r3) || r3 <= 0))) {
+    res.innerText = "Qarshiliklarni musbat sonda kiriting!";
+    return;
+  }
+
+  let ketmaKet = r1 + r2 + (r3 || 0);
+  let invParallel = (1 / r1) + (1 / r2) + (r3 ? (1 / r3) : 0);
+  let parallel = 1 / invParallel;
+
+  res.innerHTML = `Ketma-ket ulanganda: R<sub>um</sub> = ${parseFloat(ketmaKet.toFixed(6))} Ω<br>Parallel ulanganda: R<sub>um</sub> = ${parseFloat(parallel.toFixed(6))} Ω`;
+}
+</script>
+
+</body>
+</html>
