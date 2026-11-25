@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baholash va GPA kalkulyatori</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  background: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: #ffffff;
+  color: #312e81;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 3px solid #4f46e5;
+  position: relative;
+}
+.back {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4f46e5;
+  text-decoration: none;
+  background: #eef2ff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.container {
+  margin: 1.5rem auto;
+  width: 94%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.box {
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 22px;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.07);
+  border: 1px solid #e2e8f0;
+}
+h4 {
+  color: #312e81;
+  margin-bottom: 12px;
+  font-size: 1.08rem;
+}
+.fan-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+  background: #f8fafc;
+}
+.btn-add {
+  width: 100%;
+  padding: 10px;
+  background: #eef2ff;
+  color: #4f46e5;
+  border: 1px dashed #4f46e5;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #4338ca;
+}
+.natija {
+  margin-top: 14px;
+  background: #eef2ff;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #1e293b;
+  font-weight: 600;
+  line-height: 1.6;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="kalkulyator.html" class="back">← Orqaga</a>
+  <h3>Baholash va GPA</h3>
+</header>
+
+<div class="container">
+
+  <!-- 1. Talabalar uchun GPA -->
+  <div class="box">
+    <h4>1. Talabalar uchun GPA hisoblash</h4>
+    <div id="fanlar-royxati">
+      <div class="fan-row">
+        <input type="number" class="kredit" placeholder="Kredit (masalan: 6)" min="1" step="any">
+        <select class="baho">
+          <option value="5">5 (A'lo / 86-100)</option>
+          <option value="4">4 (Yaxshi / 71-85)</option>
+          <option value="3">3 (Qoniqarli / 56-70)</option>
+          <option value="2">2 (Qoniqarsiz / 0-55)</option>
+        </select>
+      </div>
+      <div class="fan-row">
+        <input type="number" class="kredit" placeholder="Kredit (masalan: 4)" min="1" step="any">
+        <select class="baho">
+          <option value="5">5 (A'lo / 86-100)</option>
+          <option value="4">4 (Yaxshi / 71-85)</option>
+          <option value="3">3 (Qoniqarli / 56-70)</option>
+          <option value="2">2 (Qoniqarsiz / 0-55)</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-add" onclick="fanQosh()">+ Yana fan qo'shish</button>
+    <button class="btn" onclick="hisobGpa()">GPA ni hisoblash</button>
+    <div class="natija" id="res-gpa"></div>
+  </div>
+
+  <!-- 2. O'qituvchilar uchun baholash -->
+  <div class="box">
+    <h4>2. Test / Nazorat ishi baholash</h4>
+    <div class="fan-row">
+      <input type="number" id="jami-savol" placeholder="Jami savollar (masalan: 30)" min="1" step="1">
+      <input type="number" id="togri-savol" placeholder="To'g'ri javoblar" min="0" step="1">
+    </div>
+    <button class="btn" onclick="hisobBaho()">Bahoni aniqlash</button>
+    <div class="natija" id="res-baho"></div>
+  </div>
+
+</div>
+
+<script>
+function fanQosh() {
+  const royxat = document.getElementById('fanlar-royxati');
+  const div = document.createElement('div');
+  div.className = 'fan-row';
+  div.innerHTML = `
+    <input type="number" class="kredit" placeholder="Kredit" min="1" step="any">
+    <select class="baho">
+      <option value="5">5 (A'lo / 86-100)</option>
+      <option value="4">4 (Yaxshi / 71-85)</option>
+      <option value="3">3 (Qoniqarli / 56-70)</option>
+      <option value="2">2 (Qoniqarsiz / 0-55)</option>
+    </select>`;
+  royxat.appendChild(div);
+}
+
+function hisobGpa() {
+  const kreditlar = document.querySelectorAll('.kredit');
+  const baholar = document.querySelectorAll('.baho');
+  const res = document.getElementById('res-gpa');
+  res.style.display = 'block';
+
+  let jamiBall = 0;
+  let jamiKredit = 0;
+
+  for (let i = 0; i < kreditlar.length; i++) {
+    const k = parseFloat(kreditlar[i].value);
+    const b = parseFloat(baholar[i].value);
+    if (!isNaN(k) && k > 0) {
+      jamiBall += k * b;
+      jamiKredit += k;
+    }
+  }
+
+  if (jamiKredit === 0) {
+    res.innerText = "Iltimos, kamida bitta fan kreditini kiriting!";
+    return;
+  }
+
+  const gpa = jamiBall / jamiKredit;
+  res.innerHTML = `Jami kreditlar: ${jamiKredit}<br>Umumiy GPA: <strong>${gpa.toFixed(2)}</strong> (5.00 dan)`;
+}
+
+function hisobBaho() {
+  const jami = parseInt(document.getElementById('jami-savol').value);
+  const togri = parseInt(document.getElementById('togri-savol').value);
+  const res = document.getElementById('res-baho');
+  res.style.display = 'block';
+
+  if (isNaN(jami) || isNaN(togri) || jami < 1 || togri < 0 || togri > jami) {
+    res.innerText = "Savollar sonini to'g'ri kiriting (To'g'ri ≤ Jami)!";
+    return;
+  }
+
+  const foiz = (togri / jami) * 100;
+  let baho = "";
+  if (foiz >= 86) baho = "5 (A'lo)";
+  else if (foiz >= 71) baho = "4 (Yaxshi)";
+  else if (foiz >= 56) baho = "3 (Qoniqarli)";
+  else baho = "2 (Qoniqarsiz)";
+
+  res.innerHTML = `O'zlashtirish: <strong>${foiz.toFixed(1)}%</strong><br>Baho: <strong>${baho}</strong>`;
+}
+</script>
+
+</body>
+</html>
