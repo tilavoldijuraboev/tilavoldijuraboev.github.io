@@ -178,9 +178,10 @@ function lgHisob() {
   let son = parseFloat(e_val());
   ekran.value = son > 0 ? parseFloat(Math.log10(son).toFixed(6)) : 'Xato';
 }
-  function faktorial() {
+
+function faktorial() {
   let son = parseInt(e_val());
-  if (isNaN(son)  son < 0  son > 170) {
+  if (isNaN(son) || son < 0 || son > 170) {
     ekran.value = 'Xato';
     return;
   }
@@ -208,4 +209,3 @@ function hisobla() {
 
 </body>
 </html>
-  
