@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stereometriya: Hajmlar</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  background: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: #ffffff;
+  color: #312e81;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 3px solid #4f46e5;
+  position: relative;
+}
+.back {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4f46e5;
+  text-decoration: none;
+  background: #eef2ff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.box {
+  margin: 2rem auto;
+  width: 94%;
+  max-width: 460px;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.08);
+  border: 1px solid #e2e8f0;
+}
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #334155;
+}
+select, input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 16px;
+  background: #f8fafc;
+  color: #1e293b;
+  margin-bottom: 14px;
+}
+select {
+  font-weight: 600;
+  color: #4f46e5;
+}
+.btn {
+  width: 100%;
+  padding: 14px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #4338ca;
+}
+.natija {
+  margin-top: 18px;
+  background: #eef2ff;
+  padding: 14px;
+  border-radius: 12px;
+  color: #1e293b;
+  font-weight: 600;
+  line-height: 1.6;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="kalkulyator.html" class="back">← Orqaga</a>
+  <h3>Stereometriya kalkulyatori</h3>
+</header>
+
+<div class="box">
+  <label for="jism">Fazoviy jismni tanlang:</label>
+  <select id="jism" onchange="maydonYangila()">
+    <option value="kub">Kub</option>
+    <option value="parallelepiped">To'g'ri burchakli parallelepiped</option>
+    <option value="silindr">Silindr</option>
+    <option value="konus">Konus</option>
+    <option value="shar">Shar / Sfera</option>
+  </select>
+
+  <div id="inputs-box"></div>
+
+  <button class="btn" onclick="hisoblaStereo()">Hisoblash</button>
+  <div class="natija" id="res-stereo"></div>
+</div>
+
+<script>
+function maydonYangila() {
+  const j = document.getElementById('jism').value;
+  const box = document.getElementById('inputs-box');
+  document.getElementById('res-stereo').style.display = 'none';
+
+  if (j === 'kub') {
+    box.innerHTML = `<input type="number" id="a" placeholder="Kub qirrasi (a)" step="any">`;
+  } else if (j === 'parallelepiped') {
+    box.innerHTML = `
+      <input type="number" id="a" placeholder="Uzunligi (a)" step="any">
+      <input type="number" id="b" placeholder="Eni (b)" step="any">
+      <input type="number" id="c" placeholder="Balandligi (c)" step="any">`;
+  } else if (j === 'silindr' || j === 'konus') {
+    box.innerHTML = `
+      <input type="number" id="r" placeholder="Asos radiusi (r)" step="any">
+      <input type="number" id="h" placeholder="Balandligi (h)" step="any">`;
+  } else if (j === 'shar') {
+    box.innerHTML = `<input type="number" id="r" placeholder="Shar radiusi (r)" step="any">`;
+  }
+}
+
+function hisoblaStereo() {
+  const j = document.getElementById('jism').value;
+  const res = document.getElementById('res-stereo');
+  res.style.display = 'block';
+
+  if (j === 'kub') {
+    const a = parseFloat(document.getElementById('a').value);
+    if (isNaN(a) || a <= 0) {
+      res.innerText = "Qirrani musbat sonda kiriting!";
+      return;
+    }
+    const v = Math.pow(a, 3);
+    const s = 6 * a * a;
+    res.innerHTML = `Hajmi: V = ${parseFloat(v.toFixed(6))}<br>To'la sirti: S = ${parseFloat(s.toFixed(6))}`;
+  } else if (j === 'parallelepiped') {
+    const a = parseFloat(document.getElementById('a').value);
+    const b = parseFloat(document.getElementById('b').value);
+    const c = parseFloat(document.getElementById('c').value);
+    if ([a, b, c].some(v => isNaN(v) || v <= 0)) {
+      res.innerText = "Barcha o'lchamlarni musbat sonda kiriting!";
+      return;
+    }
+    const v = a * b * c;
+    const s = 2 * (a * b + b * c + a * c);
+    res.innerHTML = `Hajmi: V = ${parseFloat(v.toFixed(6))}<br>To'la sirti: S = ${parseFloat(s.toFixed(6))}`;
+  } else if (j === 'silindr') {
+    const r = parseFloat(document.getElementById('r').value);
+    const h = parseFloat(document.getElementById('h').value);
+    if (isNaN(r) || isNaN(h) || r <= 0 || h <= 0) {
+      res.innerText = "Radius va balandlikni musbat sonda kiriting!";
+      return;
+    }
+    const v = Math.PI * r * r * h;
+    const s = 2 * Math.PI * r * (r + h);
+    res.innerHTML = `Hajmi: V = ${parseFloat(v.toFixed(6))}<br>To'la sirti: S = ${parseFloat(s.toFixed(6))}`;
+  } else if (j === 'konus') {
+    const r = parseFloat(document.getElementById('r').value);
+    const h = parseFloat(document.getElementById('h').value);
+    if (isNaN(r) || isNaN(h) || r <= 0 || h <= 0) {
+      res.innerText = "Radius va balandlikni musbat sonda kiriting!";
+      return;
+    }
+    const l = Math.sqrt(r * r + h * h);
+    const v = (1 / 3) * Math.PI * r * r * h;
+    const s = Math.PI * r * (r + l);
+    res.innerHTML = `Hajmi: V = ${parseFloat(v.toFixed(6))}<br>To'la sirti: S = ${parseFloat(s.toFixed(6))}<br>Yasovchisi: l = ${parseFloat(l.toFixed(6))}`;
+  } else if (j === 'shar') {
+    const r = parseFloat(document.getElementById('r').value);
+    if (isNaN(r) || r <= 0) {
+      res.innerText = "Radiusni musbat sonda kiriting!";
+      return;
+    }
+    const v = (4 / 3) * Math.PI * Math.pow(r, 3);
+    const s = 4 * Math.PI * r * r;
+    res.innerHTML = `Hajmi: V = ${parseFloat(v.toFixed(6))}<br>Sfera sirti: S = ${parseFloat(s.toFixed(6))}`;
+  }
+}
+
+maydonYangila();
+</script>
+
+</body>
+</html>
