@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigonometrik kalkulyator</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  background: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: #ffffff;
+  color: #312e81;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 3px solid #4f46e5;
+  position: relative;
+}
+.back {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4f46e5;
+  text-decoration: none;
+  background: #eef2ff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.box {
+  margin: 2rem auto;
+  width: 92%;
+  max-width: 440px;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.08);
+  border: 1px solid #e2e8f0;
+}
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #334155;
+}
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+input, select {
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 16px;
+  background: #f8fafc;
+  color: #1e293b;
+}
+input {
+  flex: 1;
+}
+select {
+  width: 120px;
+  font-weight: 600;
+  color: #4f46e5;
+}
+.btn {
+  width: 100%;
+  padding: 14px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn:hover {
+  background: #4338ca;
+}
+.results {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.res-card {
+  background: #f8fafc;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+.res-card span {
+  display: block;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+}
+.res-card strong {
+  font-size: 18px;
+  color: #312e81;
+}
+.conv-box {
+  margin-top: 12px;
+  background: #eef2ff;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #3730a3;
+  font-weight: 600;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="kalkulyator.html" class="back">← Orqaga</a>
+  <h3>Trigonometrik kalkulyator</h3>
+</header>
+
+<div class="box">
+  <label for="burchak">Burchak qiymatini kiriting:</label>
+  <div class="input-row">
+    <input type="number" id="burchak" placeholder="Masalan: 30" step="any">
+    <select id="birlik">
+      <option value="deg">Gradus (°)</option>
+      <option value="rad">Radian</option>
+    </select>
+  </div>
+
+  <button class="btn" onclick="hisoblaTrig()">Hisoblash</button>
+
+  <div class="results">
+    <div class="res-card"><span>sin(α)</span><strong id="sin-res">—</strong></div>
+    <div class="res-card"><span>cos(α)</span><strong id="cos-res">—</strong></div>
+    <div class="res-card"><span>tg(α)</span><strong id="tg-res">—</strong></div>
+    <div class="res-card"><span>ctg(α)</span><strong id="ctg-res">—</strong></div>
+  </div>
+
+  <div class="conv-box" id="conv-res">Gradus ↔ Radian o'tkazgich</div>
+</div>
+
+<script>
+function hisoblaTrig() {
+  const val = parseFloat(document.getElementById('burchak').value);
+  const birlik = document.getElementById('birlik').value;
+
+  if (isNaN(val)) {
+    alert("Iltimos, burchak qiymatini kiriting!");
+    return;
+  }
+
+  let rad, deg;
+  if (birlik === 'deg') {
+    deg = val;
+    rad = val * (Math.PI / 180);
+    document.getElementById('conv-res').innerText = `${deg}° = ${rad.toFixed(6)} radian`;
+  } else {
+    rad = val;
+    deg = val * (180 / Math.PI);
+    document.getElementById('conv-res').innerText = `${rad} rad = ${deg.toFixed(4)}°`;
+  }
+
+  let s = Math.sin(rad);
+  let c = Math.cos(rad);
+
+  if (Math.abs(s) < 1e-12) s = 0;
+  if (Math.abs(c) < 1e-12) c = 0;
+
+  document.getElementById('sin-res').innerText = parseFloat(s.toFixed(6));
+  document.getElementById('cos-res').innerText = parseFloat(c.toFixed(6));
+  document.getElementById('tg-res').innerText = c === 0 ? "Mavjud emas" : parseFloat((s / c).toFixed(6));
+  document.getElementById('ctg-res').innerText = s === 0 ? "Mavjud emas" : parseFloat((c / s).toFixed(6));
+}
+</script>
+
+</body>
+</html>
