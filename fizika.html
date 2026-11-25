@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fizika — Fizika va Matematika</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  background-color: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+header {
+  background: #ffffff;
+  color: #312e81;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  border-bottom: 3px solid #4f46e5;
+  position: relative;
+}
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.back-btn {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4f46e5;
+  text-decoration: none;
+  background: #eef2ff;
+  padding: 7px 14px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.back-btn:hover {
+  background: #4f46e5;
+  color: #ffffff;
+}
+.menu-column {
+  max-width: 520px;
+  width: 100%;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #ffffff;
+  color: #1e293b;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 1.2rem 1.6rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.05);
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+.menu-item:hover {
+  background: #4f46e5;
+  color: #ffffff;
+  border-color: #4f46e5;
+  transform: translateX(4px);
+}
+.icon-box {
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 1.3rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.menu-item:hover .icon-box {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+}
+.tg-links a {
+  display: inline-block;
+  color: #4f46e5;
+  background: #eef2ff;
+  padding: 8px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 4px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.tg-links a:hover {
+  background: #4f46e5;
+  color: #ffffff;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="back-btn">← Orqaga</a>
+  <h1>⚛️ Fizika</h1>
+</header>
+
+<div class="menu-column">
+  <a href="fiz-mavzular.html" class="menu-item"><span class="icon-box">📚</span> Mavzular</a>
+  <a href="fiz-masalalar.html" class="menu-item"><span class="icon-box">✍️</span> Masalalar yechimlari</a>
+  <a href="fiz-testlar.html" class="menu-item"><span class="icon-box">🧪</span> Onlayn testlar</a>
+  <a href="fiz-laboratoriya.html" class="menu-item"><span class="icon-box">🔬</span> Elektron laboratoriya</a>
+  <a href="fiz-materiallar.html" class="menu-item"><span class="icon-box">📂</span> O'quv materiallari</a>
+  <a href="fiz-jadvallar.html" class="menu-item"><span class="icon-box">📋</span> Fizik doimiylar va jadvallar</a>
+</div>
+
+<footer>
+  <div class="tg-links">
+    <a href="https://t.me" target="_blank">@Phismath21</a>
+    <a href="https://t.me" target="_blank">@Abdullayev2104</a>
+  </div>
+</footer>
+
+</body>
+</html>
