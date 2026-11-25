@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Issiqlik fizikasi kalkulyatori</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  background: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: #ffffff;
+  color: #312e81;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 3px solid #4f46e5;
+  position: relative;
+}
+.back {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4f46e5;
+  text-decoration: none;
+  background: #eef2ff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.container {
+  margin: 1.5rem auto;
+  width: 94%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.box {
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 22px;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.07);
+  border: 1px solid #e2e8f0;
+}
+h4 {
+  color: #312e81;
+  margin-bottom: 12px;
+  font-size: 1.08rem;
+}
+select, input {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+  background: #f8fafc;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+select {
+  font-weight: 600;
+  color: #4f46e5;
+}
+.row {
+  display: flex;
+  gap: 10px;
+}
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #4338ca;
+}
+.natija {
+  margin-top: 14px;
+  background: #eef2ff;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #1e293b;
+  font-weight: 600;
+  line-height: 1.6;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="kalkulyator.html" class="back">← Orqaga</a>
+  <h3>Issiqlik fizikasi</h3>
+</header>
+
+<div class="container">
+
+  <!-- 1. Isitish va sovitish -->
+  <div class="box">
+    <h4>1. Issiqlik miqdori (Q = c · m · Δt)</h4>
+    <select id="modda" onchange="moddaTanla()">
+      <option value="4200">Suv (c = 4200 J/kg·°C)</option>
+      <option value="2100">Muz (c = 2100 J/kg·°C)</option>
+      <option value="460">Temir (c = 460 J/kg·°C)</option>
+      <option value="400">Mis (c = 400 J/kg·°C)</option>
+      <option value="920">Alyuminiy (c = 920 J/kg·°C)</option>
+      <option value="">Boshqa modda (c ni qo'lda kiritish)</option>
+    </select>
+    <div class="row">
+      <input type="number" id="c-val" value="4200" placeholder="c (J/kg·°C)" step="any">
+      <input type="number" id="m1" placeholder="Massa m (kg)" step="any">
+    </div>
+    <div class="row">
+      <input type="number" id="t1" placeholder="Boshlang'ich t₁ (°C)" step="any">
+      <input type="number" id="t2" placeholder="Oxirgi t₂ (°C)" step="any">
+    </div>
+    <button class="btn" onclick="hisobIssiqlik()">Hisoblash</button>
+    <div class="natija" id="res-q1"></div>
+  </div>
+
+  <!-- 2. Erish / Bug'lanish -->
+  <div class="box">
+    <h4>2. Erish va Bug'lanish issiqligi (Q = λ · m)</h4>
+    <select id="jarayon" onchange="jarayonTanla()">
+      <option value="330000">Muzning erishi (λ = 330 000 J/kg)</option>
+      <option value="2300000">Suvning bug'lanishi (L = 2 300 000 J/kg)</option>
+      <option value="">Boshqa qiymat (qo'lda kiritish)</option>
+    </select>
+    <div class="row">
+      <input type="number" id="lam" value="330000" placeholder="λ yoki L (J/kg)" step="any">
+      <input type="number" id="m2" placeholder="Massa m (kg)" step="any">
+    </div>
+    <button class="btn" onclick="hisobFazaviy()">Hisoblash</button>
+    <div class="natija" id="res-q2"></div>
+  </div>
+
+</div>
+
+<script>
+function moddaTanla() {
+  const val = document.getElementById('modda').value;
+  document.getElementById('c-val').value = val;
+}
+
+function jarayonTanla() {
+  const val = document.getElementById('jarayon').value;
+  document.getElementById('lam').value = val;
+}
+
+function hisobIssiqlik() {
+  const c = parseFloat(document.getElementById('c-val').value);
+  const m = parseFloat(document.getElementById('m1').value);
+  const t1 = parseFloat(document.getElementById('t1').value);
+  const t2 = parseFloat(document.getElementById('t2').value);
+  const res = document.getElementById('res-q1');
+  res.style.display = 'block';
+
+  if ([c, m, t1, t2].some(isNaN) || c <= 0 || m <= 0) {
+    res.innerText = "Barcha qiymatlarni to'g'ri kiriting (c > 0, m > 0)!";
+    return;
+  }
+
+  const dt = t2 - t1;
+  const q = c * m * dt;
+  const qKj = q / 1000;
+  const holat = dt >= 0 ? "Isitish uchun kerakli issiqlik:" : "Sovishda ajralgan issiqlik:";
+
+  res.innerHTML = `${holat}<br>Q = ${parseFloat(Math.abs(q).toFixed(4))} J (${parseFloat(Math.abs(qKj).toFixed(4))} kJ)`;
+}
+
+function hisobFazaviy() {
+  const lam = parseFloat(document.getElementById('lam').value);
+  const m = parseFloat(document.getElementById('m2').value);
+  const res = document.getElementById('res-q2');
+  res.style.display = 'block';
+
+  if (isNaN(lam) || isNaN(m) || lam <= 0 || m <= 0) {
+    res.innerText = "Qiymatlarni musbat sonda kiriting!";
+    return;
+  }
+
+  const q = lam * m;
+  const qKj = q / 1000;
+  res.innerHTML = `Issiqlik miqdori:<br>Q = ${parseFloat(q.toFixed(4))} J (${parseFloat(qKj.toFixed(4))} kJ)`;
+}
+</script>
+
+</body>
+</html>
