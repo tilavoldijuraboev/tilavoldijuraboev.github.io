@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progressiyalar kalkulyatori</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  background: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: #ffffff;
+  color: #312e81;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 3px solid #4f46e5;
+  position: relative;
+}
+.back {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4f46e5;
+  text-decoration: none;
+  background: #eef2ff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.container {
+  margin: 1.5rem auto;
+  width: 94%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.box {
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 22px;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.07);
+  border: 1px solid #e2e8f0;
+}
+h4 {
+  color: #312e81;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+.inputs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+input {
+  width: 100%;
+  padding: 11px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+  background: #f8fafc;
+  text-align: center;
+}
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #4338ca;
+}
+.natija {
+  margin-top: 14px;
+  background: #eef2ff;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #1e293b;
+  font-weight: 600;
+  line-height: 1.6;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="kalkulyator.html" class="back">← Orqaga</a>
+  <h3>Progressiyalar kalkulyatori</h3>
+</header>
+
+<div class="container">
+
+  <!-- 1. Arifmetik progressiya -->
+  <div class="box">
+    <h4>1. Arifmetik progressiya</h4>
+    <div class="inputs">
+      <input type="number" id="a1" placeholder="a₁ (1-had)" step="any">
+      <input type="number" id="d" placeholder="d (ayirma)" step="any">
+      <input type="number" id="an_n" placeholder="n (soni)" min="1" step="1">
+    </div>
+    <button class="btn" onclick="hisobArif()">Hisoblash</button>
+    <div class="natija" id="res-arif"></div>
+  </div>
+
+  <!-- 2. Geometrik progressiya -->
+  <div class="box">
+    <h4>2. Geometrik progressiya</h4>
+    <div class="inputs">
+      <input type="number" id="b1" placeholder="b₁ (1-had)" step="any">
+      <input type="number" id="q" placeholder="q (maxraj)" step="any">
+      <input type="number" id="bn_n" placeholder="n (soni)" min="1" step="1">
+    </div>
+    <button class="btn" onclick="hisobGeom()">Hisoblash</button>
+    <div class="natija" id="res-geom"></div>
+  </div>
+
+</div>
+
+<script>
+function hisobArif() {
+  const a1 = parseFloat(document.getElementById('a1').value);
+  const d = parseFloat(document.getElementById('d').value);
+  const n = parseInt(document.getElementById('an_n').value);
+  const res = document.getElementById('res-arif');
+  res.style.display = 'block';
+
+  if (isNaN(a1) || isNaN(d) || isNaN(n) || n < 1) {
+    res.innerText = "Iltimos, barcha qiymatlarni to'g'ri kiriting (n ≥ 1)!";
+    return;
+  }
+
+  const an = a1 + (n - 1) * d;
+  const sn = ((a1 + an) / 2) * n;
+
+  res.innerHTML = `${n}-hadi: a<sub>${n}</sub> = ${parseFloat(an.toFixed(6))}<br>Dastlabki ${n} ta hadi yig'indisi: S<sub>${n}</sub> = ${parseFloat(sn.toFixed(6))}`;
+}
+
+function hisobGeom() {
+  const b1 = parseFloat(document.getElementById('b1').value);
+  const q = parseFloat(document.getElementById('q').value);
+  const n = parseInt(document.getElementById('bn_n').value);
+  const res = document.getElementById('res-geom');
+  res.style.display = 'block';
+
+  if (isNaN(b1) || isNaN(q) || isNaN(n) || n < 1) {
+    res.innerText = "Iltimos, barcha qiymatlarni to'g'ri kiriting (n ≥ 1)!";
+    return;
+  }
+
+  const bn = b1 * Math.pow(q, n - 1);
+  let sn;
+  if (q === 1) {
+    sn = b1 * n;
+  } else {
+    sn = (b1 * (Math.pow(q, n) - 1)) / (q - 1);
+  }
+
+  let html = `${n}-hadi: b<sub>${n}</sub> = ${parseFloat(bn.toFixed(6))}<br>Dastlabki ${n} ta hadi yig'indisi: S<sub>${n}</sub> = ${parseFloat(sn.toFixed(6))}`;
+
+  if (Math.abs(q) < 1 && q !== 0) {
+    const sInf = b1 / (1 - q);
+    html += `<br>Cheksiz kamayuvchi yig'indi: S = ${parseFloat(sInf.toFixed(6))}`;
+  }
+
+  res.innerHTML = html;
+}
+</script>
+
+</body>
+</html>
