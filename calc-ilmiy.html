@@ -9,20 +9,20 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
 }
 body {
-  background: #eef5f1;
+  background: #f1f5f9;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 header {
-  background: #064e3b;
-  color: #fff;
+  background: #ffffff;
+  color: #312e81;
   padding: 15px;
   text-align: center;
-  border-bottom: 4px solid #e11d48;
+  border-bottom: 3px solid #4f46e5;
   position: relative;
 }
 .back {
@@ -30,34 +30,36 @@ header {
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #fff;
+  color: #4f46e5;
   text-decoration: none;
-  background: #059669;
+  background: #eef2ff;
   padding: 6px 12px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 14px;
+  font-weight: 600;
 }
 .box {
   margin: auto;
   width: 94%;
   max-width: 360px;
-  background: #fff;
-  padding: 16px;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.08);
+  border: 1px solid #e2e8f0;
 }
 #ekran {
   width: 100%;
-  height: 60px;
-  background: #064e3b;
-  color: #fff;
-  border: none;
-  border-radius: 12px;
+  height: 65px;
+  background: #f8fafc;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
   text-align: right;
   padding: 10px 15px;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 12px;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 14px;
 }
 .grid {
   display: grid;
@@ -67,29 +69,39 @@ header {
 button {
   padding: 14px 0;
   font-size: 17px;
-  font-weight: bold;
+  font-weight: 600;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
-  background: #f0f4f2;
-  color: #064e3b;
+  background: #f8fafc;
+  color: #1e293b;
+  transition: all 0.15s;
+}
+button:hover {
+  background: #e2e8f0;
+}
+button:active {
+  transform: scale(0.95);
 }
 .ilmiy {
-  background: #e0f2fe;
-  color: #0369a1;
+  background: #f3e8ff;
+  color: #7e22ce;
   font-size: 15px;
 }
 .amal {
-  background: #d1fae5;
-  color: #059669;
+  background: #eef2ff;
+  color: #4f46e5;
 }
 .toza {
-  background: #ffe4e6;
-  color: #e11d48;
+  background: #fef2f2;
+  color: #ef4444;
 }
 .teng {
-  background: #e11d48;
-  color: #fff;
+  background: #4f46e5;
+  color: #ffffff;
+}
+.teng:hover {
+  background: #4338ca;
 }
 </style>
 </head>
@@ -160,27 +172,27 @@ function ochir() {
 }
 
 function ildiz() {
-  let son = parseFloat(e_val());
+  let son = parseFloat(ekran.value);
   ekran.value = son >= 0 ? parseFloat(Math.sqrt(son).toFixed(6)) : 'Xato';
 }
 
 function kvadrat() {
-  let son = parseFloat(e_val());
+  let son = parseFloat(ekran.value);
   ekran.value = parseFloat((son * son).toFixed(6));
 }
 
 function lnHisob() {
-  let son = parseFloat(e_val());
+  let son = parseFloat(ekran.value);
   ekran.value = son > 0 ? parseFloat(Math.log(son).toFixed(6)) : 'Xato';
 }
 
 function lgHisob() {
-  let son = parseFloat(e_val());
+  let son = parseFloat(ekran.value);
   ekran.value = son > 0 ? parseFloat(Math.log10(son).toFixed(6)) : 'Xato';
 }
 
 function faktorial() {
-  let son = parseInt(e_val());
+  let son = parseInt(ekran.value);
   if (isNaN(son) || son < 0 || son > 170) {
     ekran.value = 'Xato';
     return;
@@ -190,10 +202,6 @@ function faktorial() {
     res *= i;
   }
   ekran.value = res;
-}
-
-function e_val() {
-  return ekran.value;
 }
 
 function hisobla() {
