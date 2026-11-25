@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dinamika (Kuch va Bosim)</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  background: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: #ffffff;
+  color: #312e81;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 3px solid #4f46e5;
+  position: relative;
+}
+.back {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4f46e5;
+  text-decoration: none;
+  background: #eef2ff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.container {
+  margin: 1.5rem auto;
+  width: 94%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+.box {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 22px;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.07);
+  border: 1px solid #e2e8f0;
+}
+h4 {
+  color: #312e81;
+  margin-bottom: 8px;
+  font-size: 1.08rem;
+}
+.hint {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+.inputs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+input {
+  width: 100%;
+  padding: 11px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+  background: #f8fafc;
+  text-align: center;
+}
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #4338ca;
+}
+.natija {
+  margin-top: 12px;
+  background: #eef2ff;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #1e293b;
+  font-weight: 600;
+  line-height: 1.6;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="kalkulyator.html" class="back">← Orqaga</a>
+  <h3>Dinamika (Kuch va Bosim)</h3>
+</header>
+
+<div class="container">
+
+  <!-- 1. Nyutonning 2-qonuni -->
+  <div class="box">
+    <h4>1. Nyutonning 2-qonuni (F = m · a)</h4>
+    <p class="hint">Istalgan 2 ta qiymatni kiriting, 3-sini bo'sh qoldiring:</p>
+    <div class="inputs">
+      <input type="number" id="f1" placeholder="F (N)" step="any">
+      <input type="number" id="m1" placeholder="m (kg)" step="any">
+      <input type="number" id="a1" placeholder="a (m/s²)" step="any">
+    </div>
+    <button class="btn" onclick="hisobNyuton()">Topish</button>
+    <div class="natija" id="res-nyuton"></div>
+  </div>
+
+  <!-- 2. Og'irlik va ishqalanish kuchi -->
+  <div class="box">
+    <h4>2. Og'irlik va ishqalanish kuchi (g = 9.81 m/s²)</h4>
+    <p class="hint">Massa va ishqalanish koeffitsiyentini (μ) kiriting:</p>
+    <div class="inputs">
+      <input type="number" id="m2" placeholder="Massa m (kg)" step="any">
+      <input type="number" id="mu" placeholder="μ (masalan: 0.2)" step="any">
+    </div>
+    <button class="btn" onclick="hisobIshq()">Hisoblash</button>
+    <div class="natija" id="res-ishq"></div>
+  </div>
+
+  <!-- 3. Bosim -->
+  <div class="box">
+    <h4>3. Bosim (P = F / S)</h4>
+    <p class="hint">Istalgan 2 ta qiymatni kiriting, 3-sini bo'sh qoldiring:</p>
+    <div class="inputs">
+      <input type="number" id="p3" placeholder="P (Pa)" step="any">
+      <input type="number" id="f3" placeholder="F (N)" step="any">
+      <input type="number" id="s3" placeholder="S (m²)" step="any">
+    </div>
+    <button class="btn" onclick="hisobBosim()">Topish</button>
+    <div class="natija" id="res-bosim"></div>
+  </div>
+
+</div>
+
+<script>
+function hisobNyuton() {
+  const fVal = document.getElementById('f1').value;
+  const mVal = document.getElementById('m1').value;
+  const aVal = document.getElementById('a1').value;
+  const res = document.getElementById('res-nyuton');
+  res.style.display = 'block';
+
+  const f = parseFloat(fVal);
+  const m = parseFloat(mVal);
+  const a = parseFloat(aVal);
+
+  if (fVal === '' && !isNaN(m) && !isNaN(a)) {
+    res.innerText = `Kuch: F = ${parseFloat((m * a).toFixed(6))} N`;
+  } else if (mVal === '' && !isNaN(f) && !isNaN(a) && a !== 0) {
+    res.innerText = `Massa: m = ${parseFloat((f / a).toFixed(6))} kg`;
+  } else if (aVal === '' && !isNaN(f) && !isNaN(m) && m !== 0) {
+    res.innerText = `Tezlanish: a = ${parseFloat((f / m).toFixed(6))} m/s²`;
+  } else {
+    res.innerText = "Iltimos, faqat 2 ta qiymatni to'g'ri kiriting (bo'luvchi ≠ 0)!";
+  }
+}
+
+function hisobIshq() {
+  const m = parseFloat(document.getElementById('m2').value);
+  const muVal = document.getElementById('mu').value;
+  const mu = muVal === '' ? 0 : parseFloat(muVal);
+  const res = document.getElementById('res-ishq');
+  res.style.display = 'block';
+
+  if (isNaN(m) || m < 0 || isNaN(mu) || mu < 0) {
+    res.innerText = "Massa va koeffitsiyentni musbat sonda kiriting!";
+    return;
+  }
+
+  const g = 9.81;
+  const fog = m * g;
+  const fishq = mu * fog;
+
+  res.innerHTML = `Og'irlik kuchi: F<sub>og'</sub> = ${parseFloat(fog.toFixed(4))} N<br>Ishqalanish kuchi: F<sub>ishq</sub> = ${parseFloat(fishq.toFixed(4))} N`;
+}
+
+function hisobBosim() {
+  const pVal = document.getElementById('p3').value;
+  const fVal = document.getElementById('f3').value;
+  const sVal = document.getElementById('s3').value;
+  const res = document.getElementById('res-bosim');
+  res.style.display = 'block';
+
+  const p = parseFloat(pVal);
+  const f = parseFloat(fVal);
+  const s = parseFloat(sVal);
+
+  if (pVal === '' && !isNaN(f) && !isNaN(s) && s !== 0) {
+    res.innerText = `Bosim: P = ${parseFloat((f / s).toFixed(6))} Pa`;
+  } else if (fVal === '' && !isNaN(p) && !isNaN(s)) {
+    res.innerText = `Kuch: F = ${parseFloat((p * s).toFixed(6))} N`;
+  } else if (sVal === '' && !isNaN(f) && !isNaN(p) && p !== 0) {
+    res.innerText = `Yuza: S = ${parseFloat((f / p).toFixed(6))} m²`;
+  } else {
+    res.innerText = "Iltimos, faqat 2 ta qiymatni to'g'ri kiriting (bo'luvchi ≠ 0)!";
+  }
+}
+</script>
+
+</body>
+</html>
