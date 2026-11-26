@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 2: Burchak ostida otilgan jism</title>
+<link rel="stylesheet" href="theme.css?v=3">
+<script src="theme.js?v=3"></script>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  padding: 14px 10px;
+  text-align: center;
+  position: relative;
+}
+header h3 { font-size: 1.2rem; }
+.back, .home-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.back { left: 12px; }
+.home-btn { right: 12px; }
+.lab-container {
+  max-width: 980px;
+  width: 95%;
+  margin: 1.2rem auto;
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 1.2rem;
+}
+@media (max-width: 780px) {
+  .lab-container { grid-template-columns: 1fr; }
+}
+.box {
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+}
+canvas {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+.control-group { margin-bottom: 12px; }
+.control-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+input[type="range"] { width: 100%; cursor: pointer; }
+select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.checks {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 10px 0 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.checks label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.btn-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-sec {
+  background: var(--accent-soft, #eef2ff);
+  color: var(--accent, #4f46e5);
+}
+.metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.metric-card {
+  background: var(--surface-soft, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  padding: 9px;
+  border-radius: 10px;
+  text-align: center;
+}
+.metric-card span {
+  display: block;
+  font-size: 0.76rem;
+  opacity: 0.8;
+}
+.metric-card strong {
+  font-size: 1rem;
+  color: var(--accent, #4f46e5);
+}
+.formula-bar {
+  font-size: 0.84rem;
+  text-align: center;
+  padding: 8px;
+  border-radius: 10px;
+  background: var(--surface-soft, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="fiz-laboratoriya.html" class="back">← Orqaga</a>
+  <h3>2. Burchak ostida otilgan jism</h3>
+  <a href="index.html" class="home-btn">🏠 Asosiy</a>
+</header>
+
+<div class="lab-container">
+  <div class="box">
+    <canvas id="projCanvas" width="560" height="400"></canvas>
+  </div>
+
+  <div class="box">
+    <div class="formula-bar">L = (v₀²·sin 2α)/g &nbsp;|&nbsp; H = (v₀²·sin²α)/(2g)</div>
+
+    <div class="control-group">
+      <div class="control-header"><span>Sayyora (g tezlanish):</span></div>
+      <select id="planet">
+        <option value="9.81">🌍 Yer (g = 9.81 m/s²)</option>
+        <option value="1.62">🌕 Oy (g = 1.62 m/s²)</option>
+        <option value="3.71">🔴 Mars (g = 3.71 m/s²)</option>
+        <option value="24.79">🟠 Yupiter (g = 24.79 m/s²)</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <div class="control-header"><span>Boshlang'ich tezlik (v₀):</span><span id="v-val">25 m/s</span></div>
+      <input type="range" id="vel" min="5" max="45" step="1" value="25">
+    </div>
+
+    <div class="control-group">
+      <div class="control-header"><span>Otish burchagi (α):</span><span id="a-val">45°</span></div>
+      <input type="range" id="ang" min="5" max="85" step="1" value="45">
+    </div>
+
+    <div class="control-group">
+      <div class="control-header"><span>Boshlang'ich balandlik (h₀):</span><span id="h-val">0 m</span></div>
+      <input type="range" id="h0" min="0" max="40" step="2" value="0">
+    </div>
+
+    <div class="control-group">
+      <div class="control-header"><span>Havo qarshiligi (k):</span><span id="k-val">0.00</span></div>
+      <input type="range" id="drag" min="0" max="0.05" step="0.005" value="0">
+    </div>
+
+    <div class="checks">
+      <label><input type="checkbox" id="showVec" checked> Tezlik vektorlari (v, vₓ, vᵧ)</label>
+      <label><input type="checkbox" id="keepPaths" checked> Oldingi izlarni saqlash</label>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" id="fireBtn">🚀 Otish</button>
+      <button class="btn btn-sec" id="clearBtn">🧹 Tozalash</button>
+    </div>
+
+    <div class="metrics">
+      <div class="metric-card"><span>Maksimal balandlik (H)</span><strong id="m-maxh">0.0 m</strong></div>
+      <div class="metric-card"><span>Uchish uzoqligi (L)</span><strong id="m-dist">0.0 m</strong></div>
+      <div class="metric-card"><span>Uchish vaqti (t)</span><strong id="m-time">0.00 s</strong></div>
+      <div class="metric-card"><span>Joriy koordinata (x; y)</span><strong id="m-pos">0; 0 m</strong></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('projCanvas');
+const ctx = canvas.getContext('2d');
+
+let v0 = 25;
+let alphaDeg = 45;
+let h0 = 0;
+let g = 9.81;
+let drag = 0;
+
+let flying = false;
+let x = 0, y = 0, vx = 0, vy = 0, t = 0, maxH = 0;
+let currentPath = new Array();
+let savedPaths = new Array();
+let lastTime = performance.now();
+
+const padL = 45, padB = 35, padT = 20, padR = 20;
+const scale = 5.5; // 1 metr = 5.5 piksel
+
+function getColors() {
+  const s = getComputedStyle(document.documentElement);
+  return {
+    bg: s.getPropertyValue('--surface-soft').trim() || '#f8fafc',
+    text: s.getPropertyValue('--text').trim() || '#1e293b',
+    accent: s.getPropertyValue('--accent').trim() || '#4f46e5',
+    border: s.getPropertyValue('--border').trim() || '#cbd5e1'
+  };
+}
+
+function toPxX(xm) { return padL + xm * scale; }
+function toPxY(ym) { return canvas.height - padB - ym * scale; }
+
+function launch() {
+  if (currentPath.length > 1 && document.getElementById('keepPaths').checked) {
+    savedPaths.push(currentPath);
+    if (savedPaths.length > 6) savedPaths.shift();
+  }
+  const rad = alphaDeg * Math.PI / 180;
+  x = 0;
+  y = h0;
+  vx = v0 * Math.cos(rad);
+  vy = v0 * Math.sin(rad);
+  t = 0;
+  maxH = h0;
+  currentPath = new Array({ x: x, y: y });
+  flying = true;
+}
+function drawArrow(fromX, fromY, toX, toY, color, label) {
+  const headlen = 8;
+  const angle = Math.atan2(toY - fromY, toX - fromX);
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  ctx.lineWidth = 2.2;
+  ctx.beginPath();
+  ctx.moveTo(fromX, fromY);
+  ctx.lineTo(toX, toY);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(toX, toY);
+  ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+  ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
+  ctx.closePath();
+  ctx.fill();
+
+  if (label) {
+    ctx.font = 'bold 11px Segoe UI, sans-serif';
+    ctx.fillText(label, toX + 5, toY - 3);
+  }
+  ctx.restore();
+}
+
+function stepPhysics(dt) {
+  const speed = Math.hypot(vx, vy);
+  const ax = -drag * speed * vx;
+  const ay = -g - drag * speed * vy;
+
+  vx += ax * dt;
+  vy += ay * dt;
+  x += vx * dt;
+  y += vy * dt;
+  t += dt;
+
+  if (y > maxH) maxH = y;
+
+  if (y <= 0) {
+    y = 0;
+    flying = false;
+  }
+  currentPath.push({ x: x, y: y });
+}
+
+function drawGrid(col) {
+  ctx.fillStyle = col.bg;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.strokeStyle = col.border;
+  ctx.lineWidth = 1;
+  ctx.font = '10px Segoe UI, sans-serif';
+  ctx.fillStyle = col.text;
+
+  // Gorizontal va vertikal o'qlar
+  ctx.beginPath();
+  ctx.moveTo(padL, padT);
+  ctx.lineTo(padL, canvas.height - padB);
+  ctx.lineTo(canvas.width - padR, canvas.height - padB);
+  ctx.stroke();
+
+  // Metr belgilari (har 10 metrda)
+  for (let xm = 10; toPxX(xm) < canvas.width - padR; xm += 10) {
+    const px = toPxX(xm);
+    ctx.beginPath();
+    ctx.moveTo(px, canvas.height - padB);
+    ctx.lineTo(px, canvas.height - padB + 5);
+    ctx.stroke();
+    ctx.fillText(xm + 'm', px - 10, canvas.height - padB + 17);
+  }
+  for (let ym = 10; toPxY(ym) > padT; ym += 10) {
+    const py = toPxY(ym);
+    ctx.beginPath();
+    ctx.moveTo(padL - 5, py);
+    ctx.lineTo(padL, py);
+    ctx.stroke();
+    ctx.fillText(ym + 'm', 8, py + 3);
+  }
+}
+
+function drawPath(pts, color, dashed) {
+  if (pts.length < 2) return;
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = dashed ? 1.8 : 2.8;
+  if (dashed) ctx.setLineDash(new Array(5, 5));
+  ctx.beginPath();
+  for (let i = 0; i < pts.length; i++) {
+    const px = toPxX(pts.item ? pts.item(i).x : pts.at(i).x);
+    const py = toPxY(pts.item ? pts.item(i).y : pts.at(i).y);
+    if (i === 0) ctx.moveTo(px, py);
+    else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+  ctx.restore();
+}
+
+function loop(now) {
+  const dt = Math.min((now - lastTime) / 1000, 0.05);
+  lastTime = now;
+
+  if (flying) {
+    const sub = 6;
+    for (let i = 0; i < sub; i++) {
+      if (flying) stepPhysics(dt / sub);
+    }
+  }
+
+  const col = getColors();
+  drawGrid(col);
+
+  // Oldingi saqlangan traektoriyalar
+  for (let i = 0; i < savedPaths.length; i++) {
+    drawPath(savedPaths.at(i), col.border, true);
+  }
+
+  // Joriy traektoriya
+  drawPath(currentPath, col.accent, false);
+
+  // To'p (jism) pozitsiyasi
+  const curX = flying || currentPath.length > 0 ? x : 0;
+  const curY = flying || currentPath.length > 0 ? y : h0;
+  const px = toPxX(curX);
+  const py = toPxY(curY);
+
+  // Otishdan oldingi nishon chizig'i
+  if (!flying && currentPath.length === 0) {
+    const rad = alphaDeg * Math.PI / 180;
+    const len = v0 * 1.6;
+    drawArrow(px, py, px + len * Math.cos(rad), py - len * Math.sin(rad), col.accent, 'v₀');
+  }
+
+  // Uchish davomidagi tezlik vektorlari
+  if (flying && document.getElementById('showVec').checked) {
+    const vScale = 1.6;
+    drawArrow(px, py, px + vx * vScale, py, '#10b981', 'vₓ');
+    drawArrow(px, py, px, py - vy * vScale, '#ef4444', 'vᵧ');
+    drawArrow(px, py, px + vx * vScale, py - vy * vScale, col.accent, 'v');
+  }
+
+  // Jismni chizish
+  ctx.fillStyle = col.accent;
+  ctx.beginPath();
+  ctx.arc(px, py, 7, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Ko'rsatkichlarni yangilash
+  document.getElementById('m-maxh').innerText = maxH.toFixed(1) + ' m';
+  document.getElementById('m-dist').innerText = curX.toFixed(1) + ' m';
+  document.getElementById('m-time').innerText = t.toFixed(2) + ' s';
+  document.getElementById('m-pos').innerText = `${curX.toFixed(1)}; ${curY.toFixed(1)} m`;
+
+  requestAnimationFrame(loop);
+}
+
+document.getElementById('planet').addEventListener('change', (e) => { g = parseFloat(e.target.value); });
+document.getElementById('vel').addEventListener('input', (e) => {
+  v0 = parseFloat(e.target.value);
+  document.getElementById('v-val').innerText = v0 + ' m/s';
+});
+document.getElementById('ang').addEventListener('input', (e) => {
+  alphaDeg = parseFloat(e.target.value);
+  document.getElementById('a-val').innerText = alphaDeg + '°';
+});
+document.getElementById('h0').addEventListener('input', (e) => {
+  h0 = parseFloat(e.target.value);
+  document.getElementById('h-val').innerText = h0 + ' m';
+  if (!flying && currentPath.length === 0) y = h0;
+});
+document.getElementById('drag').addEventListener('input', (e) => {
+  drag = parseFloat(e.target.value);
+  document.getElementById('k-val').innerText = drag.toFixed(3);
+});
+
+document.getElementById('fireBtn').addEventListener('click', launch);
+document.getElementById('clearBtn').addEventListener('click', () => {
+  flying = false;
+  x = 0; y = h0; t = 0; maxH = h0;
+  currentPath = new Array();
+  savedPaths = new Array();
+});
+
+requestAnimationFrame(loop);
+</script>
+
+</body>
+</html>
