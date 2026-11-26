@@ -99,6 +99,46 @@
   --border: #bfdbfe;
   --shadow: rgba(37, 99, 235, 0.08);
 }
+/* 5. MINIMALIST (Monoxrom Oq-Qora) — Kunduzgi va Tungi */
+[data-theme="minimalist"] {
+  --bg: #f5f5f5;
+  --surface: #ffffff;
+  --surface-soft: #fafafa;
+  --text: #171717;
+  --title: #000000;
+  --muted: #525252;
+  --accent: #262626;
+  --accent-hover: #000000;
+  --accent-soft: #e5e5e5;
+  --border: #d4d4d4;
+  --shadow: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="minimalist"][data-dark="true"] {
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --surface-soft: #1c1c1c;
+  --text: #f5f5f5;
+  --title: #ffffff;
+  --muted: #a3a3a3;
+  --accent: #e5e5e5;
+  --accent-hover: #ffffff;
+  --accent-soft: #262626;
+  --border: #2e2e2e;
+  --shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* Minimalist tungi rejimda tugma yozuvi ko'rinishi uchun */
+[data-theme="minimalist"][data-dark="true"] .btn,
+[data-theme="minimalist"][data-dark="true"] .teng,
+[data-theme="minimalist"][data-dark="true"] .menu-item:hover,
+[data-theme="minimalist"][data-dark="true"] .dark-btn:hover,
+[data-theme="minimalist"][data-dark="true"] .back:hover,
+[data-theme="minimalist"][data-dark="true"] .back-btn:hover,
+[data-theme="minimalist"][data-dark="true"] .home-btn:hover,
+[data-theme="minimalist"][data-dark="true"] .tg-links a:hover {
+  color: #0a0a0a !important;
+}
 
 [data-theme="kok"][data-dark="true"] {
   --bg: #091526;
@@ -173,4 +213,44 @@ input, select:not(.theme-select), #ekran, .res-card, .formula-hint {
   background-color: var(--surface-soft) !important;
   color: var(--text) !important;
   border-color: var(--border) !important;
+}
+/* 5. MINIMALIST (Monoxrom Oq-Qora) — Kunduzgi va Tungi */
+[data-theme="minimalist"] {
+  --bg: #f5f5f5;
+  --surface: #ffffff;
+  --surface-soft: #fafafa;
+  --text: #171717;
+  --title: #000000;
+  --muted: #525252;
+  --accent: #262626;
+  --accent-hover: #000000;
+  --accent-soft: #e5e5e5;
+  --border: #d4d4d4;
+  --shadow: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="minimalist"][data-dark="true"] {
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --surface-soft: #1c1c1c;
+  --text: #f5f5f5;
+  --title: #ffffff;
+  --muted: #a3a3a3;
+  --accent: #e5e5e5;
+  --accent-hover: #ffffff;
+  --accent-soft: #262626;
+  --border: #2e2e2e;
+  --shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* Minimalist tungi rejimda tugma yozuvi ko'rinishi uchun */
+[data-theme="minimalist"][data-dark="true"] .btn,
+[data-theme="minimalist"][data-dark="true"] .teng,
+[data-theme="minimalist"][data-dark="true"] .menu-item:hover,
+[data-theme="minimalist"][data-dark="true"] .dark-btn:hover,
+[data-theme="minimalist"][data-dark="true"] .back:hover,
+[data-theme="minimalist"][data-dark="true"] .back-btn:hover,
+[data-theme="minimalist"][data-dark="true"] .home-btn:hover,
+[data-theme="minimalist"][data-dark="true"] .tg-links a:hover {
+  color: #0a0a0a !important;
 }
