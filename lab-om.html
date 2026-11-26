@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 4: Om qonuni va Elektr zanjiri</title>
+<link rel="stylesheet" href="theme.css?v=3">
+<script src="theme.js?v=3"></script>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  padding: 14px 10px;
+  text-align: center;
+  position: relative;
+}
+header h3 { font-size: 1.2rem; }
+.back, .home-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.back { left: 12px; }
+.home-btn { right: 12px; }
+.lab-container {
+  max-width: 960px;
+  width: 95%;
+  margin: 1.2rem auto;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1.2rem;
+}
+@media (max-width: 780px) {
+  .lab-container { grid-template-columns: 1fr; }
+}
+.box {
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+}
+canvas {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+.graph-canvas {
+  margin-top: 12px;
+}
+.control-group { margin-bottom: 14px; }
+.control-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+input[type="range"] { width: 100%; cursor: pointer; }
+.checks {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 10px 0 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.checks label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.btn-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.btn {
+  flex: 1;
+  padding: 11px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-sec {
+  background: var(--accent-soft, #eef2ff);
+  color: var(--accent, #4f46e5);
+}
+.metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.metric-card {
+  background: var(--surface-soft, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+.metric-card span {
+  display: block;
+  font-size: 0.78rem;
+  opacity: 0.8;
+}
+.metric-card strong {
+  font-size: 1.05rem;
+  color: var(--accent, #4f46e5);
+}
+.formula-bar {
+  font-size: 0.86rem;
+  text-align: center;
+  padding: 8px;
+  border-radius: 10px;
+  background: var(--surface-soft, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="fiz-laboratoriya.html" class="back">← Orqaga</a>
+  <h3>4. Om qonuni va Elektr zanjiri</h3>
+  <a href="index.html" class="home-btn">🏠 Asosiy</a>
+</header>
+
+<div class="lab-container">
+  <div class="box">
+    <canvas id="circuitCanvas" width="540" height="350"></canvas>
+    <canvas id="vaxCanvas" class="graph-canvas" width="540" height="140"></canvas>
+  </div>
+
+  <div class="box">
+    <div class="formula-bar">I = U / R &nbsp;|&nbsp; P = U · I &nbsp;|&nbsp; R = ρ · l / S</div>
+
+    <div class="control-group">
+      <div class="control-header"><span>Manba kuchlanishi (U):</span><span id="u-val">12.0 V</span></div>
+      <input type="range" id="voltage" min="0" max="24" step="0.5" value="12">
+    </div>
+
+    <div class="control-group">
+      <div class="control-header"><span>Rezistor qarshiligi (R):</span><span id="r-val">6.0 Ω</span></div>
+      <input type="range" id="resist" min="1" max="24" step="0.5" value="6">
+    </div>
+
+    <div class="checks">
+      <label><input type="checkbox" id="showElec" checked> Zaryadlar harakati</label>
+      <label><input type="radio" name="dir" value="elec" checked> Elektronlar (− → +)</label>
+      <label><input type="radio" name="dir" value="conv"> Tok (+ → −)</label>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" id="switchBtn">🔌 Zanjir: Ulangan</button>
+      <button class="btn btn-sec" id="resetBtn">🔄 Qayta</button>
+    </div>
+
+    <div class="metrics">
+      <div class="metric-card"><span>Tok kuchi (I)</span><strong id="m-curr">2.00 A</strong></div>
+      <div class="metric-card"><span>Elektr quvvati (P)</span><strong id="m-pow">24.0 W</strong></div>
+      <div class="metric-card"><span>1 daqiqadagi ish (A)</span><strong id="m-work">1440 J</strong></div>
+      <div class="metric-card"><span>Zanjir holati</span><strong id="m-state">Yopiq</strong></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('circuitCanvas');
+const ctx = canvas.getContext('2d');
+const vaxCanvas = document.getElementById('vaxCanvas');
+const vctx = vaxCanvas.getContext('2d');
+
+let U = 12.0;
+let R = 6.0;
+let closed = true;
+let flowOffset = 0;
+let lastTime = performance.now();
+
+function getColors() {
+  const s = getComputedStyle(document.documentElement);
+  return {
+    bg: s.getPropertyValue('--surface-soft').trim() || '#f8fafc',
+    text: s.getPropertyValue('--text').trim() || '#1e293b',
+    accent: s.getPropertyValue('--accent').trim() || '#4f46e5',
+    border: s.getPropertyValue('--border').trim() || '#cbd5e1'
+  };
+}
+function getDir() {
+  const radios = document.getElementsByName('dir');
+  for (let i = 0; i < radios.length; i++) {
+    if (radios.item(i).checked) return radios.item(i).value;
+  }
+  return 'elec';
+}
+
+function drawCircuit(I, P) {
+  const col = getColors();
+  ctx.fillStyle = col.bg;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const xL = 90, xR = 450, yT = 65, yB = 275;
+
+  // Asosiy o'tkazgich simlar
+  ctx.strokeStyle = col.text;
+  ctx.lineWidth = 3.5;
+  ctx.beginPath();
+  // Chap sim (Batareyadan tepaga va pastga)
+  ctx.moveTo(xL, yT);
+  ctx.lineTo(xL, 145);
+  ctx.moveTo(xL, 195);
+  ctx.lineTo(xL, yB);
+  // Yuqori sim (Kalitgacha va undan keyin)
+  ctx.moveTo(xL, yT);
+  ctx.lineTo(190, yT);
+  ctx.moveTo(250, yT);
+  ctx.lineTo(xR, yT);
+  // O'ng sim (Rezistor orqali)
+  ctx.moveTo(xR, yT);
+  ctx.lineTo(xR, 125);
+  ctx.moveTo(xR, 215);
+  ctx.lineTo(xR, yB);
+  // Pastki sim (Ampermetr orqali)
+  ctx.moveTo(xL, yB);
+  ctx.lineTo(xR, yB);
+  ctx.stroke();
+
+  // 1. Tok manbai (Batareya - chapda)
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = '#ef4444';
+  ctx.beginPath();
+  ctx.moveTo(xL - 22, 145);
+  ctx.lineTo(xL + 22, 145);
+  ctx.stroke();
+
+  ctx.lineWidth = 6;
+  ctx.strokeStyle = '#3b82f6';
+  ctx.beginPath();
+  ctx.moveTo(xL - 12, 195);
+  ctx.lineTo(xL + 12, 195);
+  ctx.stroke();
+
+  ctx.fillStyle = col.text;
+  ctx.font = 'bold 13px Segoe UI, sans-serif';
+  ctx.fillText('+', xL - 32, 142);
+  ctx.fillText('−', xL - 32, 205);
+  ctx.fillText(U.toFixed(1) + ' V', xL - 65, 175);
+
+  // 2. Kalit (Yuqorida)
+  ctx.strokeStyle = closed ? '#10b981' : '#ef4444';
+  ctx.lineWidth = 3.5;
+  ctx.beginPath();
+  ctx.moveTo(190, yT);
+  if (closed) {
+    ctx.lineTo(250, yT);
+  } else {
+    ctx.lineTo(245, yT - 26);
+  }
+  ctx.stroke();
+
+  ctx.fillStyle = col.accent;
+  ctx.beginPath();
+  ctx.arc(190, yT, 5, 0, Math.PI * 2);
+  ctx.arc(250, yT, 5, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 3. Lampochka (Yuqori o'ng burchak oldida)
+  const lampX = 335, lampY = yT;
+  const glow = closed ? Math.min(P / 40, 1) : 0;
+  if (glow > 0) {
+    const grad = ctx.createRadialGradient(lampX, lampY, 4, lampX, lampY, 38 + glow * 20);
+    grad.addColorStop(0, `rgba(250, 204, 21, ${0.85 * glow})`);
+    grad.addColorStop(1, 'rgba(250, 204, 21, 0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(lampX, lampY, 58, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.fillStyle = glow > 0.05 ? `rgba(254, 240, 138, ${0.3 + glow * 0.7})` : col.bg;
+  ctx.strokeStyle = col.text;
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.arc(lampX, lampY, 18, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+
+  // 4. Rezistor (O'ng tomonda)
+  ctx.fillStyle = col.bg;
+  ctx.strokeStyle = col.accent;
+  ctx.lineWidth = 3;
+  ctx.fillRect(xR - 14, 125, 28, 90);
+  ctx.strokeRect(xR - 14, 125, 28, 90);
+  ctx.fillStyle = col.text;
+  ctx.font = 'bold 12px Segoe UI, sans-serif';
+  ctx.fillText('R = ' + R.toFixed(1) + ' Ω', xR + 22, 175);
+
+  // 5. Voltmetr (Rezistorga parallel ulangan)
+  const vx = 365, vy = 170;
+  ctx.strokeStyle = col.border;
+  ctx.lineWidth = 1.8;
+  ctx.beginPath();
+  ctx.moveTo(xR, 110);
+  ctx.lineTo(vx, 110);
+  ctx.lineTo(vx, vy - 18);
+  ctx.moveTo(vx, vy + 18);
+  ctx.lineTo(vx, 230);
+  ctx.lineTo(xR, 230);
+  ctx.stroke();
+
+  ctx.fillStyle = col.bg;
+  ctx.strokeStyle = '#10b981';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.arc(vx, vy, 18, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = '#10b981';
+  ctx.textAlign = 'center';
+  ctx.fillText('V', vx, vy + 5);
+  ctx.font = '11px Segoe UI, sans-serif';
+  ctx.fillText((closed ? U.toFixed(1) : '0.0') + 'V', vx, vy + 31);
+
+  // 6. Ampermetr (Pastki simda)
+  const ax = 270, ay = yB;
+  ctx.fillStyle = col.bg;
+  ctx.strokeStyle = '#ef4444';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.arc(ax, ay, 18, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = '#ef4444';
+  ctx.font = 'bold 12px Segoe UI, sans-serif';
+  ctx.fillText('A', ax, ay + 5);
+  ctx.font = '11px Segoe UI, sans-serif';
+  ctx.fillText(I.toFixed(2) + 'A', ax, ay + 32);
+  ctx.textAlign = 'left';
+
+  // 7. Zaryadlar harakati
+  if (document.getElementById('showElec').checked) {
+    const perim = 2 * ((xR - xL) + (yB - yT));
+    const count = 26;
+    const dir = getDir();
+    const isElec = dir === 'elec';
+
+    for (let i = 0; i < count; i++) {
+      let d = (i * (perim / count) + (isElec ? -flowOffset : flowOffset)) % perim;
+      if (d < 0) d += perim;
+      let cx, cy;
+      const w = xR - xL;
+      const h = yB - yT;
+
+      if (d < w) { cx = xL + d; cy = yT; }
+      else if (d < w + h) { cx = xR; cy = yT + (d - w); }
+      else if (d < 2 * w + h) { cx = xR - (d - w - h); cy = yB; }
+      else { cx = xL; cy = yB - (d - 2 * w - h); }
+
+      ctx.fillStyle = isElec ? '#3b82f6' : '#ef4444';
+      ctx.beginPath();
+      ctx.arc(cx, cy, 4.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+function drawVAX(I) {
+  const col = getColors();
+  vctx.fillStyle = col.bg;
+  vctx.fillRect(0, 0, vaxCanvas.width, vaxCanvas.height);
+
+  const pL = 45, pB = 25, pT = 18, pR = 25;
+  const gW = vaxCanvas.width - pL - pR;
+  const gH = vaxCanvas.height - pT - pB;
+
+  vctx.strokeStyle = col.border;
+  vctx.lineWidth = 1.5;
+  vctx.beginPath();
+  vctx.moveTo(pL, pT);
+  vctx.lineTo(pL, vaxCanvas.height - pB);
+  vctx.lineTo(vaxCanvas.width - pR, vaxCanvas.height - pB);
+  vctx.stroke();
+
+  vctx.fillStyle = col.text;
+  vctx.font = '11px Segoe UI, sans-serif';
+  vctx.fillText('I (A)', 10, pT + 6);
+  vctx.fillText('U (V)', vaxCanvas.width - 35, vaxCanvas.height - 8);
+  vctx.fillText('Volt-Amper xarakteristikasi I(U)', pL + 12, pT + 6);
+
+  // R bo'yicha to'g'ri chiziq (max U = 24V, max I = 6A shkala)
+  const maxU = 24, maxI = 6;
+  const endU = maxU;
+  const endI = Math.min(endU / R, maxI);
+  const actualEndU = endI * R;
+
+  vctx.strokeStyle = col.accent;
+  vctx.lineWidth = 2.2;
+  vctx.beginPath();
+  vctx.moveTo(pL, vaxCanvas.height - pB);
+  vctx.lineTo(pL + (actualEndU / maxU) * gW, (vaxCanvas.height - pB) - (endI / maxI) * gH);
+  vctx.stroke();
+
+  // Joriy nuqta
+  if (closed && I <= maxI) {
+    const px = pL + (U / maxU) * gW;
+    const py = (vaxCanvas.height - pB) - (I / maxI) * gH;
+    vctx.fillStyle = '#ef4444';
+    vctx.beginPath();
+    vctx.arc(px, py, 5.5, 0, Math.PI * 2);
+    vctx.fill();
+  }
+}
+
+function loop(now) {
+  const dt = Math.min((now - lastTime) / 1000, 0.05);
+  lastTime = now;
+
+  const I = closed ? (U / R) : 0;
+  const P = U * I;
+
+  if (closed && I > 0) {
+    flowOffset += I * 45 * dt;
+  }
+
+  document.getElementById('m-curr').innerText = I.toFixed(2) + ' A';
+  document.getElementById('m-pow').innerText = P.toFixed(1) + ' W';
+  document.getElementById('m-work').innerText = Math.round(P * 60) + ' J';
+  document.getElementById('m-state').innerText = closed ? 'Yopiq (Ishlayapti)' : 'Ochiq (Uzilgan)';
+
+  drawCircuit(I, P);
+  drawVAX(I);
+  requestAnimationFrame(loop);
+}
+
+document.getElementById('voltage').addEventListener('input', (e) => {
+  U = parseFloat(e.target.value);
+  document.getElementById('u-val').innerText = U.toFixed(1) + ' V';
+});
+document.getElementById('resist').addEventListener('input', (e) => {
+  R = parseFloat(e.target.value);
+  document.getElementById('r-val').innerText = R.toFixed(1) + ' Ω';
+});
+document.getElementById('switchBtn').addEventListener('click', (e) => {
+  closed = !closed;
+  e.target.innerText = closed ? '🔌 Zanjir: Ulangan' : '❌ Zanjir: Uzilgan';
+});
+document.getElementById('resetBtn').addEventListener('click', () => {
+  U = 12.0; R = 6.0; closed = true;
+  document.getElementById('voltage').value = 12;
+  document.getElementById('resist').value = 6;
+  document.getElementById('u-val').innerText = '12.0 V';
+  document.getElementById('r-val').innerText = '6.0 Ω';
+  document.getElementById('switchBtn').innerText = '🔌 Zanjir: Ulangan';
+});
+
+requestAnimationFrame(loop);
+</script>
+
+</body>
+</html>
