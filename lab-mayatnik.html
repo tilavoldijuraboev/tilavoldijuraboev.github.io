@@ -38,7 +38,6 @@ header h3 {
 }
 .back { left: 12px; }
 .home-btn { right: 12px; }
-
 .lab-container {
   max-width: 960px;
   width: 95%;
@@ -48,9 +47,7 @@ header h3 {
   gap: 1.2rem;
 }
 @media (max-width: 780px) {
-  .lab-container {
-    grid-template-columns: 1fr;
-  }
+  .lab-container { grid-template-columns: 1fr; }
 }
 .box {
   padding: 16px;
@@ -64,16 +61,12 @@ canvas {
   touch-action: none;
   cursor: grab;
 }
-canvas:active {
-  cursor: grabbing;
-}
+canvas:active { cursor: grabbing; }
 .graph-canvas {
   margin-top: 12px;
   cursor: default;
 }
-.control-group {
-  margin-bottom: 14px;
-}
+.control-group { margin-bottom: 14px; }
 .control-header {
   display: flex;
   justify-content: space-between;
@@ -81,10 +74,7 @@ canvas:active {
   font-weight: 600;
   margin-bottom: 5px;
 }
-input[type="range"] {
-  width: 100%;
-  cursor: pointer;
-}
+input[type="range"] { width: 100%; cursor: pointer; }
 select {
   width: 100%;
   padding: 9px 12px;
@@ -324,7 +314,6 @@ function stepPhysics(dt) {
   theta += (dt / 6) * (k1_x + 2 * k2_x + 2 * k3_x + k4_x);
   omega += (dt / 6) * (k1_v + 2 * k2_v + 2 * k3_v + k4_v);
 }
-
 function drawArrow(c, fromX, fromY, toX, toY, color, label) {
   const headlen = 9;
   const angle = Math.atan2(toY - fromY, toX - fromX);
@@ -388,162 +377,184 @@ function drawSim() {
       ctx.globalAlpha = (i / trace.length) * 0.5;
       ctx.fillStyle = col.accent;
       ctx.beginPath();
-ctx.arc(trace[i].x, trace[i].y, 2.5, 0, Math.PI * 2);
-ctx.fill();
+      ctx.arc(trace[i].x, trace[i].y, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  } else {
+    trace = [];
+  }
+
+  ctx.strokeStyle = col.text;
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(origin.x, origin.y);
+  ctx.lineTo(bobX, bobY);
+  ctx.stroke();
+
+  ctx.fillStyle = col.accent;
+  ctx.beginPath();
+  ctx.arc(origin.x, origin.y, 5, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = col.accent;
+  ctx.beginPath();
+  ctx.arc(bobX, bobY, radius, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  if (document.getElementById('showVectors').checked) {
+    const fScale = 3.2;
+    const mgLen = m * g * fScale;
+    drawArrow(ctx, bobX, bobY, bobX, bobY + Math.min(mgLen, 95), '#ef4444', 'mg');
+
+    const tension = m * g * Math.cos(theta) + m * L * omega * omega;
+    const tLen = Math.min(Math.max(tension * fScale, 15), 95);
+    const tx = bobX - tLen * Math.sin(theta);
+    const ty = bobY - tLen * Math.cos(theta);
+    drawArrow(ctx, bobX, bobY, tx, ty, '#10b981', 'T');
+  }
 }
-ctx.globalAlpha = 1;
-} else {
-trace = [];
-}
-ctx.strokeStyle = col.text;
-ctx.lineWidth = 2.5;
-ctx.beginPath();
-ctx.moveTo(origin.x, origin.y);
-ctx.lineTo(bobX, bobY);
-ctx.stroke();
-ctx.fillStyle = col.accent;
-ctx.beginPath();
-ctx.arc(origin.x, origin.y, 5, 0, Math.PI * 2);
-ctx.fill();
-ctx.fillStyle = col.accent;
-ctx.beginPath();
-ctx.arc(bobX, bobY, radius, 0, Math.PI * 2);
-ctx.fill();
-ctx.strokeStyle = '#ffffff';
-ctx.lineWidth = 2;
-ctx.stroke();
-if (document.getElementById('showVectors').checked) {
-const fScale = 3.2;
-const mgLen = m * g * fScale;
-drawArrow(ctx, bobX, bobY, bobX, bobY + Math.min(mgLen, 95), '#ef4444', 'mg');
-const tension = m * g * Math.cos(theta) + m * L * omega * omega;
-const tLen = Math.min(Math.max(tension * fScale, 15), 95);
-const tx = bobX - tLen * Math.sin(theta);
-const ty = bobY - tLen * Math.cos(theta);
-drawArrow(ctx, bobX, bobY, tx, ty, '#10b981', 'T');
-}
-}
+
 function drawGraph() {
-const col = getColors();
-gctx.fillStyle = col.bg;
-gctx.fillRect(0, 0, graphCanvas.width, graphCanvas.height);
-const midY = graphCanvas.height / 2;
-gctx.strokeStyle = col.border;
-gctx.lineWidth = 1;
-gctx.beginPath();
-gctx.moveTo(0, midY);
-gctx.lineTo(graphCanvas.width, midY);
-gctx.stroke();
-gctx.fillStyle = col.text;
-gctx.font = '11px Segoe UI, sans-serif';
-gctx.fillText('Burchak grafigi θ(t)', 10, 16);
-if (history.length < 2) return;
-gctx.strokeStyle = col.accent;
-gctx.lineWidth = 2.2;
-gctx.beginPath();
-for (let i = 0; i < history.length; i++) {
-const x = (i / 250) * graphCanvas.width;
-const y = midY - (history[i] / (Math.PI / 2)) * (midY - 15);
-if (i === 0) gctx.moveTo(x, y);
-else gctx.lineTo(x, y);
+  const col = getColors();
+  gctx.fillStyle = col.bg;
+  gctx.fillRect(0, 0, graphCanvas.width, graphCanvas.height);
+
+  const midY = graphCanvas.height / 2;
+  gctx.strokeStyle = col.border;
+  gctx.lineWidth = 1;
+  gctx.beginPath();
+  gctx.moveTo(0, midY);
+  gctx.lineTo(graphCanvas.width, midY);
+  gctx.stroke();
+
+  gctx.fillStyle = col.text;
+  gctx.font = '11px Segoe UI, sans-serif';
+  gctx.fillText('Burchak grafigi θ(t)', 10, 16);
+
+  if (history.length < 2) return;
+  gctx.strokeStyle = col.accent;
+  gctx.lineWidth = 2.2;
+  gctx.beginPath();
+  for (let i = 0; i < history.length; i++) {
+    const x = (i / 250) * graphCanvas.width;
+    const y = midY - (history[i] / (Math.PI / 2)) * (midY - 15);
+    if (i === 0) gctx.moveTo(x, y);
+    else gctx.lineTo(x, y);
+  }
+  gctx.stroke();
 }
-gctx.stroke();
-}
+
 function loop(now) {
-const dt = Math.min((now - lastTime) / 1000, 0.05);
-lastTime = now;
-if (running && !dragging) {
-const subSteps = 5;
-for (let i = 0; i < subSteps; i++) {
-stepPhysics(dt / subSteps);
+  const dt = Math.min((now - lastTime) / 1000, 0.05);
+  lastTime = now;
+
+  if (running && !dragging) {
+    const subSteps = 5;
+    for (let i = 0; i < subSteps; i++) {
+      stepPhysics(dt / subSteps);
+    }
+    history.push(theta);
+    if (history.length > 250) history.shift();
+
+    if (swRunning) {
+      swTime += dt;
+      document.getElementById('swDisplay').innerText = swTime.toFixed(2) + ' s';
+    }
+  }
+
+  updateStats();
+  drawSim();
+  drawGraph();
+  requestAnimationFrame(loop);
 }
-history.push(theta);
-if (history.length > 250) history.shift();
-if (swRunning) {
-swTime += dt;
-document.getElementById('swDisplay').innerText = swTime.toFixed(2) + ' s';
-}
-}
-updateStats();
-drawSim();
-drawGraph();
-requestAnimationFrame(loop);
-}
+
 function getPointerPos(e) {
-const rect = simCanvas.getBoundingClientRect();
-const touch = e.touches ? e.touches[0] : e;
-return {
-x: (touch.clientX - rect.left) * (simCanvas.width / rect.width),
-y: (touch.clientY - rect.top) * (simCanvas.height / rect.height)
-};
+  const rect = simCanvas.getBoundingClientRect();
+  const touch = e.touches ? e.touches[0] : e;
+  return {
+    x: (touch.clientX - rect.left) * (simCanvas.width / rect.width),
+    y: (touch.clientY - rect.top) * (simCanvas.height / rect.height)
+  };
 }
+
 function startDrag(e) {
-const pos = getPointerPos(e);
-const bobX = origin.x + L * pxPerMeter * Math.sin(theta);
-const bobY = origin.y + L * pxPerMeter * Math.cos(theta);
-if (Math.hypot(pos.x - bobX, pos.y - bobY) < 45) {
-dragging = true;
-omega = 0;
+  const pos = getPointerPos(e);
+  const bobX = origin.x + L * pxPerMeter * Math.sin(theta);
+  const bobY = origin.y + L * pxPerMeter * Math.cos(theta);
+  if (Math.hypot(pos.x - bobX, pos.y - bobY) < 45) {
+    dragging = true;
+    omega = 0;
+  }
 }
-}
+
 function moveDrag(e) {
-if (!dragging) return;
-e.preventDefault();
-const pos = getPointerPos(e);
-let ang = Math.atan2(pos.x - origin.x, pos.y - origin.y);
-ang = Math.max(-Math.PI * 0.45, Math.min(Math.PI * 0.45, ang));
-theta = ang;
-omega = 0;
-trace = [];
+  if (!dragging) return;
+  e.preventDefault();
+  const pos = getPointerPos(e);
+  let ang = Math.atan2(pos.x - origin.x, pos.y - origin.y);
+  ang = Math.max(-Math.PI * 0.45, Math.min(Math.PI * 0.45, ang));
+  theta = ang;
+  omega = 0;
+  trace = [];
 }
+
 function endDrag() {
-dragging = false;
+  dragging = false;
 }
+
 simCanvas.addEventListener('mousedown', startDrag);
 window.addEventListener('mousemove', moveDrag);
 window.addEventListener('mouseup', endDrag);
+
 simCanvas.addEventListener('touchstart', startDrag, { passive: false });
 window.addEventListener('touchmove', moveDrag, { passive: false });
 window.addEventListener('touchend', endDrag);
+
 document.getElementById('planet').addEventListener('change', (e) => {
-g = parseFloat(e.target.value);
+  g = parseFloat(e.target.value);
 });
 document.getElementById('length').addEventListener('input', (e) => {
-L = parseFloat(e.target.value);
-document.getElementById('l-val').innerText = L.toFixed(2) + ' m';
-trace = [];
+  L = parseFloat(e.target.value);
+  document.getElementById('l-val').innerText = L.toFixed(2) + ' m';
+  trace = [];
 });
 document.getElementById('mass').addEventListener('input', (e) => {
-m = parseFloat(e.target.value);
-document.getElementById('m-val').innerText = m.toFixed(1) + ' kg';
+  m = parseFloat(e.target.value);
+  document.getElementById('m-val').innerText = m.toFixed(1) + ' kg';
 });
 document.getElementById('damping').addEventListener('input', (e) => {
-damping = parseFloat(e.target.value);
-document.getElementById('d-val').innerText = damping.toFixed(2);
+  damping = parseFloat(e.target.value);
+  document.getElementById('d-val').innerText = damping.toFixed(2);
 });
+
 document.getElementById('playBtn').addEventListener('click', (e) => {
-running = !running;
-e.target.innerText = running ? '⏸️ Pauza' : '▶️ Boshlash';
+  running = !running;
+  e.target.innerText = running ? '⏸️ Pauza' : '▶️ Boshlash';
 });
 document.getElementById('resetBtn').addEventListener('click', () => {
-theta = Math.PI / 6;
-omega = 0;
-trace = [];
-history = [];
+  theta = Math.PI / 6;
+  omega = 0;
+  trace = [];
+  history = [];
 });
+
 document.getElementById('swToggle').addEventListener('click', (e) => {
-swRunning = !swRunning;
-e.target.innerText = swRunning ? "To'xtatish" : 'Davom etish';
+  swRunning = !swRunning;
+  e.target.innerText = swRunning ? "To'xtatish" : 'Davom etish';
 });
 document.getElementById('swReset').addEventListener('click', () => {
-swRunning = false;
-swTime = 0;
-document.getElementById('swDisplay').innerText = '00.00 s';
-document.getElementById('swToggle').innerText = 'Boshlash';
+  swRunning = false;
+  swTime = 0;
+  document.getElementById('swDisplay').innerText = '00.00 s';
+  document.getElementById('swToggle').innerText = 'Boshlash';
 });
+
 requestAnimationFrame(loop);
-  <FollowUp>
-Kodni **`lab-mayatnik.html`** fayliga saqlab, saytda sinab ko'rganingizdan so'ng xabar bering:
-* Mayatnik tebranishi, vektorlar, grafik va sekundomer **to'g'ri ishladimi**?
-* Shundan so'ng darhol **2-tajriba — Gorizontga burchak ostida otilgan jism (`lab-traektoriya.html`)** ni yaratishga o'tamiz!
-</FollowUp>
+</script>
+
+</body>
+</html>
