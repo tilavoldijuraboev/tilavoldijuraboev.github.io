@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masalalar yechimlari — Fizika</title>
+<link rel="stylesheet" href="theme.css?v=3">
+<script src="theme.js?v=3"></script>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+header {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  position: relative;
+}
+header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.back-btn, .home-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.back-btn { left: 15px; }
+.home-btn { right: 15px; }
+.menu-column {
+  max-width: 560px;
+  width: 100%;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  padding: 1.3rem 1.5rem;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+.menu-item:hover {
+  transform: translateY(-3px);
+}
+.book-icon {
+  font-size: 1.6rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+.book-info strong {
+  display: block;
+  font-size: 1.15rem;
+  margin-bottom: 3px;
+}
+.book-info span {
+  font-size: 0.88rem;
+  opacity: 0.8;
+}
+footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+.tg-links a {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 4px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="fizika.html" class="back-btn">← Orqaga</a>
+  <h1>✍️ Masalalar yechimlari</h1>
+  <a href="index.html" class="home-btn">🏠 Asosiy</a>
+</header>
+
+<div class="menu-column">
+  <a href="kitob-innova.html" class="menu-item">
+    <span class="book-icon icon-box">📘</span>
+    <div class="book-info">
+      <strong>INNOVA — Fizikadan masalalar to'plami</strong>
+      <span>Muallif: Sardor Berdiyev • Yechimlar va tahlillar</span>
+    </div>
+  </a>
+</div>
+
+<footer>
+  <div class="tg-links">
+    <a href="https://t.me" target="_blank">@Phismath21</a>
+    <a href="https://t.me" target="_blank">@Abdullayev2104</a>
+  </div>
+</footer>
+
+</body>
+</html>
