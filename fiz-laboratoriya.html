@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elektron laboratoriya — Fizika va Matematika</title>
+<link rel="stylesheet" href="theme.css?v=3">
+<script src="theme.js?v=3"></script>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  background-color: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+header {
+  background: #ffffff;
+  color: #312e81;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border-bottom: 3px solid #4f46e5;
+  position: relative;
+}
+header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.back-btn {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.home-btn {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.menu-column {
+  max-width: 540px;
+  width: 100%;
+  margin: 2.2rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 1.15rem 1.5rem;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+.menu-item:hover {
+  transform: translateX(4px);
+}
+.num-badge {
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+  min-width: 32px;
+  text-align: center;
+}
+footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+.tg-links a {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 4px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="fizika.html" class="back-btn">← Orqaga</a>
+  <h1>🔬 Elektron laboratoriya</h1>
+  <a href="index.html" class="home-btn">🏠 Asosiy</a>
+</header>
+
+<div class="menu-column">
+  <a href="lab-mayatnik.html" class="menu-item"><span class="num-badge">1</span> Matematik mayatnik tebranishi</a>
+  <a href="lab-traektoriya.html" class="menu-item"><span class="num-badge">2</span> Gorizontga burchak ostida otilgan jism</a>
+  <a href="lab-prujina.html" class="menu-item"><span class="num-badge">3</span> Prujinali mayatnik va Guk qonuni</a>
+  <a href="lab-om.html" class="menu-item"><span class="num-badge">4</span> Om qonuni va Elektr zanjiri</a>
+  <a href="lab-optika.html" class="menu-item"><span class="num-badge">5</span> Yorug'likning sinishi va qaytishi</a>
+  <a href="lab-arximed.html" class="menu-item"><span class="num-badge">6</span> Arximed kuchi va suzish sharti</a>
+</div>
+
+<footer>
+  <div class="tg-links">
+    <a href="https://t.me" target="_blank">@Phismath21</a>
+    <a href="https://t.me" target="_blank">@Abdullayev2104</a>
+  </div>
+</footer>
+
+</body>
+</html>
