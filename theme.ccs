@@ -1,0 +1,176 @@
+/* 1. STANDART (Indigo) — Kunduzgi va Tungi */
+:root {
+  --bg: #f1f5f9;
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+  --text: #1e293b;
+  --title: #312e81;
+  --muted: #64748b;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-soft: #eef2ff;
+  --border: #e2e8f0;
+  --shadow: rgba(79, 70, 229, 0.08);
+}
+
+[data-dark="true"] {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface-soft: #0f172a;
+  --text: #f1f5f9;
+  --title: #e0e7ff;
+  --muted: #94a3b8;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-soft: rgba(99, 102, 241, 0.2);
+  --border: #334155;
+  --shadow: rgba(0, 0, 0, 0.35);
+}
+
+/* 2. QOG'OZ — Kunduzgi va Tungi (Iliq jigarrang/sepia) */
+[data-theme="qogoz"] {
+  --bg: #f5efe6;
+  --surface: #fdfaf5;
+  --surface-soft: #f7f1e7;
+  --text: #2c241b;
+  --title: #5c3a21;
+  --muted: #7c6a58;
+  --accent: #b45309;
+  --accent-hover: #92400e;
+  --accent-soft: #fef3c7;
+  --border: #e6dccf;
+  --shadow: rgba(180, 83, 9, 0.08);
+}
+
+[data-theme="qogoz"][data-dark="true"] {
+  --bg: #1c1713;
+  --surface: #29221c;
+  --surface-soft: #1f1914;
+  --text: #ede4d8;
+  --title: #fcd34d;
+  --muted: #a89988;
+  --accent: #d97706;
+  --accent-hover: #f59e0b;
+  --accent-soft: rgba(217, 119, 6, 0.2);
+  --border: #3f352c;
+  --shadow: rgba(0, 0, 0, 0.4);
+}
+
+/* 3. DOSKA — Kunduzgi (Yorqin zumrad) va Tungi (Chuqur maktab doskasi) */
+[data-theme="doska"] {
+  --bg: #ecfdf5;
+  --surface: #ffffff;
+  --surface-soft: #f0fdf4;
+  --text: #143627;
+  --title: #064e3b;
+  --muted: #4d7c68;
+  --accent: #059669;
+  --accent-hover: #047857;
+  --accent-soft: #d1fae5;
+  --border: #bbf7d0;
+  --shadow: rgba(5, 150, 105, 0.08);
+}
+
+[data-theme="doska"][data-dark="true"] {
+  --bg: #0d1f18;
+  --surface: #152e24;
+  --surface-soft: #0f241b;
+  --text: #ecfdf5;
+  --title: #6ee7b7;
+  --muted: #86efac;
+  --accent: #10b981;
+  --accent-hover: #34d399;
+  --accent-soft: rgba(16, 185, 129, 0.2);
+  --border: #234738;
+  --shadow: rgba(0, 0, 0, 0.4);
+}
+
+/* 4. KO'K — Kunduzgi va Tungi (Chuqur okean ko'k) */
+[data-theme="kok"] {
+  --bg: #eff6ff;
+  --surface: #ffffff;
+  --surface-soft: #f0f9ff;
+  --text: #0f172a;
+  --title: #1e3a8a;
+  --muted: #475569;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-soft: #dbeafe;
+  --border: #bfdbfe;
+  --shadow: rgba(37, 99, 235, 0.08);
+}
+
+[data-theme="kok"][data-dark="true"] {
+  --bg: #091526;
+  --surface: #11223d;
+  --surface-soft: #0c1b30;
+  --text: #e0f2fe;
+  --title: #7dd3fc;
+  --muted: #93c5fd;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-soft: rgba(59, 130, 246, 0.22);
+  --border: #1e3a5f;
+  --shadow: rgba(0, 0, 0, 0.45);
+}
+
+/* Umumiy elementlarni avtomatik moslashtirish */
+body {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+header, footer, .box, .column-card, .calculator {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 8px 22px var(--shadow) !important;
+}
+
+header {
+  border-bottom: 3px solid var(--accent) !important;
+}
+
+header h1, header h2, header h3, h4 {
+  color: var(--title) !important;
+}
+
+.menu-item {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 6px 16px var(--shadow) !important;
+}
+
+.menu-item:hover {
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
+  border-color: var(--accent) !important;
+}
+
+.back, .back-btn, .home-btn, .num-badge, .icon-box, .tg-links a, .natija, .conv-box, .btn-add, .theme-select, .dark-btn {
+  background-color: var(--accent-soft) !important;
+  color: var(--accent) !important;
+  border-color: var(--border) !important;
+}
+
+.back:hover, .back-btn:hover, .home-btn:hover, .tg-links a:hover, .dark-btn:hover, .menu-item:hover .num-badge, .menu-item:hover .icon-box {
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+.btn, .teng {
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+.btn:hover, .teng:hover {
+  background-color: var(--accent-hover) !important;
+}
+
+input, select:not(.theme-select), #ekran, .res-card, .formula-hint {
+  background-color: var(--surface-soft) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
