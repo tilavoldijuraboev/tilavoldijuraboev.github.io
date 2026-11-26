@@ -359,7 +359,8 @@ function drawSim() {
   ctx.arc(origin.x, origin.y, 75, Math.PI * 0.15, Math.PI * 0.85);
   ctx.stroke();
 
-  ctx.setLineDash([5, 5]);
+ctx.setLineDash(new Array(5, 5));
+
   ctx.beginPath();
   ctx.moveTo(origin.x, origin.y);
   ctx.lineTo(origin.x, origin.y + L * pxPerMeter + 35);
