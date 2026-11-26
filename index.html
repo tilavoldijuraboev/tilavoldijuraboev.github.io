@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fizika va Matematika</title>
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 <style>
 * {
   box-sizing: border-box;
@@ -22,20 +24,73 @@ body {
 header {
   background: #ffffff;
   color: #1e293b;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   text-align: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
   border-bottom: 3px solid #4f46e5;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 header h1 {
-  font-size: 2rem;
+  font-size: 1.85rem;
   font-weight: 700;
   color: #312e81;
+}
+.theme-select {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 7px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border, #e2e8f0);
+  background: var(--accent-soft, #eef2ff);
+  color: var(--accent, #4f46e5);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+.dark-btn {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 7px 14px;
+  border-radius: 10px;
+  border: none;
+  background: var(--accent-soft, #eef2ff);
+  color: var(--accent, #4f46e5);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.dark-btn:hover {
+  background: var(--accent, #4f46e5);
+  color: #ffffff;
+}
+@media (max-width: 540px) {
+  header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 1.2rem 1rem;
+  }
+  .theme-select, .dark-btn {
+    position: static;
+    transform: none;
+  }
+  .header-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
 }
 .menu-column {
   max-width: 480px;
   width: 100%;
-  margin: 3rem auto;
+  margin: 2.5rem auto;
   padding: 0 1rem;
   display: flex;
   flex-direction: column;
@@ -51,16 +106,11 @@ header h1 {
   padding: 1.3rem 2rem;
   border-radius: 16px;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.06);
   border: 1px solid #e2e8f0;
   transition: all 0.25s ease;
 }
 .menu-item:hover {
-  background: #4f46e5;
-  color: #ffffff;
-  border-color: #4f46e5;
   transform: translateY(-3px);
-  box-shadow: 0 12px 25px rgba(79, 70, 229, 0.2);
 }
 footer {
   text-align: center;
@@ -70,8 +120,6 @@ footer {
 }
 .tg-links a {
   display: inline-block;
-  color: #4f46e5;
-  background: #eef2ff;
   padding: 8px 18px;
   border-radius: 10px;
   text-decoration: none;
@@ -80,16 +128,21 @@ footer {
   font-size: 0.95rem;
   transition: all 0.2s;
 }
-.tg-links a:hover {
-  background: #4f46e5;
-  color: #ffffff;
-}
 </style>
 </head>
 <body>
 
 <header>
   <h1>Fizika va Matematika</h1>
+  <div class="header-controls">
+    <select id="theme-select" class="theme-select" title="Mavzuni tanlash">
+      <option value="standart">🎨 Standart</option>
+      <option value="qogoz">📜 Qog'oz</option>
+      <option value="doska">🟩 Doska</option>
+      <option value="kok">📘 Ko'k</option>
+    </select>
+    <button id="dark-toggle" class="dark-btn">🌙 Tun</button>
+  </div>
 </header>
 
 <div class="menu-column">
