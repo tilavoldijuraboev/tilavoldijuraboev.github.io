@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 5: Yorug'likning sinishi va qaytishi</title>
+<link rel="stylesheet" href="theme.css?v=3">
+<script src="theme.js?v=3"></script>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  padding: 14px 10px;
+  text-align: center;
+  position: relative;
+}
+header h3 { font-size: 1.2rem; }
+.back, .home-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.back { left: 12px; }
+.home-btn { right: 12px; }
+.lab-container {
+  max-width: 960px;
+  width: 95%;
+  margin: 1.2rem auto;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1.2rem;
+}
+@media (max-width: 780px) {
+  .lab-container { grid-template-columns: 1fr; }
+}
+.box {
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+}
+canvas {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+  touch-action: none;
+  cursor: grab;
+}
+canvas:active { cursor: grabbing; }
+.control-group { margin-bottom: 13px; }
+.control-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+input[type="range"] { width: 100%; cursor: pointer; }
+select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.checks {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 10px 0 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.checks label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.btn-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-sec {
+  background: var(--accent-soft, #eef2ff);
+  color: var(--accent, #4f46e5);
+}
+.metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.metric-card {
+  background: var(--surface-soft, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  padding: 9px;
+  border-radius: 10px;
+  text-align: center;
+}
+.metric-card span {
+  display: block;
+  font-size: 0.76rem;
+  opacity: 0.8;
+}
+.metric-card strong {
+  font-size: 1rem;
+  color: var(--accent, #4f46e5);
+}
+.formula-bar {
+  font-size: 0.84rem;
+  text-align: center;
+  padding: 8px;
+  border-radius: 10px;
+  background: var(--surface-soft, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="fiz-laboratoriya.html" class="back">← Orqaga</a>
+  <h3>5. Yorug'likning sinishi va qaytishi</h3>
+  <a href="index.html" class="home-btn">🏠 Asosiy</a>
+</header>
+
+<div class="lab-container">
+  <div class="box">
+    <canvas id="optCanvas" width="540" height="440"></canvas>
+  </div>
+
+  <div class="box">
+    <div class="formula-bar">n₁ · sin α = n₂ · sin β &nbsp;|&nbsp; Lazerni ushlab buring!</div>
+
+    <div class="control-group">
+      <div class="control-header"><span>1-muhit (Yuqori qism):</span><span id="n1-val">n₁ = 1.00</span></div>
+      <select id="med1">
+        <option value="1.00">💨 Havo (n = 1.00)</option>
+        <option value="1.33">💧 Suv (n = 1.33)</option>
+        <option value="1.50">🪟 Shisha (n = 1.50)</option>
+        <option value="2.42">💎 Olmos (n = 2.42)</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <div class="control-header"><span>2-muhit (Pastki qism):</span><span id="n2-val">n₂ = 1.33</span></div>
+      <select id="med2">
+        <option value="1.00">💨 Havo (n = 1.00)</option>
+        <option value="1.33" selected>💧 Suv (n = 1.33)</option>
+        <option value="1.50">🪟 Shisha (n = 1.50)</option>
+        <option value="2.42">💎 Olmos (n = 2.42)</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <div class="control-header"><span>Tushish burchagi (α):</span><span id="a-val">40.0°</span></div>
+      <input type="range" id="angle" min="0" max="85" step="0.5" value="40">
+    </div>
+
+    <div class="checks">
+      <label><input type="checkbox" id="showNormal" checked> Normal (perpendikulyar)</label>
+      <label><input type="checkbox" id="showProt" checked> Transportir</label>
+      <label><input type="checkbox" id="showRefl" checked> Qaytgan nur</label>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" id="swapBtn">⇅ Muhitlarni almashtirish</button>
+      <button class="btn btn-sec" id="resetBtn">🔄 Qayta</button>
+    </div>
+
+    <div class="metrics">
+      <div class="metric-card"><span>Qaytish burchagi (α')</span><strong id="m-refl">40.0°</strong></div>
+      <div class="metric-card"><span>Sinish burchagi (β)</span><strong id="m-refr">28.9°</strong></div>
+      <div class="metric-card"><span>Limit burchak (α₀)</span><strong id="m-crit">Mavjud emas</strong></div>
+      <div class="metric-card"><span>2-muhitda tezlik (v₂)</span><strong id="m-vel">2.26·10⁸ m/s</strong></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('optCanvas');
+const ctx = canvas.getContext('2d');
+
+let n1 = 1.00;
+let n2 = 1.33;
+let alphaDeg = 40.0;
+let dragging = false;
+
+const cx = canvas.width / 2;
+const cy = canvas.height / 2;
+const laserDist = 175;
+
+function getColors() {
+  const s = getComputedStyle(document.documentElement);
+  return {
+    bg: s.getPropertyValue('--surface-soft').trim() || '#f8fafc',
+    text: s.getPropertyValue('--text').trim() || '#1e293b',
+    accent: s.getPropertyValue('--accent').trim() || '#4f46e5',
+    border: s.getPropertyValue('--border').trim() || '#cbd5e1'
+  };
+}
+function drawRay(x1, y1, x2, y2, color, width, alpha) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = width;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+
+  // Nur o'rtasiga yo'nalish strelkasi
+  const mx = (x1 + x2) / 2;
+  const my = (y1 + y2) / 2;
+  const ang = Math.atan2(y2 - y1, x2 - x1);
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(mx + 6 * Math.cos(ang), my + 6 * Math.sin(ang));
+  ctx.lineTo(mx - 6 * Math.cos(ang - 0.5), my - 6 * Math.sin(ang - 0.5));
+  ctx.lineTo(mx - 6 * Math.cos(ang + 0.5), my - 6 * Math.sin(ang + 0.5));
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+function draw() {
+  const col = getColors();
+  ctx.fillStyle = col.bg;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // 1-muhit (Yuqori) va 2-muhit (Pastki) ranglari
+  const op1 = Math.min((n1 - 1) * 0.22, 0.35);
+  const op2 = Math.min((n2 - 1) * 0.22, 0.35);
+
+  ctx.fillStyle = `rgba(59, 130, 246, ${op1})`;
+  ctx.fillRect(0, 0, canvas.width, cy);
+
+  ctx.fillStyle = `rgba(14, 165, 233, ${op2})`;
+  ctx.fillRect(0, cy, canvas.width, canvas.height - cy);
+
+  // Muhitlar chegarasi
+  ctx.strokeStyle = col.text;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, cy);
+  ctx.lineTo(canvas.width, cy);
+  ctx.stroke();
+
+  // Muhit nomlari
+  ctx.fillStyle = col.text;
+  ctx.font = 'bold 12px Segoe UI, sans-serif';
+  ctx.fillText(`1-muhit (n₁ = ${n1.toFixed(2)})`, 14, 24);
+  ctx.fillText(`2-muhit (n₂ = ${n2.toFixed(2)})`, 14, cy + 22);
+
+  // Transportir
+  if (document.getElementById('showProt').checked) {
+    ctx.save();
+    ctx.strokeStyle = col.border;
+    ctx.fillStyle = col.text;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 130, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.font = '10px Segoe UI, sans-serif';
+    ctx.textAlign = 'center';
+    for (let deg = 0; deg < 360; deg += 15) {
+      const r = deg * Math.PI / 180;
+      const r1 = deg % 30 === 0 ? 120 : 125;
+      ctx.beginPath();
+      ctx.moveTo(cx + r1 * Math.sin(r), cy - r1 * Math.cos(r));
+      ctx.lineTo(cx + 130 * Math.sin(r), cy - 130 * Math.cos(r));
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  // Normal (perpendikulyar chiziq)
+  if (document.getElementById('showNormal').checked) {
+    ctx.save();
+    ctx.strokeStyle = col.border;
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash(new Array(6, 6));
+    ctx.beginPath();
+    ctx.moveTo(cx, 20);
+    ctx.lineTo(cx, canvas.height - 20);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  const radA = alphaDeg * Math.PI / 180;
+  const laserX = cx - laserDist * Math.sin(radA);
+  const laserY = cy - laserDist * Math.cos(radA);
+
+  // Tushuvchi nur
+  drawRay(laserX, laserY, cx, cy, '#ef4444', 3.5, 1.0);
+
+  // Snellius qonuni: n1 * sin(a) = n2 * sin(b)
+  const sinB = (n1 / n2) * Math.sin(radA);
+  const totalInternal = sinB > 1;
+
+  // Qaytgan nur
+  if (document.getElementById('showRefl').checked || totalInternal) {
+    const reflX = cx + 220 * Math.sin(radA);
+    const reflY = cy - 220 * Math.cos(radA);
+    const reflAlpha = totalInternal ? 1.0 : Math.max(0.25, Math.pow(alphaDeg / 90, 1.5));
+    drawRay(cx, cy, reflX, reflY, '#ef4444', totalInternal ? 3.5 : 2.5, reflAlpha);
+  }
+
+  // Singan nur
+  if (!totalInternal) {
+    const radB = Math.asin(sinB);
+    const betaDeg = radB * 180 / Math.PI;
+    const refrX = cx + 220 * Math.sin(radB);
+    const refrY = cy + 220 * Math.cos(radB);
+    drawRay(cx, cy, refrX, refrY, '#ef4444', 3.2, 0.9);
+    document.getElementById('m-refr').innerText = betaDeg.toFixed(1) + '°';
+  } else {
+    document.getElementById('m-refr').innerText = "To'la ichki qaytish!";
+  }
+
+  // Lazer korpusini chizish
+  ctx.save();
+  ctx.translate(laserX, laserY);
+  ctx.rotate(-radA);
+  ctx.fillStyle = col.accent;
+  ctx.beginPath();
+  ctx.roundRect(-12, -28, 24, 34, 6);
+  ctx.fill();
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.restore();
+
+  // Metrikalarni yangilash
+  document.getElementById('m-refl').innerText = alphaDeg.toFixed(1) + '°';
+  if (n1 > n2) {
+    const crit = Math.asin(n2 / n1) * 180 / Math.PI;
+    document.getElementById('m-crit').innerText = crit.toFixed(1) + '°';
+  } else {
+    document.getElementById('m-crit').innerText = 'Mavjud emas';
+  }
+  const v2 = 3.0 / n2;
+  document.getElementById('m-vel').innerText = v2.toFixed(2) + '·10⁸ m/s';
+}
+
+function getPointerPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const touch = e.touches ? e.touches.item(0) : e;
+  return {
+    x: (touch.clientX - rect.left) * (canvas.width / rect.width),
+    y: (touch.clientY - rect.top) * (canvas.height / rect.height)
+  };
+}
+
+function updateAngleFromPointer(e) {
+  const pos = getPointerPos(e);
+  if (pos.y >= cy - 5) return;
+  let ang = Math.atan2(cx - pos.x, cy - pos.y) * 180 / Math.PI;
+  ang = Math.max(0, Math.min(85, ang));
+  alphaDeg = Math.round(ang * 2) / 2;
+  document.getElementById('angle').value = alphaDeg;
+  document.getElementById('a-val').innerText = alphaDeg.toFixed(1) + '°';
+  draw();
+}
+
+canvas.addEventListener('mousedown', (e) => { dragging = true; updateAngleFromPointer(e); });
+window.addEventListener('mousemove', (e) => { if (dragging) updateAngleFromPointer(e); });
+window.addEventListener('mouseup', () => { dragging = false; });
+
+canvas.addEventListener('touchstart', (e) => { dragging = true; updateAngleFromPointer(e); }, { passive: false });
+window.addEventListener('touchmove', (e) => { if (dragging) { e.preventDefault(); updateAngleFromPointer(e); } }, { passive: false });
+window.addEventListener('touchend', () => { dragging = false; });
+
+document.getElementById('med1').addEventListener('change', (e) => {
+  n1 = parseFloat(e.target.value);
+  document.getElementById('n1-val').innerText = 'n₁ = ' + n1.toFixed(2);
+  draw();
+});
+document.getElementById('med2').addEventListener('change', (e) => {
+  n2 = parseFloat(e.target.value);
+  document.getElementById('n2-val').innerText = 'n₂ = ' + n2.toFixed(2);
+  draw();
+});
+document.getElementById('angle').addEventListener('input', (e) => {
+  alphaDeg = parseFloat(e.target.value);
+  document.getElementById('a-val').innerText = alphaDeg.toFixed(1) + '°';
+  draw();
+});
+document.getElementById('showNormal').addEventListener('change', draw);
+document.getElementById('showProt').addEventListener('change', draw);
+document.getElementById('showRefl').addEventListener('change', draw);
+
+document.getElementById('swapBtn').addEventListener('click', () => {
+  const m1 = document.getElementById('med1');
+  const m2 = document.getElementById('med2');
+  const tmp = m1.value;
+  m1.value = m2.value;
+  m2.value = tmp;
+  n1 = parseFloat(m1.value);
+  n2 = parseFloat(m2.value);
+  document.getElementById('n1-val').innerText = 'n₁ = ' + n1.toFixed(2);
+  document.getElementById('n2-val').innerText = 'n₂ = ' + n2.toFixed(2);
+  draw();
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  n1 = 1.00; n2 = 1.33; alphaDeg = 40.0;
+  document.getElementById('med1').value = '1.00';
+  document.getElementById('med2').value = '1.33';
+  document.getElementById('angle').value = 40;
+  document.getElementById('n1-val').innerText = 'n₁ = 1.00';
+  document.getElementById('n2-val').innerText = 'n₂ = 1.33';
+  document.getElementById('a-val').innerText = '40.0°';
+  draw();
+});
+
+window.addEventListener('load', draw);
+setTimeout(draw, 100);
+</script>
+
+</body>
+</html>
