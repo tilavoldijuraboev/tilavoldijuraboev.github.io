@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 6: Arximed kuchi va suzish sharti</title>
+<link rel="stylesheet" href="theme.css?v=3">
+<script src="theme.js?v=3"></script>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  padding: 14px 10px;
+  text-align: center;
+  position: relative;
+}
+header h3 { font-size: 1.2rem; }
+.back, .home-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.back { left: 12px; }
+.home-btn { right: 12px; }
+.lab-container {
+  max-width: 960px;
+  width: 95%;
+  margin: 1.2rem auto;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 1.2rem;
+}
+@media (max-width: 780px) {
+  .lab-container { grid-template-columns: 1fr; }
+}
+.box {
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+}
+canvas {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+  touch-action: none;
+  cursor: grab;
+}
+canvas:active { cursor: grabbing; }
+.control-group { margin-bottom: 12px; }
+.control-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+input[type="range"] { width: 100%; cursor: pointer; }
+select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.checks {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 10px 0 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.checks label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.btn-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-sec {
+  background: var(--accent-soft, #eef2ff);
+  color: var(--accent, #4f46e5);
+}
+.metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.metric-card {
+  background: var(--surface-soft, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  padding: 9px;
+  border-radius: 10px;
+  text-align: center;
+}
+.metric-card span {
+  display: block;
+  font-size: 0.76rem;
+  opacity: 0.8;
+}
+.metric-card strong {
+  font-size: 0.98rem;
+  color: var(--accent, #4f46e5);
+}
+.formula-bar {
+  font-size: 0.84rem;
+  text-align: center;
+  padding: 8px;
+  border-radius: 10px;
+  background: var(--surface-soft, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="fiz-laboratoriya.html" class="back">← Orqaga</a>
+  <h3>6. Arximed kuchi va suzish</h3>
+  <a href="index.html" class="home-btn">🏠 Asosiy</a>
+</header>
+
+<div class="lab-container">
+  <div class="box">
+    <canvas id="archCanvas" width="520" height="440"></canvas>
+  </div>
+
+  <div class="box">
+    <div class="formula-bar">F<sub>A</sub> = ρ<sub>suy</sub> · g · V<sub>bot</sub> &nbsp;|&nbsp; Jismni ushlab botiring!</div>
+
+    <div class="control-group">
+      <div class="control-header"><span>Jism materiali:</span></div>
+      <select id="matSel">
+        <option value="600">🪵 Yog'och (ρ = 600 kg/m³)</option>
+        <option value="900">🧊 Muz (ρ = 900 kg/m³)</option>
+        <option value="1000">⚖️ Muvozanat (ρ = 1000 kg/m³)</option>
+        <option value="2700">🔩 Alyuminiy (ρ = 2700 kg/m³)</option>
+        <option value="7800">🧲 Temir (ρ = 7800 kg/m³)</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <div class="control-header"><span>Jism zichligi (ρ<sub>jism</sub>):</span><span id="rj-val">600 kg/m³</span></div>
+      <input type="range" id="rhoObj" min="200" max="8000" step="50" value="600">
+    </div>
+
+    <div class="control-group">
+      <div class="control-header"><span>Suyuqlik turi:</span><span id="rs-val">1000 kg/m³</span></div>
+      <select id="liqSel">
+        <option value="800">🛢️ Moy (ρ = 800 kg/m³)</option>
+        <option value="1000" selected>💧 Toza suv (ρ = 1000 kg/m³)</option>
+        <option value="1200">🌊 Sho'r suv (ρ = 1200 kg/m³)</option>
+        <option value="1260">🧪 Glitserin (ρ = 1260 kg/m³)</option>
+        <option value="13600">🌡️ Simob (ρ = 13600 kg/m³)</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <div class="control-header"><span>Jism hajmi (V):</span><span id="v-val">2.0 litr (dm³)</span></div>
+      <input type="range" id="volObj" min="0.5" max="5.0" step="0.1" value="2.0">
+    </div>
+
+    <div class="checks">
+      <label><input type="checkbox" id="showVec" checked> Kuch vektorlari (F<sub>A</sub>, mg)</label>
+      <label><input type="checkbox" id="showScale" checked> Menzurka shkalasi</label>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" id="dropBtn">⬆️ Havoga ko'tarish</button>
+      <button class="btn btn-sec" id="resetBtn">🔄 Qayta</button>
+    </div>
+
+    <div class="metrics">
+      <div class="metric-card"><span>Og'irlik kuchi (mg)</span><strong id="m-fg">11.77 N</strong></div>
+      <div class="metric-card"><span>Arximed kuchi (F<sub>A</sub>)</span><strong id="m-fa">11.77 N</strong></div>
+      <div class="metric-card"><span>Botgan hajm (V<sub>bot</sub>)</span><strong id="m-vsub">1.20 L</strong></div>
+      <div class="metric-card"><span>Jism holati</span><strong id="m-state">Suzmoqda</strong></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('archCanvas');
+const ctx = canvas.getContext('2d');
+
+let rhoObj = 600;
+let rhoLiq = 1000;
+let volLiters = 2.0;
+const g = 9.81;
+
+let objY = 180; // jism markazining Y koordinatasi
+let vy = 0;
+let dragging = false;
+let lastTime = performance.now();
+
+const tankX = 110, tankY = 120, tankW = 300, tankH = 290;
+const baseWaterTop = 210; // jismsiz suv sathi
+
+function getColors() {
+  const s = getComputedStyle(document.documentElement);
+  return {
+    bg: s.getPropertyValue('--surface-soft').trim() || '#f8fafc',
+    text: s.getPropertyValue('--text').trim() || '#1e293b',
+    accent: s.getPropertyValue('--accent').trim() || '#4f46e5',
+    border: s.getPropertyValue('--border').trim() || '#cbd5e1'
+  };
+}
+function drawArrow(fromX, fromY, toX, toY, color, label) {
+  if (Math.abs(toY - fromY) < 4) return;
+  const headlen = 8;
+  const angle = Math.atan2(toY - fromY, toX - fromX);
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(fromX, fromY);
+  ctx.lineTo(toX, toY);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(toX, toY);
+  ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+  ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
+  ctx.closePath();
+  ctx.fill();
+
+  if (label) {
+    ctx.font = 'bold 12px Segoe UI, sans-serif';
+    ctx.fillText(label, toX + 8, toY + 4);
+  }
+  ctx.restore();
+}
+
+function getBoxSize() {
+  return 48 + Math.cbrt(volLiters) * 28;
+}
+
+function calcSubmergedRatio(waterY, boxTop, boxSize) {
+  if (boxTop + boxSize <= waterY) return 0;
+  if (boxTop >= waterY) return 1;
+  return (boxTop + boxSize - waterY) / boxSize;
+}
+
+function stepPhysics(dt) {
+  const boxSize = getBoxSize();
+  const volM3 = volLiters / 1000;
+  const mass = rhoObj * volM3;
+  const fg = mass * g;
+
+  // Taxminiy suv sathi va botgan qismni iteratsiya bilan topish
+  let waterY = baseWaterTop;
+  let subRatio = 0;
+  for (let i = 0; i < 3; i++) {
+    subRatio = calcSubmergedRatio(waterY, objY - boxSize / 2, boxSize);
+    const vSubLiters = volLiters * subRatio;
+    waterY = baseWaterTop - vSubLiters * 6.5;
+  }
+
+  const vSubM3 = volM3 * subRatio;
+  const fa = rhoLiq * g * vSubM3;
+
+  if (!dragging) {
+    const netF = fg - fa;
+    const dragCoeff = subRatio > 0 ? (3.5 + subRatio * 8) : 0.4;
+    const ay = (netF / mass) - dragCoeff * vy;
+    vy += ay * dt;
+    objY += vy * dt * 55;
+
+    // Idish tubi chegarasi
+    const floorY = tankY + tankH - boxSize / 2;
+    if (objY > floorY) {
+      objY = floorY;
+      if (vy > 0) vy = 0;
+    }
+    // Yuqori chegara
+    if (objY < 45) {
+      objY = 45;
+      if (vy < 0) vy = 0;
+    }
+  }
+}
+
+function draw() {
+  const col = getColors();
+  ctx.fillStyle = col.bg;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const boxSize = getBoxSize();
+  const cx = tankX + tankW / 2;
+
+  // Suv sathini hisoblash
+  let waterY = baseWaterTop;
+  let subRatio = 0;
+  for (let i = 0; i < 3; i++) {
+    subRatio = calcSubmergedRatio(waterY, objY - boxSize / 2, boxSize);
+    waterY = baseWaterTop - (volLiters * subRatio) * 6.5;
+  }
+
+  // Suyuqlik rangi (turiga qarab)
+  let liqColor = 'rgba(14, 165, 233, 0.32)';
+  if (rhoLiq === 800) liqColor = 'rgba(234, 179, 8, 0.32)';
+  if (rhoLiq === 1200) liqColor = 'rgba(2, 132, 199, 0.40)';
+  if (rhoLiq === 1260) liqColor = 'rgba(168, 85, 247, 0.28)';
+  if (rhoLiq === 13600) liqColor = 'rgba(148, 163, 184, 0.65)';
+
+  // Suyuqlikni chizish
+  ctx.fillStyle = liqColor;
+  ctx.fillRect(tankX, waterY, tankW, (tankY + tankH) - waterY);
+
+  // Suv sathi chizig'i
+  ctx.strokeStyle = '#0284c7';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(tankX, waterY);
+  ctx.lineTo(tankX + tankW, waterY);
+  ctx.stroke();
+
+  // Jismni chizish
+  ctx.fillStyle = col.accent;
+  ctx.beginPath();
+  ctx.roundRect(cx - boxSize / 2, objY - boxSize / 2, boxSize, boxSize, 10);
+  ctx.fill();
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 12px Segoe UI, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(rhoObj + ' kg/m³', cx, objY + 4);
+  ctx.textAlign = 'left';
+
+  // Idish (Menzurka) devorlari
+  ctx.strokeStyle = col.text;
+  ctx.lineWidth = 3.5;
+  ctx.beginPath();
+  ctx.moveTo(tankX, tankY);
+  ctx.lineTo(tankX, tankY + tankH);
+  ctx.lineTo(tankX + tankW, tankY + tankH);
+  ctx.lineTo(tankX + tankW, tankY);
+  ctx.stroke();
+
+  // Menzurka shkalasi (litrlarda)
+  if (document.getElementById('showScale').checked) {
+    ctx.strokeStyle = col.text;
+    ctx.fillStyle = col.text;
+    ctx.lineWidth = 1.2;
+    ctx.font = '11px Segoe UI, sans-serif';
+    for (let l = 0; l <= 15; l += 2) {
+      const sy = baseWaterTop - l * 6.5;
+      if (sy >= tankY + 10) {
+        ctx.beginPath();
+        ctx.moveTo(tankX, sy);
+        ctx.lineTo(tankX + 12, sy);
+        ctx.stroke();
+        ctx.fillText('+' + l + ' L', tankX - 42, sy + 4);
+      }
+    }
+  }
+
+  // Kuchlarni hisoblash
+  const volM3 = volLiters / 1000;
+  const fg = rhoObj * volM3 * g;
+  const vSubLiters = volLiters * subRatio;
+  const fa = rhoLiq * (vSubLiters / 1000) * g;
+
+  // Kuch vektorlari
+  if (document.getElementById('showVec').checked) {
+    const scale = 1.2;
+    const fgLen = Math.min(fg * scale, 110);
+    const faLen = Math.min(fa * scale, 110);
+    drawArrow(cx - 14, objY, cx - 14, objY + fgLen, '#ef4444', 'mg');
+    drawArrow(cx + 14, objY, cx + 14, objY - faLen, '#10b981', 'F_A');
+  }
+
+  // Metrikalarni yangilash
+  document.getElementById('m-fg').innerText = fg.toFixed(2) + ' N';
+  document.getElementById('m-fa').innerText = fa.toFixed(2) + ' N';
+  document.getElementById('m-vsub').innerText = vSubLiters.toFixed(2) + ' L';
+
+  let state = 'Havoda';
+  if (subRatio > 0 && subRatio < 0.99) state = 'Sirtda suzmoqda';
+  else if (subRatio >= 0.99) {
+    if (rhoObj > rhoLiq) state = 'Tubiga cho\'kdi';
+    else if (rhoObj === rhoLiq) state = 'Ichida muallaq';
+    else state = 'Qalqib chiqmoqda';
+  }
+  document.getElementById('m-state').innerText = state;
+}
+
+function loop(now) {
+  const dt = Math.min((now - lastTime) / 1000, 0.05);
+  lastTime = now;
+
+  const sub = 5;
+  for (let i = 0; i < sub; i++) {
+    stepPhysics(dt / sub);
+  }
+  draw();
+  requestAnimationFrame(loop);
+}
+
+function getPointerY(e) {
+  const rect = canvas.getBoundingClientRect();
+  const touch = e.touches ? e.touches.item(0) : e;
+  return (touch.clientY - rect.top) * (canvas.height / rect.height);
+}
+
+function startDrag(e) {
+  const py = getPointerY(e);
+  if (Math.abs(py - objY) < getBoxSize() / 2 + 15) {
+    dragging = true;
+    vy = 0;
+  }
+}
+
+function moveDrag(e) {
+  if (!dragging) return;
+  e.preventDefault();
+  const py = getPointerY(e);
+  const half = getBoxSize() / 2;
+  objY = Math.max(45, Math.min(tankY + tankH - half, py));
+  vy = 0;
+}
+
+function endDrag() { dragging = false; }
+
+canvas.addEventListener('mousedown', startDrag);
+window.addEventListener('mousemove', moveDrag);
+window.addEventListener('mouseup', endDrag);
+
+canvas.addEventListener('touchstart', startDrag, { passive: false });
+window.addEventListener('touchmove', moveDrag, { passive: false });
+window.addEventListener('touchend', endDrag);
+
+document.getElementById('matSel').addEventListener('change', (e) => {
+  rhoObj = parseFloat(e.target.value);
+  document.getElementById('rhoObj').value = rhoObj;
+  document.getElementById('rj-val').innerText = rhoObj + ' kg/m³';
+});
+document.getElementById('rhoObj').addEventListener('input', (e) => {
+  rhoObj = parseFloat(e.target.value);
+  document.getElementById('rj-val').innerText = rhoObj + ' kg/m³';
+});
+document.getElementById('liqSel').addEventListener('change', (e) => {
+  rhoLiq = parseFloat(e.target.value);
+  document.getElementById('rs-val').innerText = rhoLiq + ' kg/m³';
+});
+document.getElementById('volObj').addEventListener('input', (e) => {
+  volLiters = parseFloat(e.target.value);
+  document.getElementById('v-val').innerText = volLiters.toFixed(1) + ' litr (dm³)';
+});
+
+document.getElementById('dropBtn').addEventListener('click', () => {
+  objY = 65;
+  vy = 0;
+});
+document.getElementById('resetBtn').addEventListener('click', () => {
+  rhoObj = 600; rhoLiq = 1000; volLiters = 2.0; objY = 180; vy = 0;
+  document.getElementById('matSel').value = '600';
+  document.getElementById('rhoObj').value = 600;
+  document.getElementById('liqSel').value = '1000';
+  document.getElementById('volObj').value = 2.0;
+  document.getElementById('rj-val').innerText = '600 kg/m³';
+  document.getElementById('rs-val').innerText = '1000 kg/m³';
+  document.getElementById('v-val').innerText = '2.0 litr (dm³)';
+});
+
+requestAnimationFrame(loop);
+</script>
+
+</body>
+</html>
