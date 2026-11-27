@@ -17,7 +17,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  line-height: 1.65;
+  line-height: 1.68;
 }
 header {
   padding: 14px 12px;
@@ -37,9 +37,8 @@ header h3 { font-size: 1.15rem; }
 }
 .back { left: 12px; }
 .home-btn { right: 12px; }
-
 .article-container {
-  max-width: 760px;
+  max-width: 780px;
   width: 94%;
   margin: 1.5rem auto 2.5rem;
 }
@@ -61,14 +60,13 @@ header h3 { font-size: 1.15rem; }
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--title, #312e81);
-  margin: 1.4rem 0 0.7rem;
+  margin: 1.5rem 0 0.7rem;
   padding-left: 10px;
   border-left: 4px solid var(--accent, #4f46e5);
 }
-p { margin-bottom: 0.85rem; font-size: 0.97rem; }
+p { margin-bottom: 0.85rem; font-size: 0.96rem; }
 ul, ol { margin: 0.5rem 0 1rem 1.4rem; }
-li { margin-bottom: 0.45rem; font-size: 0.95rem; }
-
+li { margin-bottom: 0.45rem; font-size: 0.94rem; }
 .vec {
   display: inline-block;
   position: relative;
@@ -87,7 +85,6 @@ li { margin-bottom: 0.45rem; font-size: 0.95rem; }
   font-style: normal;
   line-height: 1;
 }
-
 .callout {
   background: var(--accent-soft, #eef2ff);
   border-left: 4px solid var(--accent, #4f46e5);
@@ -109,23 +106,43 @@ li { margin-bottom: 0.45rem; font-size: 0.95rem; }
   font-size: 0.95rem;
 }
 .formula-line {
-  font-size: 1.08rem;
+  font-size: 1.04rem;
   font-weight: 700;
   color: var(--title, #312e81);
   text-align: center;
-  padding: 8px;
+  padding: 8px 10px;
   margin: 6px 0;
   background: var(--surface, #ffffff);
   border-radius: 10px;
   border: 1px solid var(--border, #e2e8f0);
 }
-
+.svg-box {
+  background: var(--surface-soft, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 14px;
+  padding: 12px;
+  margin: 1rem 0;
+  text-align: center;
+}
+.svg-box svg { max-width: 100%; height: auto; }
+.svg-cap {
+  font-size: 0.83rem;
+  opacity: 0.8;
+  margin-top: 6px;
+  font-weight: 600;
+}
 .sim-box {
   background: var(--surface-soft, #f8fafc);
   border: 1px solid var(--border, #e2e8f0);
   border-radius: 16px;
   padding: 14px;
-  margin: 1rem 0;
+  margin: 1.1rem 0;
+}
+.sim-head {
+  font-weight: 700;
+  color: var(--title, #312e81);
+  margin-bottom: 6px;
+  font-size: 0.97rem;
 }
 canvas {
   width: 100%;
@@ -138,17 +155,17 @@ canvas {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin-top: 12px;
+  margin-top: 10px;
 }
-@media (max-width: 540px) {
+@media (max-width: 560px) {
   .sim-controls { grid-template-columns: 1fr; }
 }
 .ctrl-item label {
   display: flex;
   justify-content: space-between;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 input[type="range"] { width: 100%; cursor: pointer; }
 .sim-btns {
@@ -158,18 +175,17 @@ input[type="range"] { width: 100%; cursor: pointer; }
 }
 .btn {
   flex: 1;
-  padding: 10px;
+  padding: 9px;
   border: none;
   border-radius: 10px;
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   cursor: pointer;
 }
 .btn-sec {
   background: var(--accent-soft, #eef2ff);
   color: var(--accent, #4f46e5);
 }
-
 .prob-item {
   background: var(--surface-soft, #f8fafc);
   border: 1px solid var(--border, #e2e8f0);
@@ -188,7 +204,6 @@ input[type="range"] { width: 100%; cursor: pointer; }
 .b-easy { background: #dcfce7; color: #166534; }
 .b-med { background: #fef3c7; color: #92400e; }
 .b-hard { background: #fee2e2; color: #991b1b; }
-
 .sol-toggle {
   margin-top: 8px;
   padding: 7px 14px;
@@ -208,7 +223,6 @@ input[type="range"] { width: 100%; cursor: pointer; }
   font-size: 0.94rem;
 }
 .sol-body.open { display: block; }
-
 .f-card {
   background: var(--accent-soft, #eef2ff);
   border-radius: 12px;
@@ -217,11 +231,10 @@ input[type="range"] { width: 100%; cursor: pointer; }
 }
 .f-card strong {
   display: block;
-  font-size: 1.06rem;
+  font-size: 1.04rem;
   color: var(--title, #312e81);
 }
-.f-card span { font-size: 0.86rem; opacity: 0.85; }
-
+.f-card span { font-size: 0.85rem; opacity: 0.85; }
 .nav-links {
   display: flex;
   flex-direction: column;
@@ -268,157 +281,321 @@ footer {
 
 <div class="article-container">
   <div class="card">
-    <h1 class="main-title">1.2. To'g'ri chiziqli tekis harakat. Tezlik va harakat tenglamasi</h1>
-
-    <div class="sec-title">1. To'g'ri chiziqli tekis harakat tushunchasi</div>
-    <p>Harakatning eng sodda ko'rinishi <strong>to'g'ri chiziqli tekis harakatdir</strong>. Bunda jismning traektoriyasi to'g'ri chiziqdan iborat bo'ladi va harakat sur'ati vaqt davomida o'zgarmaydi.</p>
+    <h1 class="main-title">1.2. To'g'ri chiziqli tekis harakat. Tezlik vektori, harakat tenglamalari va nisbiylik</h1>
+    <div class="sec-title">1. To'g'ri chiziqli tekis harakatning qat'iy ta'rifi</div>
+    <p>Mexanik harakatning eng sodda va fundamental ko'rinishi <strong>to'g'ri chiziqli tekis harakatdir</strong>. Bunda moddiy nuqtaning traektoriyasi to'g'ri chiziqdan iborat bo'lib, harakat jadalligi va yo'nalishi vaqt o'tishi bilan o'zgarmaydi.</p>
 
     <div class="callout">
-      <strong>Ta'rif:</strong> Jism har qanday teng vaqt oraliqlarida bir xil ko'chishlarni amalga oshiradigan harakat <strong>to'g'ri chiziqli tekis harakat</strong> deyiladi.
+      <strong>Ta'rif:</strong> Moddiy nuqta har qanday teng vaqt oraliqlarida moduli va yo'nalishi jihatidan bir xil ko'chishlarni amalga oshiradigan harakat <strong>to'g'ri chiziqli tekis harakat</strong> deyiladi.
     </div>
 
-    <p><em>Muhim izoh (G.S. Landsberg va D. Halliday ta'kidlaganidek):</em> Ta'rifdagi <strong>"har qanday"</strong> so'zi hal qiluvchi ahamiyatga ega. Masalan, poyezd har 1 soatda 60 km yo'l bossa-yu, lekin birinchi yarim soatda 40 km, ikkinchi yarim soatda 20 km yurgan bo'lsa, bu tekis harakat emas. Tekis harakatda har bir soniya yoki millisekundda ko'chishlar aynan teng bo'lishi shart.</p>
+    <p>Ta'rifdagi <em>"har qanday teng vaqt oraliqlarida"</em> sharti muhim fizik ma'noga ega. Agar jism 1 soatda 60 km yo'l yurgan bo'lsa-yu, lekin birinchi yarim soatda 45 km, ikkinchi yarim soatda 15 km masofani bosgan bo'lsa, teng 0.5 soatlik oraliqlarda ko'chishlar teng bo'lmagani sababli bu harakat tekis hisoblanmaydi. Tekis harakatda Δt → 0 qanchalik kichik tanlanmasin, Δ<span class="vec">r</span> / Δt nisbat o'zgarmas qoladi.</p>
 
-    <div class="sec-title">2. Tezlik vektori va uning fizik ma'nosi</div>
-    <p>Harakatning jadalligini va yo'nalishini bir vaqtning o'zida xarakterlash uchun <strong>tezlik (<span class="vec">v</span>)</strong> deb ataluvchi vektor fizik kattalik kiritiladi.</p>
+    <div class="svg-box">
+      <svg viewBox="0 0 460 190" width="460" height="190">
+        <defs>
+          <marker id="arr1" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6 Z" fill="#4f46e5"/>
+          </marker>
+          <marker id="arr2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6 Z" fill="#10b981"/>
+          </marker>
+        </defs>
+        <line x1="40" y1="160" x2="430" y2="160" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr1)"/>
+        <line x1="50" y1="170" x2="50" y2="15" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr1)"/>
+        <text x="435" y="164" fill="#64748b" font-size="13" font-weight="bold">X</text>
+        <text x="34" y="20" fill="#64748b" font-size="13" font-weight="bold">Y</text>
+        <text x="34" y="175" fill="#64748b" font-size="13" font-weight="bold">O</text>
+
+        <line x1="90" y1="125" x2="400" y2="45" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6,5"/>
+        <line x1="50" y1="160" x2="145" y2="110" stroke="#4f46e5" stroke-width="2.2" marker-end="url(#arr1)"/>
+        <line x1="50" y1="160" x2="325" y2="64" stroke="#4f46e5" stroke-width="2.2" marker-end="url(#arr1)"/>
+        <line x1="148" y1="109" x2="322" y2="65" stroke="#10b981" stroke-width="3" marker-end="url(#arr2)"/>
+
+        <circle cx="148" cy="109" r="5" fill="#4f46e5"/>
+        <circle cx="325" cy="64" r="5" fill="#ef4444"/>
+
+        <text x="82" y="128" fill="#4f46e5" font-size="13" font-weight="bold">r₀</text>
+        <text x="195" y="125" fill="#4f46e5" font-size="13" font-weight="bold">r(t)</text>
+        <text x="215" y="75" fill="#10b981" font-size="13" font-weight="bold">Δr = s = v·t</text>
+        <text x="135" y="96" fill="#64748b" font-size="11">M₀(t=0)</text>
+        <text x="318" y="50" fill="#ef4444" font-size="11">M(t)</text>
+      </svg>
+      <div class="svg-cap">1-chizma: Tekislikda to'g'ri chiziqli tekis harakatning vektorli tasviri: r(t) = r₀ + v·t</div>
+    </div>
 
     <div class="derivation">
-      <div class="derivation-title">📐 Tezlik formulasining keltirib chiqarilishi:</div>
-      <p>Jism <span class="vec">r</span><sub>0</sub> radius-vektor bilan aniqlanuvchi boshlang'ich nuqtadan <em>t</em> vaqt davomida <span class="vec">r</span> nuqtaga ko'chsin. Uning ko'chish vektori <span class="vec">s</span> = Δ<span class="vec">r</span> = <span class="vec">r</span> − <span class="vec">r</span><sub>0</sub> ga teng. Ko'chish vektorining shu ko'chish ro'y bergan vaqt oralig'iga nisbati <strong>tezlik vektori</strong>ni beradi:</p>
-      <div class="formula-line"><span class="vec">v</span> = <span class="vec">s</span> / t = (<span class="vec">r</span> − <span class="vec">r</span><sub>0</sub>) / t</div>
-      <p>Tekis harakatda tezlik vektori ham moduli (son qiymati), ham yo'nalishi bo'yicha o'zgarmasdir: <strong><span class="vec">v</span> = const</strong>.</p>
+      <div class="derivation-title">📐 1-keltirib chiqarish: Tezlik vektori va fazoviy harakat tenglamasi</div>
+      <p>Sanoq boshi O nuqtada joylashgan koordinatalar sistemasida moddiy nuqtaning t₀ = 0 momentdagi radius-vektori <span class="vec">r</span><sub>0</sub>, ixtiyoriy t momentdagi radius-vektori <span class="vec">r</span>(t) bo'lsin. t vaqt ichidagi ko'chish vektori:</p>
+      <div class="formula-line">Δ<span class="vec">r</span> = <span class="vec">s</span> = <span class="vec">r</span>(t) − <span class="vec">r</span><sub>0</sub></div>
+      <p>Ko'chish vektorining shu ko'chish ro'y bergan vaqt oralig'iga nisbati <strong>tezlik vektori</strong> (<span class="vec">v</span>) deyiladi:</p>
+      <div class="formula-line"><span class="vec">v</span> = Δ<span class="vec">r</span> / Δt = (<span class="vec">r</span>(t) − <span class="vec">r</span><sub>0</sub>) / t &nbsp;⇒&nbsp; <span class="vec">r</span>(t) = <span class="vec">r</span><sub>0</sub> + <span class="vec">v</span> · t</div>
+      <p>SI birliklar tizimida tezlik birligi <strong>1 m/s</strong>. Amaliy birliklar bilan bog'liqlik: <strong>1 km/soat = 1000 m / 3600 s = 1/3.6 m/s</strong> va <strong>1 m/s = 3.6 km/soat</strong>.</p>
     </div>
 
-    <ul>
-      <li>SI tizimida tezlik birligi — <strong>1 m/s</strong>.</li>
-      <li>Amaliy birliklarni o'tkazish: <strong>1 km/soat = 1 / 3.6 m/s ≈ 0.278 m/s</strong>, aksincha <strong>1 m/s = 3.6 km/soat</strong>.</li>
-    </ul>
-
-    <div class="sec-title">3. Harakat tenglamasi (Koordinataning vaqtga bog'liqligi)</div>
-    <p>Istalgan <em>t</em> vaqt momentida jismning qayerda turganini topish uchun koordinata o'qini harakat yo'nalishi bo'ylab (OX o'qi bo'ylab) yo'naltiramiz.</p>
+    <div class="sec-title">2. Dekart koordinata proyeksiyalari, yo'nalish kosinuslari va traektoriya</div>
+    <p>Vektor tenglamadan skalyar tenglamalarga o'tish uchun <span class="vec">r</span><sub>0</sub>, <span class="vec">r</span>(t) va <span class="vec">v</span> vektorlarni OX, OY, OZ o'qlarining birlik vektorlari (<span class="vec">i</span>, <span class="vec">j</span>, <span class="vec">k</span>) bo'yicha yoyamiz:</p>
 
     <div class="derivation">
-      <div class="derivation-title">📐 Harakat tenglamasini keltirib chiqarish (2 usulda):</div>
-      <p><strong>1-usul (Algebraik usul):</strong> OX o'qidagi ko'chish proyeksiyasi <em>s<sub>x</sub> = x − x<sub>0</sub></em> ekanligini va <em>v<sub>x</sub> = s<sub>x</sub> / t</em> formulasini birlashtiramiz:</p>
-      <div class="formula-line">v<sub>x</sub> = (x − x<sub>0</sub>) / t &nbsp;⇒&nbsp; x − x<sub>0</sub> = v<sub>x</sub> · t</div>
-      <div class="formula-line">x(t) = x<sub>0</sub> + v<sub>x</sub> · t</div>
-      <p><strong>2-usul (Diferensial va integral usul — D. Halliday uslubida):</strong> Oniy tezlik ta'rifiga ko'ra <em>v<sub>x</sub> = dx / dt</em>, bundan <em>dx = v<sub>x</sub> dt</em>. Boshlang'ich <em>t<sub>0</sub> = 0</em> momentda koordinata <em>x<sub>0</sub></em>, ixtiyoriy <em>t</em> momentda <em>x</em> bo'lsa, <em>v<sub>x</sub> = const</em> uchun integrallaymiz:</p>
-      <div class="formula-line">∫<sub>x₀</sub><sup>x</sup> dx = v<sub>x</sub> ∫<sub>0</sub><sup>t</sup> dt &nbsp;⇒&nbsp; x − x<sub>0</sub> = v<sub>x</sub> · t &nbsp;⇒&nbsp; x(t) = x<sub>0</sub> + v<sub>x</sub> · t</div>
+      <div class="derivation-title">📐 2-keltirib chiqarish: 3D skalyar tenglamalar va yo'nalish kosinuslari</div>
+      <div class="formula-line"><span class="vec">r</span><sub>0</sub> = x<sub>0</sub><span class="vec">i</span> + y<sub>0</sub><span class="vec">j</span> + z<sub>0</sub><span class="vec">k</span> &nbsp;;&nbsp; <span class="vec">v</span> = v<sub>x</sub><span class="vec">i</span> + v<sub>y</sub><span class="vec">j</span> + v<sub>z</sub><span class="vec">k</span></div>
+      <p>Bu yoyilmalarni <span class="vec">r</span>(t) = <span class="vec">r</span><sub>0</sub> + <span class="vec">v</span>·t tenglamaga qo'yib, birlik ortlar oldidagi koeffitsiyentlarni tenglashtiramiz:</p>
+      <div class="formula-line">
+        x(t) = x<sub>0</sub> + v<sub>x</sub> · t<br>
+        y(t) = y<sub>0</sub> + v<sub>y</sub> · t<br>
+        z(t) = z<sub>0</sub> + v<sub>z</sub> · t
+      </div>
+      <p>Tezlik vektorining moduli va koordinata o'qlari bilan hosil qilgan α, β, γ burchaklarining <strong>yo'nalish kosinuslari</strong>:</p>
+      <div class="formula-line">v = √(v<sub>x</sub>² + v<sub>y</sub>² + v<sub>z</sub>²) &nbsp;;&nbsp; cos α = v<sub>x</sub> / v ,&nbsp; cos β = v<sub>y</sub> / v ,&nbsp; cos γ = v<sub>z</sub> / v</div>
+      <p><strong>Traektoriya tenglamasini topish:</strong> Tekislikdagi (XOY) harakat tenglamalaridan t = (x − x<sub>0</sub>)/v<sub>x</sub> parametrni yo'qotsak (v<sub>x</sub> ≠ 0):</p>
+      <div class="formula-line">y(x) = y<sub>0</sub> + (v<sub>y</sub> / v<sub>x</sub>) · (x − x<sub>0</sub>)</div>
+      <p>Bu y = kx + b ko'rinishidagi chiziqli funksiya bo'lib, k = v<sub>y</sub> / v<sub>x</sub> = tg α — to'g'ri chiziqning OX o'qiga og'ish burchagi tangensidir.</p>
+    </div>
+    <div class="sec-title">3. Integral usulda keltirib chiqarish va grafiklarning geometrik ma'nosi</div>
+    <p>Kinematikada koordinata va ko'chishni topishning umumiy usuli diferensial va integral hisobga asoslanadi.</p>
+
+    <div class="derivation">
+      <div class="derivation-title">📐 3-keltirib chiqarish: Diferensial tenglamani integrallash</div>
+      <p>Tezlikning OX o'qidagi proyeksiyasi koordinataning vaqt bo'yicha olingan birinchi tartibli hosilasiga teng: <em>v<sub>x</sub> = dx / dt</em>. Bundan cheksiz kichik <em>dt</em> vaqt oralig'idagi ko'chish <em>dx = v<sub>x</sub> · dt</em>. Boshlang'ich <em>t₀ = 0</em> momentda koordinata <em>x₀</em>, ixtiyoriy <em>t</em> momentda <em>x</em> bo'lsa, <em>v<sub>x</sub> = const</em> sharti ostida aniq integral olamiz:</p>
+      <div class="formula-line">∫<sub>x₀</sub><sup>x</sup> dx = ∫<sub>0</sub><sup>t</sup> v<sub>x</sub> dt = v<sub>x</sub> ∫<sub>0</sub><sup>t</sup> dt &nbsp;⇒&nbsp; x − x<sub>0</sub> = v<sub>x</sub> · t &nbsp;⇒&nbsp; x(t) = x<sub>0</sub> + v<sub>x</sub> · t</div>
+    </div>
+
+    <div class="svg-box">
+      <svg viewBox="0 0 460 175" width="460" height="175">
+        <defs>
+          <marker id="arr3" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6 Z" fill="#64748b"/>
+          </marker>
+        </defs>
+        <!-- Chap grafik: vx(t) -->
+        <rect x="45" y="45" width="120" height="85" fill="rgba(79,70,229,0.16)"/>
+        <line x1="35" y1="130" x2="195" y2="130" stroke="#64748b" stroke-width="1.8" marker-end="url(#arr3)"/>
+        <line x1="45" y1="145" x2="45" y2="20" stroke="#64748b" stroke-width="1.8" marker-end="url(#arr3)"/>
+        <line x1="45" y1="45" x2="175" y2="45" stroke="#4f46e5" stroke-width="3"/>
+        <line x1="165" y1="45" x2="165" y2="130" stroke="#4f46e5" stroke-width="1.5" stroke-dasharray="4,4"/>
+        <text x="190" y="145" fill="#64748b" font-size="12" font-weight="bold">t</text>
+        <text x="22" y="25" fill="#64748b" font-size="12" font-weight="bold">vₓ</text>
+        <text x="24" y="49" fill="#4f46e5" font-size="11" font-weight="bold">v₀</text>
+        <text x="160" y="145" fill="#64748b" font-size="11">t₁</text>
+        <text x="72" y="92" fill="#312e81" font-size="12" font-weight="bold">S = v₀·t₁ = sₓ</text>
+
+        <!-- O'ng grafik: x(t) -->
+        <line x1="245" y1="130" x2="425" y2="130" stroke="#64748b" stroke-width="1.8" marker-end="url(#arr3)"/>
+        <line x1="255" y1="145" x2="255" y2="20" stroke="#64748b" stroke-width="1.8" marker-end="url(#arr3)"/>
+        <line x1="255" y1="105" x2="405" y2="30" stroke="#10b981" stroke-width="3"/>
+        <line x1="255" y1="105" x2="375" y2="105" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="4,4"/>
+        <line x1="375" y1="45" x2="375" y2="105" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="4,4"/>
+        <text x="420" y="145" fill="#64748b" font-size="12" font-weight="bold">t</text>
+        <text x="235" y="25" fill="#64748b" font-size="12" font-weight="bold">x</text>
+        <text x="236" y="109" fill="#10b981" font-size="11" font-weight="bold">x₀</text>
+        <text x="295" y="100" fill="#10b981" font-size="11" font-weight="bold">α</text>
+        <text x="380" y="80" fill="#10b981" font-size="11" font-weight="bold">Δx</text>
+        <text x="310" y="118" fill="#64748b" font-size="11">Δt</text>
+      </svg>
+      <div class="svg-cap">2-chizma: Chapda — vₓ(t) grafigi ostidagi yuza ko'chishga teng; O'ngda — x(t) to'g'ri chiziq qiyaligi tg α = Δx/Δt = vₓ</div>
     </div>
 
     <ul>
-      <li>Jism OX o'qi yo'nalishida harakatlansa <strong>v<sub>x</sub> > 0</strong>, qarama-qarshi harakatlansa <strong>v<sub>x</sub> < 0</strong> bo'ladi.</li>
-      <li>Bir tomonga to'g'ri chiziqli harakatda bosib o'tilgan yo'l ko'chish moduliga teng: <strong>l = |s<sub>x</sub>| = |v<sub>x</sub>| · t</strong>.</li>
+      <li><strong>Tezlik grafigi v<sub>x</sub>(t):</strong> <em>v<sub>x</sub> = const</em> bo'lgani uchun grafik vaqt o'qiga parallel to'g'ri chiziqdan iborat. Chiziq va vaqt o'qi orasidagi to'g'ri to'rtburchakning <strong>yuzasi</strong> ko'chish proyeksiyasiga teng: <em>s<sub>x</sub> = v<sub>x</sub> · t</em>. Agar <em>v<sub>x</sub> < 0</em> bo'lsa, yuza vaqt o'qidan pastda joylashadi va ko'chish manfiy olinadi.</li>
+      <li><strong>Koordinata grafigi x(t):</strong> Chiziqli funksiya grafigi og'ma to'g'ri chiziq bo'lib, vaqt o'qi bilan hosil qilgan burchak tangensi tezlikka teng: <strong>tg α = (x − x₀) / t = v<sub>x</sub></strong>.</li>
     </ul>
 
-    <div class="sec-title">4. Tezlik va koordinata grafiklari</div>
-    <ul>
-      <li><strong>Tezlik grafigi v<sub>x</sub>(t):</strong> <em>v<sub>x</sub> = const</em> bo'lgani uchun grafik vaqt o'qiga parallel to'g'ri chiziqdan iborat. Chiziq ostidagi to'g'ri to'rtburchak <strong>yuzasi</strong> ko'chish proyeksiyasiga (<em>s<sub>x</sub> = v<sub>x</sub> · t</em>) teng.</li>
-      <li><strong>Koordinata grafigi x(t):</strong> <em>x(t) = x<sub>0</sub> + v<sub>x</sub> t</em> chiziqli funksiya bo'lgani uchun grafigi og'ma to'g'ri chiziq bo'lib, qiyalik burchagi tangensi tezlikka teng: <strong>tg α = v<sub>x</sub></strong>.</li>
-    </ul>
-
-    <div class="sec-title">🔬 Interaktiv tajriba: Harakat va grafiklar bog'liqligi</div>
     <div class="sim-box">
-      <p style="font-size:0.88rem; margin-bottom:8px;">Boshlang'ich koordinata (<strong>x₀</strong>) va tezlikni (<strong>v<sub>x</sub></strong>) o'zgartirib, jism harakati hamda <strong>x(t)</strong> grafigini kuzating:</p>
-      <canvas id="motionCanvas" width="660" height="310"></canvas>
+      <div class="sim-head">🔬 Interaktiv tajriba №1: Harakat, x(t) va vₓ(t) grafiklari</div>
+      <p style="font-size:0.86rem; margin-bottom:8px;">Boshlang'ich koordinata (<strong>x₀</strong>) va tezlikni (<strong>v<sub>x</sub></strong>) o'zgartirib, jism harakati, koordinata grafigi hamda tezlik grafigi ostidagi bo'yalgan yuzani kuzating:</p>
+      <canvas id="sim1Canvas" width="680" height="330"></canvas>
 
       <div class="sim-controls">
         <div class="ctrl-item">
-          <label><span>Boshlang'ich koordinata (x₀):</span><span id="x0-txt">0 m</span></label>
-          <input type="range" id="x0-range" min="-20" max="20" step="2" value="0">
+          <label><span>Boshlang'ich koordinata (x₀):</span><span id="s1-x0-txt">0 m</span></label>
+          <input type="range" id="s1-x0" min="-20" max="20" step="2" value="0">
         </div>
         <div class="ctrl-item">
-          <label><span>Tezlik proyeksiyasi (v<sub>x</sub>):</span><span id="vx-txt">5 m/s</span></label>
-          <input type="range" id="vx-range" min="-10" max="10" step="1" value="5">
+          <label><span>Tezlik proyeksiyasi (v<sub>x</sub>):</span><span id="s1-vx-txt">5 m/s</span></label>
+          <input type="range" id="s1-vx" min="-10" max="10" step="1" value="5">
         </div>
       </div>
 
       <div class="sim-btns">
-        <button class="btn" id="simPlay">⏸️ Pauza</button>
-        <button class="btn btn-sec" id="simReset">🔄 Qayta boshlash</button>
+        <button class="btn" id="s1-play">⏸️ Pauza</button>
+        <button class="btn btn-sec" id="s1-reset">🔄 Qayta boshlash</button>
       </div>
     </div>
-    <div class="sec-title">✍️ Mavzuga oid masalalar va yechimlar</div>
+    <div class="sec-title">4. Ikki jism harakati: Uchrashuv va quvib yetish sharti</div>
+    <p>Bir to'g'ri chiziq bo'ylab harakatlanayotgan ikki moddiy nuqtaning koordinatalari vaqtga bog'liq ravishda quyidagi tenglamalar bilan ifodalansin:</p>
+
+    <div class="derivation">
+      <div class="derivation-title">📐 4-keltirib chiqarish: Uchrashuv vaqti va joyi</div>
+      <div class="formula-line">x₁(t) = x₀₁ + v₁ₓ · t &nbsp;&nbsp;va&nbsp;&nbsp; x₂(t) = x₀₂ + v₂ₓ · t</div>
+      <p>Jismlar uchrashgan (yoki biri ikkinchisini quvib yetgan) <em>t = t<sub>uch</sub></em> momentda ularning fazodagi vaziyatlari mos tushadi, ya'ni <strong>x₁(t<sub>uch</sub>) = x₂(t<sub>uch</sub>)</strong>:</p>
+      <div class="formula-line">x₀₁ + v₁ₓ · t<sub>uch</sub> = x₀₂ + v₂ₓ · t<sub>uch</sub> &nbsp;⇒&nbsp; t<sub>uch</sub> = (x₀₂ − x₀₁) / (v₁ₓ − v₂ₓ)</div>
+      <p><strong>Fizik tahlil:</strong> Agar hisoblash natijasida <em>t<sub>uch</sub> > 0</em> chiqsa, jismlar kelajakda albatta uchrashadi. Agar <em>t<sub>uch</sub> < 0</em> chiqsa, jismlar hozirgi harakat yo'nalishida uchrashmaydi (ular o'tmishda uchrashgan). Agar <em>v₁ₓ = v₂ₓ</em> va <em>x₀₁ ≠ x₀₂</em> bo'lsa, maxraj nolga aylanadi — jismlar orasidagi masofa o'zgarmaydi.</p>
+    </div>
+
+    <div class="sim-box">
+      <div class="sim-head">🔬 Interaktiv tajriba №2: Ikki jism uchrashuvi va grafik kesishuvi</div>
+      <p style="font-size:0.86rem; margin-bottom:8px;">1-jism (ko'k) va 2-jism (qizil) ning boshlang'ich koordinatalari va tezliklarini sozlab, ularning uchrashuv nuqtasini kuzating:</p>
+      <canvas id="sim2Canvas" width="680" height="310"></canvas>
+
+      <div class="sim-controls">
+        <div class="ctrl-item">
+          <label><span>1-jism: x₀₁ va v₁ₓ</span><span id="s2-p1-txt">x₀₁ = −30 m, v₁ₓ = 8 m/s</span></label>
+          <input type="range" id="s2-v1" min="-10" max="12" step="1" value="8">
+        </div>
+        <div class="ctrl-item">
+          <label><span>2-jism: x₀₂ va v₂ₓ</span><span id="s2-p2-txt">x₀₂ = 30 m, v₂ₓ = −4 m/s</span></label>
+          <input type="range" id="s2-v2" min="-12" max="10" step="1" value="-4">
+        </div>
+      </div>
+
+      <div class="sim-btns">
+        <button class="btn" id="s2-play">⏸️ Pauza</button>
+        <button class="btn btn-sec" id="s2-reset">🔄 Qayta</button>
+      </div>
+    </div>
+
+    <div class="sec-title">5. Mexanik harakatning nisbiyligi. Galiley almashtirishlari</div>
+    <p>Jismning traektoriyasi, ko'chishi va tezligi tanlangan sanoq sistemasiga bog'liq. Qo'zg'almas <em>K</em> sanoq sistemasi va unga nisbatan <span class="vec">v</span><sub>0</sub> = const tezlik bilan ilgarilanma harakatlanayotgan <em>K'</em> sanoq sistemasini qaraymiz.</p>
+
+    <div class="derivation">
+      <div class="derivation-title">📐 5-keltirib chiqarish: Galiley koordinata va tezlik almashtirishlari</div>
+      <p><em>t = 0</em> momentda <em>K</em> va <em>K'</em> sistemalarning koordinata boshlari (<em>O</em> va <em>O'</em>) ustma-ust tushsin. <em>t</em> vaqtdan keyin <em>O'</em> nuqta <em>O</em> ga nisbatan <span class="vec">v</span><sub>0</sub>·t ga ko'chadi. Uchburchak qoidasiga ko'ra radius-vektorlar bog'lanishi:</p>
+      <div class="formula-line"><span class="vec">r</span> = <span class="vec">r</span>' + <span class="vec">v</span><sub>0</sub> · t &nbsp;&nbsp;(Galiley koordinata almashtirishi, t = t')</div>
+      <p>Ushbu tenglikni vaqt bo'yicha differensiallasak (<em>d<span class="vec">r</span>/dt = d<span class="vec">r</span>'/dt + <span class="vec">v</span><sub>0</sub></em>), klassik mexanikada <strong>tezliklarni qo'shish qonuni</strong> kelib chiqadi:</p>
+      <div class="formula-line"><span class="vec">v</span> = <span class="vec">v</span>' + <span class="vec">v</span><sub>0</sub> &nbsp;&nbsp;va&nbsp;&nbsp; <span class="vec">v</span><sub>nisbiy</sub> = <span class="vec">v</span><sub>1</sub> − <span class="vec">v</span><sub>2</sub></div>
+      <p>Bu yerda <span class="vec">v</span> — jismning qo'zg'almas sistemaga nisbatan mutlaq tezligi, <span class="vec">v</span>' — harakatlanuvchi sistemaga nisbatan nisbiy tezligi, <span class="vec">v</span><sub>0</sub> — sistemaning ko'chirma tezligi.</p>
+    </div>
+
+    <div class="sim-box">
+      <div class="sim-head">🔬 Interaktiv tajriba №3: Tezliklarni qo'shish (Daryoni kesib o'tayotgan qayiq)</div>
+      <p style="font-size:0.86rem; margin-bottom:8px;">Qayiqning suvga nisbatan tezligi (<strong>v<sub>q</sub></strong>) va daryo oqimi tezligini (<strong>v<sub>oqim</sub></strong>) o'zgartirib, natijaviy tezlik vektori (<span class="vec">v</span> = <span class="vec">v</span><sub>q</sub> + <span class="vec">v</span><sub>oqim</sub>) hamda qayiqning oqib ketish masofasini kuzating:</p>
+      <canvas id="sim3Canvas" width="680" height="260"></canvas>
+
+      <div class="sim-controls">
+        <div class="ctrl-item">
+          <label><span>Qayiq tezligi (v<sub>q</sub>):</span><span id="s3-vq-txt">4.0 m/s</span></label>
+          <input type="range" id="s3-vq" min="1" max="8" step="0.5" value="4">
+        </div>
+        <div class="ctrl-item">
+          <label><span>Oqim tezligi (v<sub>oqim</sub>):</span><span id="s3-vo-txt">3.0 m/s</span></label>
+          <input type="range" id="s3-vo" min="0" max="8" step="0.5" value="3">
+        </div>
+      </div>
+
+      <div class="sim-btns">
+        <button class="btn" id="s3-play">⏸️ Pauza</button>
+        <button class="btn btn-sec" id="s3-reset">🔄 Qayta suzish</button>
+      </div>
+    </div>
+    <div class="sec-title">✍️ Mavzuga oid masalalar va batafsil yechimlar</div>
 
     <div class="prob-item">
-      <p><span class="badge b-easy">Oson</span><strong>1-masala:</strong> Tezligi 72 km/soat bo'lgan avtomobil 15 daqiqa davomida tekis harakatlanib qancha yo'l bosadi? Tezlikni m/s da ham ifodalang.</p>
+      <p><span class="badge b-easy">1-masala</span> Moddiy nuqtaning fazodagi harakati <em>x = 2 + 3t</em>, <em>y = −1 + 4t</em>, <em>z = 5</em> (SI birliklarida) tenglamalar bilan berilgan. Tezlik modulini, harakat yo'nalishining OX o'qi bilan hosil qilgan burchagini hamda 2 sekunddagi ko'chish modulini toping.</p>
       <button class="sol-toggle" onclick="toggleSol(this)">👁️ Yechim va javob</button>
       <div class="sol-body">
-        <strong>Berilgan:</strong> v = 72 km/soat = 72 / 3.6 = 20 m/s; t = 15 min = 15 · 60 = 900 s.<br>
-        <strong>Formula:</strong> s = v · t<br>
-        <strong>Yechish:</strong> s = 20 m/s · 900 s = 18 000 m = 18 km.<br>
-        <strong>Javob:</strong> v = 20 m/s; s = 18 km.
+        <strong>Tahlil:</strong> Harakat tenglamalaridan tezlik proyeksiyalarini ajratib olamiz: <em>v<sub>x</sub> = 3 m/s</em>, <em>v<sub>y</sub> = 4 m/s</em>, <em>v<sub>z</sub> = 0</em>.<br>
+        1) Tezlik moduli: <em>v = √(v<sub>x</sub>² + v<sub>y</sub>² + v<sub>z</sub>²) = √(3² + 4² + 0²) = <strong>5 m/s</strong></em>.<br>
+        2) OX o'qi bilan burchak: <em>cos α = v<sub>x</sub> / v = 3 / 5 = 0.6 ⇒ α = arccos(0.6) ≈ <strong>53.1°</strong></em>.<br>
+        3) 2 sekunddagi ko'chish: <em>s = v · t = 5 · 2 = <strong>10 m</strong></em>.<br>
+        <strong>Javob:</strong> v = 5 m/s; α ≈ 53.1°; s = 10 m.
       </div>
     </div>
 
     <div class="prob-item">
-      <p><span class="badge b-easy">Oson</span><strong>2-masala:</strong> Moddiy nuqtaning harakat tenglamasi <em>x = 12 − 4t</em> (m) ko'rinishda berilgan. Jismning boshlang'ich koordinatasi, tezlik proyeksiyasi, harakat yo'nalishi hamda 5 sekunddan keyingi koordinatasini toping.</p>
+      <p><span class="badge b-easy">2-masala</span> Ikki moddiy nuqtaning harakat tenglamalari <em>x₁ = −25 + 7t</em> va <em>x₂ = 35 − 5t</em> (m) ko'rinishga ega. Ular qancha vaqtdan keyin va qayerda uchrashadilar? Uchrashuv paytigacha har bir jism qancha yo'l bosadi?</p>
       <button class="sol-toggle" onclick="toggleSol(this)">👁️ Yechim va javob</button>
       <div class="sol-body">
-        <strong>Tahlil:</strong> Umumiy harakat tenglamasi <em>x(t) = x₀ + v<sub>x</sub>t</em> bilan solishtiramiz:<br>
-        • Boshlang'ich koordinata: <strong>x₀ = 12 m</strong><br>
-        • Tezlik proyeksiyasi: <strong>v<sub>x</sub> = −4 m/s</strong> (ishorasi manfiy bo'lgani uchun OX o'qiga qarama-qarshi harakatlanmoqda).<br>
-        • t = 5 s momentdagi koordinata: x(5) = 12 − 4 · 5 = <strong>−8 m</strong>.<br>
-        <strong>Javob:</strong> x₀ = 12 m; v<sub>x</sub> = −4 m/s; x(5) = −8 m.
+        <strong>Yechish:</strong> Uchrashuv sharti <em>x₁(t) = x₂(t)</em>:<br>
+        −25 + 7t = 35 − 5t ⇒ 12t = 60 ⇒ <strong>t = 5 s</strong>.<br>
+        Uchrashuv koordinatasi: <em>x = −25 + 7 · 5 = <strong>10 m</strong></em>.<br>
+        Bosib o'tilgan yo'llar: <em>l₁ = |v₁ₓ|·t = 7 · 5 = <strong>35 m</strong></em>; <em>l₂ = |v₂ₓ|·t = |−5| · 5 = <strong>25 m</strong></em>.<br>
+        <strong>Javob:</strong> t = 5 s; x = 10 m; l₁ = 35 m, l₂ = 25 m.
       </div>
     </div>
 
     <div class="prob-item">
-      <p><span class="badge b-med">O'rta</span><strong>3-masala:</strong> Ikki jismning harakat tenglamalari <em>x₁ = −20 + 6t</em> va <em>x₂ = 40 − 4t</em> (SI birliklarida) ko'rinishga ega. Ular qancha vaqtdan keyin va qayerda uchrashadilar?</p>
+      <p><span class="badge b-med">3-masala</span> Uzunligi 240 m bo'lgan poyezd 54 km/soat tezlik bilan tekis harakatlanib, uzunligi 360 m bo'lgan ko'prikdan necha sekundda to'liq o'tib ketadi? Agar poyezd ichida uning harakatiga qarama-qarshi 2 m/s tezlik bilan yurayotgan yo'lovchi bo'lsa, ko'prik yo'lovchining yonidan necha sekundda o'tadi?</p>
       <button class="sol-toggle" onclick="toggleSol(this)">👁️ Yechim va javob</button>
       <div class="sol-body">
-        <strong>Uchrashuv sharti:</strong> <em>x₁(t) = x₂(t)</em> ⇒ −20 + 6t = 40 − 4t<br>
-        10t = 60 ⇒ <strong>t = 6 s</strong>.<br>
-        <strong>Uchrashuv koordinatasi:</strong> x = −20 + 6 · 6 = <strong>16 m</strong>.<br>
-        <strong>Javob:</strong> t = 6 s dan keyin, x = 16 m nuqtada.
+        <strong>1-holat:</strong> Poyezdning yerga nisbatan tezligi <em>v<sub>p</sub> = 54 / 3.6 = 15 m/s</em>. To'liq o'tish masofasi <em>s₁ = 360 + 240 = 600 m</em>. Vaqt: <em>t₁ = 600 / 15 = <strong>40 s</strong></em>.<br>
+        <strong>2-holat:</strong> Yo'lovchining yerga nisbatan tezligi <em>v<sub>y</sub> = 15 − 2 = 13 m/s</em>. Ko'prik uzunligi 360 m bo'lgani uchun: <em>t₂ = 360 / 13 ≈ <strong>27.7 s</strong></em>.<br>
+        <strong>Javob:</strong> t₁ = 40 s; t₂ ≈ 27.7 s.
       </div>
     </div>
 
     <div class="prob-item">
-      <p><span class="badge b-med">O'rta</span><strong>4-masala (Kalashnikov / Xaykin uslubida):</strong> Uzunligi 240 m bo'lgan poyezd 54 km/soat tezlik bilan tekis harakatlanib, uzunligi 360 m bo'lgan ko'prikdan necha sekundda to'liq o'tib ketadi?</p>
+      <p><span class="badge b-med">4-masala</span> Ikki avtomobil bir vaqtda A shahardan B shaharga qarab yo'lga chiqdi. Birinchi avtomobil butun yo'l davomida 60 km/soat o'zgarmas tezlik bilan yurdi. Ikkinchi avtomobil esa yo'lning birinchi yarmini 40 km/soat, ikkinchi yarmini 80 km/soat tezlik bilan bosib o'tdi. Qaysi avtomobil B shaharga oldinroq yetib boradi va necha foiz kam vaqt sarflaydi?</p>
       <button class="sol-toggle" onclick="toggleSol(this)">👁️ Yechim va javob</button>
       <div class="sol-body">
-        <strong>Fizik tahlil:</strong> Poyezd to'liq o'tishi uchun ko'prik va o'z uzunligi yig'indisiga teng yo'l bosadi: s = 360 + 240 = 600 m.<br>
-        Tezlik: v = 54 / 3.6 = 15 m/s.<br>
-        Vaqt: t = 600 / 15 = <strong>40 s</strong>.<br>
-        <strong>Javob:</strong> 40 sekundda.
+        <strong>Yechish:</strong> Umumiy masofani <em>2s</em> deb olamiz.<br>
+        • 1-avtomobil vaqti: <em>t₁ = 2s / 60 = s / 30</em>.<br>
+        • 2-avtomobil vaqti: <em>t₂ = s/40 + s/80 = 3s/80 = s / 26.67</em>.<br>
+        Nisbat: <em>t₁ / t₂ = (s/30) / (3s/80) = 80 / 90 = 8/9 ≈ 0.889</em>. Demak, 1-avtomobil <em>1 − 8/9 = 1/9 ≈ <strong>11.1%</strong></em> kam vaqt sarflaydi.<br>
+        <strong>Javob:</strong> 1-avtomobil oldin yetib boradi (11.1% kam vaqt).
       </div>
     </div>
 
     <div class="prob-item">
-      <p><span class="badge b-hard">Murakkab</span><strong>5-masala (D. Halliday uslubida):</strong> Ikki avtomobil bir vaqtda yo'lga chiqdi. 1-avtomobil butun yo'lni 60 km/soat tezlik bilan yurdi. 2-avtomobil esa yo'lning birinchi yarmini 40 km/soat, ikkinchi yarmini 80 km/soat tezlik bilan bosib o'tdi. Qaysi biri oldin yetib boradi?</p>
+      <p><span class="badge b-med">5-masala</span> Kengligi 120 m bo'lgan daryo oqimining tezligi 3 m/s. Motorli qayiq suvga nisbatan 5 m/s tezlik bilan qirg'oqqa tik (perpendikulyar) ravishda narigi qirg'oqqa yo'l oldi. Qayiq daryoni qancha vaqtda kesib o'tadi, uning qirg'oqqa nisbatan tezligi qancha va u oqim bo'ylab necha metr pastga surilib ketadi?</p>
       <button class="sol-toggle" onclick="toggleSol(this)">👁️ Yechim va javob</button>
       <div class="sol-body">
-        <strong>Yechish:</strong> Umumiy yo'l <em>2s</em> bo'lsin:<br>
-        • 1-avtomobil vaqti: t₁ = 2s / 60 = <strong>s / 30</strong>.<br>
-        • 2-avtomobil vaqti: t₂ = s/40 + s/80 = 3s/80 = <strong>s / 26.67</strong>.<br>
-        Chunki <em>t₁ < t₂</em>, 1-avtomobil oldin yetib boradi.<br>
-        <strong>Javob:</strong> Birinchi avtomobil.
+        <strong>Yechish:</strong> Qayiqning daryoni kesib o'tish vaqti faqat qirg'oqqa tik tezlikka bog'liq:<br>
+        1) Vaqt: <em>t = d / v<sub>q</sub> = 120 / 5 = <strong>24 s</strong></em>.<br>
+        2) Qirg'oqqa nisbatan natijaviy tezlik (Pifagor teoremasiga ko'ra): <em>v = √(v<sub>q</sub>² + v<sub>oqim</sub>²) = √(5² + 3²) = √34 ≈ <strong>5.83 m/s</strong></em>.<br>
+        3) Oqim bo'ylab surilish (snos): <em>x = v<sub>oqim</sub> · t = 3 · 24 = <strong>72 m</strong></em>.<br>
+        <strong>Javob:</strong> t = 24 s; v ≈ 5.83 m/s; x = 72 m.
       </div>
     </div>
 
+    <div class="prob-item">
+      <p><span class="badge b-hard">6-masala</span> Oqim tezligi <em>u = 2 m/s</em> bo'lgan daryodan qayiq eng qisqa yo'l bo'ylab (qirg'oqqa tik chiziq bo'ylab) suzib o'tishi uchun qayiqning suvga nisbatan <em>v = 4 m/s</em> tezlik vektori qirg'oq chizig'iga qanday burchak ostida yo'naltirilishi kerak? Daryo kengligi 100 m bo'lsa, suzib o'tish vaqtini toping.</p>
+      <button class="sol-toggle" onclick="toggleSol(this)">👁️ Yechim va javob</button>
+      <div class="sol-body">
+        <strong>Tahlil:</strong> Natijaviy tezlik <span class="vec">v</span><sub>nat</sub> = <span class="vec">v</span> + <span class="vec">u</span> qirg'oqqa tik bo'lishi uchun qayiq oqimga qarshi ma'lum α burchak ostida suzishi lozim. Tezliklar uchburchagidan:<br>
+        1) <em>cos α = u / v = 2 / 4 = 0.5 ⇒ α = <strong>60°</strong></em> (oqimga qarshi qirg'oq chizig'iga nisbatan).<br>
+        2) Qirg'oqqa tik natijaviy tezlik: <em>v<sub>nat</sub> = v · sin 60° = 4 · (√3 / 2) = 2√3 ≈ 3.46 m/s</em>.<br>
+        3) Vaqt: <em>t = 100 / (2√3) ≈ <strong>28.9 s</strong></em>.<br>
+        <strong>Javob:</strong> Oqimga qarshi 60° burchak ostida; t ≈ 28.9 s.
+      </div>
+    </div>
+
+    <div class="prob-item">
+      <p><span class="badge b-hard">7-masala (Olimpiada)</span> O'zaro tik ikki to'g'ri chiziqli shosse chorrahasiga ikki avtomobil bir xil <em>v = 10 m/s</em> tezlik bilan yaqinlashmoqda. Boshlang'ich momentda birinchi avtomobil chorrahadan 300 m, ikkinchisi esa 400 m masofada edi. Qancha vaqtdan keyin avtomobillar orasidagi masofa eng kichik bo'ladi va bu minimal masofa nechaga teng?</p>
+      <button class="sol-toggle" onclick="toggleSol(this)">👁️ Yechim va javob</button>
+      <div class="sol-body">
+        <strong>Yechish:</strong> Chorrahani koordinata boshi O(0;0) deb olsak, <em>t</em> vaqtdan keyin avtomobillarning chorrahagacha masofalari: <em>x(t) = 300 − 10t</em> va <em>y(t) = 400 − 10t</em>.<br>
+        Ular orasidagi masofa kvadrati: <em>L²(t) = (300 − 10t)² + (400 − 10t)² = 250000 − 14000t + 200t²</em>.<br>
+        Kvadrat uchhadning minimumi (yoki <em>d(L²)/dt = 0</em> shartidan): <em>−14000 + 400t = 0 ⇒ <strong>t = 35 s</strong></em>.<br>
+        Minimal masofa: <em>L<sub>min</sub> = √((300 − 350)² + (400 − 350)²) = √((−50)² + 50²) = 50√2 ≈ <strong>70.7 m</strong></em>.<br>
+        <strong>Javob:</strong> t = 35 s dan keyin; L<sub>min</sub> ≈ 70.7 m.
+      </div>
+    </div>
     <div class="sec-title">📚 Foydalanilgan adabiyotlar</div>
     <ol>
-      <li><strong>P. Habibullayev, A. Boydedayev, A. Bahromov.</strong> <em>Fizika</em> (Maktab va litseylar uchun darslik).</li>
+      <li><strong>P. Habibullayev, A. Boydedayev, A. Bahromov.</strong> <em>Fizika</em> (Umumta'lim maktablari va akademik litseylar uchun darslik).</li>
       <li><strong>N.Sh. Turdiyev.</strong> <em>Fizika</em> (6–7-sinflar uchun darslik).</li>
-      <li><strong>M. O'lmasova.</strong> <em>Fizika: Mexanika va molekulyar fizika.</em></li>
-      <li><strong>G.S. Landsberg.</strong> <em>Elementar fizika darsligi. I tom.</em></li>
-      <li><strong>S.G. Kalashnikov, S.E. Xaykin.</strong> <em>Umumiy fizika kursi: Mexanika.</em></li>
-      <li><strong>David Halliday, Robert Resnick, Jearl Walker.</strong> <em>Fundamentals of Physics.</em></li>
+      <li><strong>M. O'lmasova.</strong> <em>Fizika: Mexanika va molekulyar fizika</em> (Abituriyentlar va talabalar uchun qo'llanma).</li>
+      <li><strong>G.S. Landsberg.</strong> <em>Elementar fizika darsligi. I tom: Mexanika, issiqlik, molekulyar fizika.</em></li>
+      <li><strong>S.G. Kalashnikov, S.E. Xaykin.</strong> <em>Umumiy fizika kursi: Mexanika</em> (Oliy o'quv yurtlari uchun darslik).</li>
+      <li><strong>David Halliday, Robert Resnick, Jearl Walker.</strong> <em>Fundamentals of Physics</em> (10th Edition, Wiley).</li>
     </ol>
 
     <div class="sec-title">📌 Asosiy formulalar</div>
     <div class="f-card">
-      <strong><span class="vec">v</span> = <span class="vec">s</span> / t &nbsp;va&nbsp; v<sub>x</sub> = (x − x₀) / t</strong>
-      <span>To'g'ri chiziqli tekis harakat tezligi va proyeksiyasi (m/s)</span>
+      <strong><span class="vec">v</span> = Δ<span class="vec">r</span> / Δt = const &nbsp;|&nbsp; <span class="vec">r</span>(t) = <span class="vec">r</span>₀ + <span class="vec">v</span> · t</strong>
+      <span>To'g'ri chiziqli tekis harakat tezligi va radius-vektorning vaqtga bog'liqligi</span>
     </div>
     <div class="f-card">
-      <strong>x(t) = x₀ + v<sub>x</sub> · t</strong>
-      <span>To'g'ri chiziqli tekis harakat tenglamasi (m)</span>
+      <strong>x(t) = x₀ + v<sub>x</sub> · t &nbsp;;&nbsp; y(t) = y₀ + v<sub>y</sub> · t &nbsp;;&nbsp; z(t) = z₀ + v<sub>z</sub> · t</strong>
+      <span>Dekart koordinatalar sistemasidagi harakat tenglamalari (m)</span>
     </div>
     <div class="f-card">
-      <strong>1 km/soat = 1/3.6 m/s &nbsp;|&nbsp; 1 m/s = 3.6 km/soat</strong>
-      <span>Tezlik birliklarini o'zaro o'tkazish</span>
+      <strong>v = √(v<sub>x</sub>² + v<sub>y</sub>² + v<sub>z</sub>²) &nbsp;|&nbsp; y(x) = y₀ + (v<sub>y</sub> / v<sub>x</sub>)(x − x₀)</strong>
+      <span>Tezlik moduli (m/s) va tekislikdagi traektoriya tenglamasi</span>
+    </div>
+    <div class="f-card">
+      <strong>t<sub>uch</sub> = (x₀₂ − x₀₁) / (v₁ₓ − v₂ₓ) &nbsp;|&nbsp; <span class="vec">v</span> = <span class="vec">v</span>' + <span class="vec">v</span>₀</strong>
+      <span>Ikki jism uchrashuv vaqti va Galiley tezliklarni qo'shish qonuni</span>
     </div>
 
     <div class="nav-links">
@@ -442,12 +619,6 @@ function toggleSol(btn) {
   btn.innerText = body.classList.contains('open') ? '🔼 Yechimni yopish' : '👁️ Yechim va javob';
 }
 
-const canvas = document.getElementById('motionCanvas');
-const ctx = canvas.getContext('2d');
-let x0 = 0, vx = 5, t = 0, running = true;
-let pts = new Array();
-let lastTime = performance.now();
-
 function getColors() {
   const s = getComputedStyle(document.documentElement);
   return {
@@ -458,116 +629,305 @@ function getColors() {
   };
 }
 
-function draw() {
+// --- SIMULYATOR 1: Harakat, x(t) va vx(t) yuzasi ---
+const c1 = document.getElementById('sim1Canvas');
+const ctx1 = c1.getContext('2d');
+let s1_x0 = 0, s1_vx = 5, s1_t = 0, s1_run = true;
+let s1_pts = new Array();
+
+function drawSim1() {
   const col = getColors();
-  ctx.fillStyle = col.bg;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx1.fillStyle = col.bg;
+  ctx1.fillRect(0, 0, c1.width, c1.height);
 
-  const curX = x0 + vx * t;
-  const trackY = 58, trackL = 50, trackR = canvas.width - 50;
-  const trackMid = (trackL + trackR) / 2;
-  const pxPerM = (trackR - trackL) / 100;
+  const curX = s1_x0 + s1_vx * s1_t;
+  const trackY = 52, tL = 45, tR = c1.width - 45;
+  const tMid = (tL + tR) / 2, ppm = (tR - tL) / 100;
 
-  ctx.strokeStyle = col.border;
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(trackL, trackY);
-  ctx.lineTo(trackR, trackY);
-  ctx.stroke();
+  ctx1.strokeStyle = col.border;
+  ctx1.lineWidth = 2;
+  ctx1.beginPath();
+  ctx1.moveTo(tL, trackY);
+  ctx1.lineTo(tR, trackY);
+  ctx1.stroke();
 
-  ctx.fillStyle = col.text;
-  ctx.font = '11px Segoe UI, sans-serif';
-  ctx.textAlign = 'center';
+  ctx1.fillStyle = col.text;
+  ctx1.font = '11px Segoe UI, sans-serif';
+  ctx1.textAlign = 'center';
   for (let m = -40; m <= 40; m += 20) {
-    const px = trackMid + m * pxPerM;
-    ctx.beginPath();
-    ctx.moveTo(px, trackY - 5);
-    ctx.lineTo(px, trackY + 5);
-    ctx.stroke();
-    ctx.fillText(m + 'm', px, trackY + 18);
+    const px = tMid + m * ppm;
+    ctx1.beginPath();
+    ctx1.moveTo(px, trackY - 4);
+    ctx1.lineTo(px, trackY + 4);
+    ctx1.stroke();
+    ctx1.fillText(m + 'm', px, trackY + 16);
   }
-  ctx.fillText('X (m)', trackR + 22, trackY + 4);
+  const objPx = tMid + Math.max(-50, Math.min(50, curX)) * ppm;
+  ctx1.fillStyle = col.accent;
+  ctx1.beginPath();
+  ctx1.arc(objPx, trackY - 10, 8, 0, Math.PI * 2);
+  ctx1.fill();
 
-  const clampedX = Math.max(-50, Math.min(50, curX));
-  const objPx = trackMid + clampedX * pxPerM;
-  ctx.fillStyle = col.accent;
-  ctx.beginPath();
-  ctx.arc(objPx, trackY - 12, 9, 0, Math.PI * 2);
-  ctx.fill();
+  ctx1.textAlign = 'left';
+  ctx1.font = 'bold 12px Segoe UI, sans-serif';
+  ctx1.fillText(`t = ${s1_t.toFixed(1)} s | x(t) = ${curX.toFixed(1)} m | Ko'chish sₓ = ${(s1_vx * s1_t).toFixed(1)} m`, 20, 20);
 
-  ctx.textAlign = 'left';
-  ctx.font = 'bold 12px Segoe UI, sans-serif';
-  ctx.fillText(`t = ${t.toFixed(1)} s   |   x(t) = ${curX.toFixed(1)} m   |   vₓ = ${vx} m/s`, 20, 22);
+  // Chap grafik: x(t)
+  const g1L = 45, g1R = 325, gT = 95, gB = 300;
+  const gMid = (gT + gB) / 2, g1W = g1R - g1L, gH = (gB - gT) / 2;
 
-  const gL = 55, gR = canvas.width - 30, gT = 105, gB = canvas.height - 28;
-  const gMidY = (gT + gB) / 2, gW = gR - gL, gH = (gB - gT) / 2;
+  ctx1.strokeStyle = col.border;
+  ctx1.lineWidth = 1.4;
+  ctx1.beginPath();
+  ctx1.moveTo(g1L, gT); ctx1.lineTo(g1L, gB);
+  ctx1.moveTo(g1L, gMid); ctx1.lineTo(g1R, gMid);
+  ctx1.stroke();
 
-  ctx.strokeStyle = col.border;
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.moveTo(gL, gT);
-  ctx.lineTo(gL, gB);
-  ctx.moveTo(gL, gMidY);
-  ctx.lineTo(gR, gMidY);
-  ctx.stroke();
+  ctx1.fillStyle = col.text;
+  ctx1.font = '11px Segoe UI, sans-serif';
+  ctx1.fillText('x(t) grafigi', g1L + 8, gT + 12);
 
-  ctx.fillStyle = col.text;
-  ctx.font = '11px Segoe UI, sans-serif';
-  ctx.fillText('x (m)', 16, gT + 8);
-  ctx.fillText('0', gL - 14, gMidY + 4);
-  ctx.fillText('t (s)', gR - 15, gMidY + 15);
-  ctx.fillText('Koordinata grafigi x(t) = x₀ + vₓ·t', gL + 12, gT + 10);
-
-  if (pts.length > 1) {
-    ctx.strokeStyle = col.accent;
-    ctx.lineWidth = 2.6;
-    ctx.beginPath();
-    let first = true;
-    for (const pt of pts) {
-      const px = gL + (pt.t / 10) * gW;
-      const py = gMidY - (Math.max(-50, Math.min(50, pt.x)) / 50) * gH;
-      if (first) { ctx.moveTo(px, py); first = false; }
-      else ctx.lineTo(px, py);
+  if (s1_pts.length > 1) {
+    ctx1.strokeStyle = col.accent;
+    ctx1.lineWidth = 2.5;
+    ctx1.beginPath();
+    let f = true;
+    for (const p of s1_pts) {
+      const px = g1L + (p.t / 10) * g1W;
+      const py = gMid - (Math.max(-50, Math.min(50, p.x)) / 50) * gH;
+      if (f) { ctx1.moveTo(px, py); f = false; } else ctx1.lineTo(px, py);
     }
-    ctx.stroke();
+    ctx1.stroke();
   }
-}
 
-function loop(now) {
-  const dt = Math.min((now - lastTime) / 1000, 0.05);
-  lastTime = now;
-  if (running) {
-    t += dt;
-    if (t > 10) { t = 0; pts = new Array(); }
-    pts.push({ t: t, x: x0 + vx * t });
+  // O'ng grafik: vx(t) va ostidagi yuza
+  const g2L = 375, g2R = c1.width - 25, g2W = g2R - g2L;
+  const vyPx = gMid - (s1_vx / 12) * gH;
+  const curW = (s1_t / 10) * g2W;
+
+  ctx1.fillStyle = 'rgba(16, 185, 129, 0.22)';
+  ctx1.fillRect(g2L, Math.min(gMid, vyPx), curW, Math.abs(gMid - vyPx));
+
+  ctx1.strokeStyle = col.border;
+  ctx1.beginPath();
+  ctx1.moveTo(g2L, gT); ctx1.lineTo(g2L, gB);
+  ctx1.moveTo(g2L, gMid); ctx1.lineTo(g2R, gMid);
+  ctx1.stroke();
+
+  ctx1.strokeStyle = '#10b981';
+  ctx1.lineWidth = 2.5;
+  ctx1.beginPath();
+  ctx1.moveTo(g2L, vyPx);
+  ctx1.lineTo(g2L + curW, vyPx);
+  ctx1.stroke();
+
+  ctx1.fillStyle = col.text;
+  ctx1.fillText('vₓ(t) grafigi (Yuza = sₓ)', g2L + 8, gT + 12);
+}
+// --- SIMULYATOR 2: Ikki jism uchrashuvi ---
+const c2 = document.getElementById('sim2Canvas');
+const ctx2 = c2.getContext('2d');
+let s2_x1 = -30, s2_v1 = 8, s2_x2 = 30, s2_v2 = -4;
+let s2_t = 0, s2_run = true;
+
+function drawSim2() {
+  const col = getColors();
+  ctx2.fillStyle = col.bg;
+  ctx2.fillRect(0, 0, c2.width, c2.height);
+
+  const cur1 = s2_x1 + s2_v1 * s2_t;
+  const cur2 = s2_x2 + s2_v2 * s2_t;
+
+  const trackY = 55, tL = 45, tR = c2.width - 45;
+  const tMid = (tL + tR) / 2, ppm = (tR - tL) / 100;
+
+  ctx2.strokeStyle = col.border;
+  ctx2.lineWidth = 2;
+  ctx2.beginPath();
+  ctx2.moveTo(tL, trackY); ctx2.lineTo(tR, trackY);
+  ctx2.stroke();
+
+  const p1x = tMid + Math.max(-50, Math.min(50, cur1)) * ppm;
+  const p2x = tMid + Math.max(-50, Math.min(50, cur2)) * ppm;
+
+  ctx2.fillStyle = '#3b82f6';
+  ctx2.beginPath(); ctx2.arc(p1x, trackY - 10, 8, 0, Math.PI * 2); ctx2.fill();
+
+  ctx2.fillStyle = '#ef4444';
+  ctx2.beginPath(); ctx2.arc(p2x, trackY + 10, 8, 0, Math.PI * 2); ctx2.fill();
+
+  let info = `t = ${s2_t.toFixed(1)} s | x₁ = ${cur1.toFixed(1)} m, x₂ = ${cur2.toFixed(1)} m`;
+  if (s2_v1 !== s2_v2) {
+    const tMeet = (s2_x2 - s2_x1) / (s2_v1 - s2_v2);
+    if (tMeet >= 0) {
+      const xMeet = s2_x1 + s2_v1 * tMeet;
+      info += ` | Uchrashuv: t = ${tMeet.toFixed(1)} s, x = ${xMeet.toFixed(1)} m`;
+    } else {
+      info += ` | Kelajakda uchrashmaydi`;
+    }
   }
-  draw();
-  requestAnimationFrame(loop);
+  ctx2.fillStyle = col.text;
+  ctx2.font = 'bold 12px Segoe UI, sans-serif';
+  ctx2.fillText(info, 20, 22);
+
+  // Grafik x1(t) va x2(t)
+  const gL = 50, gR = c2.width - 30, gT = 95, gB = 285;
+  const gMid = (gT + gB) / 2, gW = gR - gL, gH = (gB - gT) / 2;
+
+  ctx2.strokeStyle = col.border;
+  ctx2.lineWidth = 1.4;
+  ctx2.beginPath();
+  ctx2.moveTo(gL, gT); ctx2.lineTo(gL, gB);
+  ctx2.moveTo(gL, gMid); ctx2.lineTo(gR, gMid);
+  ctx2.stroke();
+
+  const drawLine = (xStart, vVal, color) => {
+    ctx2.strokeStyle = color;
+    ctx2.lineWidth = 2.4;
+    ctx2.beginPath();
+    for (let ti = 0; ti <= s2_t; ti += 0.1) {
+      const xi = xStart + vVal * ti;
+      const px = gL + (ti / 10) * gW;
+      const py = gMid - (Math.max(-50, Math.min(50, xi)) / 50) * gH;
+      if (ti === 0) ctx2.moveTo(px, py); else ctx2.lineTo(px, py);
+    }
+    ctx2.stroke();
+  };
+
+  drawLine(s2_x1, s2_v1, '#3b82f6');
+  drawLine(s2_x2, s2_v2, '#ef4444');
 }
 
-function resetSim() {
-  t = 0;
-  pts = new Array({ t: 0, x: x0 });
+// --- SIMULYATOR 3: Daryodagi qayiq (Tezliklarni qo'shish) ---
+const c3 = document.getElementById('sim3Canvas');
+const ctx3 = c3.getContext('2d');
+let s3_vq = 4.0, s3_vo = 3.0, s3_t = 0, s3_run = true;
+
+function drawSim3() {
+  const col = getColors();
+  ctx3.fillStyle = col.bg;
+  ctx3.fillRect(0, 0, c3.width, c3.height);
+
+  const bankTop = 38, bankBot = 222;
+  const riverW = bankBot - bankTop; // 184 px ~ 40 metr
+
+  // Daryo suvi
+  ctx3.fillStyle = 'rgba(14, 165, 233, 0.16)';
+  ctx3.fillRect(0, bankTop, c3.width, riverW);
+
+  ctx3.strokeStyle = '#0284c7';
+  ctx3.lineWidth = 2;
+  ctx3.beginPath();
+  ctx3.moveTo(0, bankTop); ctx3.lineTo(c3.width, bankTop);
+  ctx3.moveTo(0, bankBot); ctx3.lineTo(c3.width, bankBot);
+  ctx3.stroke();
+
+  const startX = 90, startY = bankBot;
+  const ppm = riverW / 40; // daryo kengligi 40 m
+  const bx = startX + (s3_vo * s3_t) * ppm;
+  const by = startY - (s3_vq * s3_t) * ppm;
+
+  // Traektoriya
+  ctx3.save();
+  ctx3.strokeStyle = col.accent;
+  ctx3.setLineDash(new Array(5, 5));
+  ctx3.lineWidth = 2;
+  ctx3.beginPath();
+  ctx3.moveTo(startX, startY);
+  ctx3.lineTo(bx, by);
+  ctx3.stroke();
+  ctx3.restore();
+
+  // Qayiq
+  ctx3.fillStyle = col.accent;
+  ctx3.beginPath();
+  ctx3.arc(bx, by, 8, 0, Math.PI * 2);
+  ctx3.fill();
+
+  const vNat = Math.hypot(s3_vq, s3_vo);
+  const crossT = 40 / s3_vq;
+  const drift = s3_vo * crossT;
+
+  ctx3.fillStyle = col.text;
+  ctx3.font = 'bold 12px Segoe UI, sans-serif';
+  ctx3.fillText(`Daryo kengligi: 40 m | Natijaviy tezlik v = ${vNat.toFixed(2)} m/s | O'tish vaqti: ${crossT.toFixed(1)} s | Oqib ketish: ${drift.toFixed(1)} m`, 18, 22);
 }
 
-document.getElementById('x0-range').addEventListener('input', (e) => {
-  x0 = parseFloat(e.target.value);
-  document.getElementById('x0-txt').innerText = x0 + ' m';
-  resetSim();
-});
-document.getElementById('vx-range').addEventListener('input', (e) => {
-  vx = parseFloat(e.target.value);
-  document.getElementById('vx-txt').innerText = vx + ' m/s';
-  resetSim();
-});
-document.getElementById('simPlay').addEventListener('click', (e) => {
-  running = !running;
-  e.target.innerText = running ? '⏸️ Pauza' : '▶️ Davom etish';
-});
-document.getElementById('simReset').addEventListener('click', resetSim);
+let lastT = performance.now();
+function masterLoop(now) {
+  const dt = Math.min((now - lastT) / 1000, 0.05);
+  lastT = now;
 
-resetSim();
-requestAnimationFrame(loop);
+  if (s1_run) {
+    s1_t += dt;
+    if (s1_t > 10) { s1_t = 0; s1_pts = new Array(); }
+    s1_pts.push({ t: s1_t, x: s1_x0 + s1_vx * s1_t });
+  }
+  if (s2_run) {
+    s2_t += dt;
+    if (s2_t > 10) s2_t = 0;
+  }
+  if (s3_run) {
+    s3_t += dt;
+    if (s3_vq * s3_t >= 40) s3_t = 0;
+  }
+
+  drawSim1();
+  drawSim2();
+  drawSim3();
+  requestAnimationFrame(masterLoop);
+}
+
+// Boshqaruv tugmalari
+document.getElementById('s1-x0').addEventListener('input', (e) => {
+  s1_x0 = parseFloat(e.target.value);
+  document.getElementById('s1-x0-txt').innerText = s1_x0 + ' m';
+  s1_t = 0; s1_pts = new Array();
+});
+document.getElementById('s1-vx').addEventListener('input', (e) => {
+  s1_vx = parseFloat(e.target.value);
+  document.getElementById('s1-vx-txt').innerText = s1_vx + ' m/s';
+  s1_t = 0; s1_pts = new Array();
+});
+document.getElementById('s1-play').addEventListener('click', (e) => {
+  s1_run = !s1_run;
+  e.target.innerText = s1_run ? '⏸️ Pauza' : '▶️ Davom etish';
+});
+document.getElementById('s1-reset').addEventListener('click', () => { s1_t = 0; s1_pts = new Array(); });
+
+document.getElementById('s2-v1').addEventListener('input', (e) => {
+  s2_v1 = parseFloat(e.target.value);
+  document.getElementById('s2-p1-txt').innerText = `x₀₁ = −30 m, v₁ₓ = ${s2_v1} m/s`;
+  s2_t = 0;
+});
+document.getElementById('s2-v2').addEventListener('input', (e) => {
+  s2_v2 = parseFloat(e.target.value);
+  document.getElementById('s2-p2-txt').innerText = `x₀₂ = 30 m, v₂ₓ = ${s2_v2} m/s`;
+  s2_t = 0;
+});
+document.getElementById('s2-play').addEventListener('click', (e) => {
+  s2_run = !s2_run;
+  e.target.innerText = s2_run ? '⏸️ Pauza' : '▶️ Davom etish';
+});
+document.getElementById('s2-reset').addEventListener('click', () => { s2_t = 0; });
+
+document.getElementById('s3-vq').addEventListener('input', (e) => {
+  s3_vq = parseFloat(e.target.value);
+  document.getElementById('s3-vq-txt').innerText = s3_vq.toFixed(1) + ' m/s';
+  s3_t = 0;
+});
+document.getElementById('s3-vo').addEventListener('input', (e) => {
+  s3_vo = parseFloat(e.target.value);
+  document.getElementById('s3-vo-txt').innerText = s3_vo.toFixed(1) + ' m/s';
+  s3_t = 0;
+});
+document.getElementById('s3-play').addEventListener('click', (e) => {
+  s3_run = !s3_run;
+  e.target.innerText = s3_run ? '⏸️ Pauza' : '▶️ Davom etish';
+});
+document.getElementById('s3-reset').addEventListener('click', () => { s3_t = 0; });
+
+requestAnimationFrame(masterLoop);
 </script>
 </body>
 </html>
