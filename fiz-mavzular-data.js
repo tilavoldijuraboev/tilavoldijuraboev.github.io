@@ -200,8 +200,7 @@ const FIZIKA_MAVZULAR = [
           { nomi: "🧮 Kinematika kalkulyatori", url: "calc-kinematika.html" },
           { nomi: "📐 INNOVA masalalari", url: "kitob-innova.html" }
         ]
-      }      ,
-            },
+      },
       {
         raqam: "1.2",
         nomi: "To'g'ri chiziqli tekis harakat. Tezlik va harakat tenglamasi",
