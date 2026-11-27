@@ -201,17 +201,13 @@ const FIZIKA_MAVZULAR = [
           { nomi: "📐 INNOVA masalalari", url: "kitob-innova.html" }
         ]
       }      ,
+            },
       {
-        raqam: "1.2",
-        nomi: "To'g'ri chiziqli tekis harakat. Tezlik va harakat tenglamasi",
-              {
         raqam: "1.2",
         nomi: "To'g'ri chiziqli tekis harakat. Tezlik va harakat tenglamasi",
         url: "mavzu-1-2.html"
       }
 
-        `
-      }
 
     ]
   },
