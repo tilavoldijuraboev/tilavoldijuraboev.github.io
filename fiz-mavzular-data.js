@@ -141,3 +141,101 @@ const FIZIKA_MAVZULAR = [
               <button class="quiz-opt" onclick="this.style.background='#fee2e2'; this.style.borderColor='#ef4444';">C) Har qanday harakatda</button>
             </div>
           </div>
+          <div class="lec-sec">
+            <h3 class="lec-h3">🎯 Mustaqil yechish uchun masalalar (Oson → Murakkab)</h3>
+            
+            <div class="qa-card">
+              <span class="badge-lvl lvl-easy">Oson</span><b>1-masala:</b> Turist avval shimolga tomon 600 m, so'ngra sharqqa tomon 800 m yurdi. Turist bosib o'tgan yo'lni (l) va ko'chish modulini (s) toping.
+              <div style="margin-top:6px;"><button class="sim-btn" onclick="this.parentElement.nextElementSibling.style.display='block'">📐 Yechim va javob</button></div>
+              <div class="qa-ans"><b>Yechim:</b> Yo'l: l = 600 + 800 = 1400 m. Shimol va sharq yo'nalishlari o'zaro perpendikulyar bo'lgani uchun ko'chish Pifagor teoremasidan topiladi: s = √(600<sup>2</sup> + 800<sup>2</sup>) = 1000 m.<br><b>Javob:</b> l = 1400 m; s = 1000 m.</div>
+            </div>
+
+            <div class="qa-card">
+              <span class="badge-lvl lvl-easy">Oson</span><b>2-masala:</b> Koptok 3 m balandlikdan polga tushib, undan sakrab 1 m balandlikda tutib olindi. Koptokning yo'li va ko'chishini aniqlang.
+              <div style="margin-top:6px;"><button class="sim-btn" onclick="this.parentElement.nextElementSibling.style.display='block'">📐 Yechim va javob</button></div>
+              <div class="qa-ans"><b>Yechim:</b> Jami yo'l: l = 3 + 1 = 4 m. Boshlang'ich balandlik 3 m, oxirgi balandlik 1 m bo'lgani uchun ko'chish moduli: s = 3 − 1 = 2 m (pastga yo'nalgan).<br><b>Javob:</b> l = 4 m; s = 2 m.</div>
+            </div>
+
+            <div class="qa-card">
+              <span class="badge-lvl lvl-mid">O'rta</span><b>3-masala:</b> Moddiy nuqta koordinatalari x<sub>0</sub> = −2 m, y<sub>0</sub> = 3 m bo'lgan nuqtadan x = 6 m, y = −3 m nuqtaga ko'chdi. Ko'chishning o'qlardagi proyeksiyalarini va modulini toping.
+              <div style="margin-top:6px;"><button class="sim-btn" onclick="this.parentElement.nextElementSibling.style.display='block'">📐 Yechim va javob</button></div>
+              <div class="qa-ans"><b>Yechim:</b> s<sub>x</sub> = 6 − (−2) = 8 m; s<sub>y</sub> = −3 − 3 = −6 m. Ko'chish moduli: s = √(8<sup>2</sup> + (−6)<sup>2</sup>) = √(64 + 36) = 10 m.<br><b>Javob:</b> s<sub>x</sub> = 8 m; s<sub>y</sub> = −6 m; s = 10 m.</div>
+            </div>
+
+            <div class="qa-card">
+              <span class="badge-lvl lvl-mid">O'rta</span><b>4-masala:</b> Radiusi R = 10 m bo'lgan aylana bo'ylab harakatlanayotgan jism aylananing yarmini bosib o'tdi. Uning yo'li va ko'chishini toping (π ≈ 3,14).
+              <div style="margin-top:6px;"><button class="sim-btn" onclick="this.parentElement.nextElementSibling.style.display='block'">📐 Yechim va javob</button></div>
+              <div class="qa-ans"><b>Yechim:</b> Yarim aylana uzunligi (yo'l): l = πR = 3,14 · 10 = 31,4 m. Yarim aylanada jism diametrning qarama-qarshi uchiga o'tadi, shuning uchun ko'chish diametrga teng: s = 2R = 20 m.<br><b>Javob:</b> l = 31,4 m; s = 20 m.</div>
+            </div>
+
+            <div class="qa-card">
+              <span class="badge-lvl lvl-hard">Murakkab</span><b>5-masala:</b> Radiusi R = 10 m bo'lgan aylana bo'ylab harakatlanayotgan jism aylananing 1/4 qismini o'tdi. Yo'l ko'chishdan necha marta katta (π ≈ 3,14)?
+              <div style="margin-top:6px;"><button class="sim-btn" onclick="this.parentElement.nextElementSibling.style.display='block'">📐 Yechim va javob</button></div>
+              <div class="qa-ans"><b>Yechim:</b> Yo'l: l = 2πR / 4 = πR / 2. Aylananing 1/4 qismida radiuslar 90° burchak hosil qiladi, shuning uchun ko'chish (vatar): s = √(R<sup>2</sup> + R<sup>2</sup>) = R√2. Nisbat: l / s = (πR / 2) / (R√2) = π / (2√2) ≈ 3,14 / 2,828 ≈ 1,11 marta.<br><b>Javob:</b> ≈ 1,11 marta katta.</div>
+            </div>
+
+            <div class="qa-card">
+              <span class="badge-lvl lvl-hard">Murakkab</span><b>6-masala:</b> Avtomobil avval sharqqa 3 km, keyin shimolga 4 km va yana sharqqa 9 km yurdi. Avtomobilning umumiy ko'chishini toping.
+              <div style="margin-top:6px;"><button class="sim-btn" onclick="this.parentElement.nextElementSibling.style.display='block'">📐 Yechim va javob</button></div>
+              <div class="qa-ans"><b>Yechim:</b> Sharqqa jami ko'chish (X o'qi): s<sub>x</sub> = 3 + 9 = 12 km. Shimolga ko'chish (Y o'qi): s<sub>y</sub> = 4 km. Umumiy ko'chish: s = √(12<sup>2</sup> + 4<sup>2</sup>) = √(144 + 16) = √160 ≈ 12,65 km.<br><b>Javob:</b> ≈ 12,65 km.</div>
+            </div>
+          </div>
+
+          <div class="lec-sec">
+            <h3 class="lec-h3">📚 Foydalanilgan adabiyotlar</h3>
+            <ol class="lit-list">
+              <li><b>P. Habibullayev, A. Boydedayev, A. Bahromov.</b> <i>Fizika</i> (Umumta'lim maktablari va akademik litseylar uchun darslik).</li>
+              <li><b>N.Sh. Turdiyev.</b> <i>Fizika</i> (6–7-sinflar uchun darslik).</li>
+              <li><b>M. O'lmasova.</b> <i>Fizika: Mexanika va molekulyar fizika</i> (Abituriyentlar va talabalar uchun o'quv qo'llanma).</li>
+              <li><b>G.S. Landsberg.</b> <i>Elementar fizika darsligi. I tom: Mexanika, issiqlik, molekulyar fizika.</i></li>
+            </ol>
+          </div>
+        `,
+        formulalar: [
+          { formula: "s<sub>x</sub> = x − x<sub>0</sub>  va  s<sub>y</sub> = y − y<sub>0</sub>", izoh: "Ko'chishning X va Y koordinata o'qlaridagi proyeksiyalari (m)" },
+          { formula: "s = √((x − x<sub>0</sub>)<sup>2</sup> + (y − y<sub>0</sub>)<sup>2</sup>)", izoh: "Tekislikda ko'chish modulini Pifagor teoremasi orqali topish formulasi (m)" },
+          { formula: "l ≥ s", izoh: "Bosib o'tilgan yo'l (l) va ko'chish moduli (s) o'rtasidagi asosiy munosabat" }
+        ],
+        havolalar: [
+          { nomi: "🧮 Kinematika kalkulyatori", url: "calc-kinematika.html" },
+          { nomi: "📐 INNOVA masalalari", url: "kitob-innova.html" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "molekulyar",
+    ikonka: "🌡️",
+    bobNomi: "2. Molekulyar fizika va termodinamika",
+    tavsif: "MKN asoslari, gaz qonunlari va issiqlik hodisalari",
+    mavzular: []
+  },
+  {
+    id: "elektrodinamika",
+    ikonka: "⚡",
+    bobNomi: "3. Elektrodinamika",
+    tavsif: "Elektrostatika, o'zgarmas tok, magnit maydon va elektromagnit induksiya",
+    mavzular: []
+  },
+  {
+    id: "tebranishlar",
+    ikonka: "〰️",
+    bobNomi: "4. Tebranishlar va to'lqinlar",
+    tavsif: "Mexanik va elektromagnit tebranishlar, tovush to'lqinlari",
+    mavzular: []
+  },
+  {
+    id: "optika",
+    ikonka: "🔦",
+    bobNomi: "5. Optika",
+    tavsif: "Yorug'likning qaytishi, sinishi, linzalar va to'lqin optikasi",
+    mavzular: []
+  },
+  {
+    id: "kvant",
+    ikonka: "⚛️",
+    bobNomi: "6. Atom va yadro fizikasi",
+    tavsif: "Fotoeffekt, atom tuzilishi va yadro reaksiyalari",
+    mavzular: []
+  }
+];
