@@ -204,11 +204,12 @@ const FIZIKA_MAVZULAR = [
       {
         raqam: "1.2",
         nomi: "To'g'ri chiziqli tekis harakat. Tezlik va harakat tenglamasi",
-        nazariya: `
-          <div style="text-align:center; padding: 1.5rem 0.5rem;">
-            <p style="margin-bottom: 1rem; font-size: 1rem;">Ushbu mavzuda nazariya, formulalar keltirib chiqarilishi (Kalashnikov va Halliday darsliklari asosida), jonli harakat grafigi simulyatori hamda 5 ta masala tahlili jamlangan.</p>
-            <a href="mavzu-1-2.html" style="display:inline-block; background:var(--accent, #4f46e5); color:#ffffff; padding:12px 24px; border-radius:12px; text-decoration:none; font-weight:700; font-size:1rem;">📖 1.2-mavzuni to'liq ochish →</a>
-          </div>
+              {
+        raqam: "1.2",
+        nomi: "To'g'ri chiziqli tekis harakat. Tezlik va harakat tenglamasi",
+        url: "mavzu-1-2.html"
+      }
+
         `
       }
 
