@@ -187,7 +187,7 @@ const FIZIKA_MAVZULAR = [
               <li><b>P. Habibullayev, A. Boydedayev, A. Bahromov.</b> <i>Fizika</i> (Umumta'lim maktablari va akademik litseylar uchun darslik).</li>
               <li><b>N.Sh. Turdiyev.</b> <i>Fizika</i> (6–7-sinflar uchun darslik).</li>
               <li><b>M. O'lmasova.</b> <i>Fizika: Mexanika va molekulyar fizika</i> (Abituriyentlar va talabalar uchun o'quv qo'llanma).</li>
-              <li><b>G.S. Landsberg.</b> <i>Elementar fizika darsligi. I tom: Mexanika, issiqlik, molekulyar fizika.</i></li>
+      
             </ol>
           </div>
         `,
