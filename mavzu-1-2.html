@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1.2-mavzu: To'g'ri chiziqli tekis harakat. Tezlik</title>
+<title>1.2-mavzu: To'g'ri chiziqli tekis harakat</title>
 <link rel="stylesheet" href="theme.css?v=3">
 <script src="theme.js?v=3"></script>
 <style>
@@ -17,7 +17,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  line-height: 1.68;
+  line-height: 1.65;
 }
 header {
   padding: 14px 12px;
@@ -42,47 +42,44 @@ header h3 { font-size: 1.15rem; }
   max-width: 760px;
   width: 94%;
   margin: 1.5rem auto 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
 }
 .card {
   background: var(--surface, #ffffff);
   border: 1px solid var(--border, #e2e8f0);
   border-radius: 20px;
-  padding: 22px;
+  padding: 20px;
   box-shadow: 0 8px 22px var(--shadow, rgba(0,0,0,0.05));
 }
 .main-title {
-  font-size: 1.45rem;
+  font-size: 1.4rem;
   font-weight: 800;
   color: var(--title, #312e81);
+  margin-bottom: 1rem;
   line-height: 1.35;
 }
 .sec-title {
-  font-size: 1.18rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--title, #312e81);
-  margin: 1.3rem 0 0.7rem;
+  margin: 1.4rem 0 0.7rem;
   padding-left: 10px;
   border-left: 4px solid var(--accent, #4f46e5);
 }
-p { margin-bottom: 0.85rem; font-size: 0.98rem; }
+p { margin-bottom: 0.85rem; font-size: 0.97rem; }
 ul, ol { margin: 0.5rem 0 1rem 1.4rem; }
-li { margin-bottom: 0.45rem; font-size: 0.96rem; }
+li { margin-bottom: 0.45rem; font-size: 0.95rem; }
 
-/* Vektor belgisi barcha telefonlarda aniq chiqishi uchun */
 .vec {
   display: inline-block;
   position: relative;
   font-weight: 700;
   font-style: italic;
-  padding-top: 3px;
+  padding-top: 4px;
 }
 .vec::before {
   content: "→";
   position: absolute;
-  top: -7px;
+  top: -6px;
   left: 0;
   right: 0;
   text-align: center;
@@ -94,27 +91,25 @@ li { margin-bottom: 0.45rem; font-size: 0.96rem; }
 .callout {
   background: var(--accent-soft, #eef2ff);
   border-left: 4px solid var(--accent, #4f46e5);
-  padding: 14px 16px;
+  padding: 13px 15px;
   border-radius: 12px;
   margin: 1rem 0;
 }
-.callout strong { color: var(--title, #312e81); }
-
 .derivation {
   background: var(--surface-soft, #f8fafc);
   border: 1px solid var(--border, #e2e8f0);
   border-radius: 14px;
-  padding: 15px 18px;
+  padding: 14px 16px;
   margin: 1rem 0;
 }
 .derivation-title {
   font-weight: 700;
   color: var(--accent, #4f46e5);
   margin-bottom: 8px;
-  font-size: 0.96rem;
+  font-size: 0.95rem;
 }
 .formula-line {
-  font-size: 1.12rem;
+  font-size: 1.08rem;
   font-weight: 700;
   color: var(--title, #312e81);
   text-align: center;
@@ -125,7 +120,6 @@ li { margin-bottom: 0.45rem; font-size: 0.96rem; }
   border: 1px solid var(--border, #e2e8f0);
 }
 
-/* Interaktiv tajriba */
 .sim-box {
   background: var(--surface-soft, #f8fafc);
   border: 1px solid var(--border, #e2e8f0);
@@ -144,7 +138,7 @@ canvas {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 @media (max-width: 540px) {
   .sim-controls { grid-template-columns: 1fr; }
@@ -176,7 +170,6 @@ input[type="range"] { width: 100%; cursor: pointer; }
   color: var(--accent, #4f46e5);
 }
 
-/* Masalalar */
 .prob-item {
   background: var(--surface-soft, #f8fafc);
   border: 1px solid var(--border, #e2e8f0);
@@ -197,7 +190,7 @@ input[type="range"] { width: 100%; cursor: pointer; }
 .b-hard { background: #fee2e2; color: #991b1b; }
 
 .sol-toggle {
-  margin-top: 10px;
+  margin-top: 8px;
   padding: 7px 14px;
   border: none;
   border-radius: 8px;
@@ -216,7 +209,6 @@ input[type="range"] { width: 100%; cursor: pointer; }
 }
 .sol-body.open { display: block; }
 
-/* Formulalar kartochkalari */
 .f-card {
   background: var(--accent-soft, #eef2ff);
   border-radius: 12px;
@@ -225,19 +217,16 @@ input[type="range"] { width: 100%; cursor: pointer; }
 }
 .f-card strong {
   display: block;
-  font-size: 1.08rem;
+  font-size: 1.06rem;
   color: var(--title, #312e81);
 }
-.f-card span {
-  font-size: 0.86rem;
-  opacity: 0.85;
-}
+.f-card span { font-size: 0.86rem; opacity: 0.85; }
 
 .nav-links {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 12px;
+  margin-top: 14px;
 }
 .link-btn {
   display: block;
@@ -273,7 +262,6 @@ footer {
 
 <header>
   <a href="fiz-mavzular.html" class="back">← Orqaga</a>
-
   <h3>1.2-mavzu</h3>
   <a href="index.html" class="home-btn">🏠 Asosiy</a>
 </header>
@@ -289,7 +277,7 @@ footer {
       <strong>Ta'rif:</strong> Jism har qanday teng vaqt oraliqlarida bir xil ko'chishlarni amalga oshiradigan harakat <strong>to'g'ri chiziqli tekis harakat</strong> deyiladi.
     </div>
 
-    <p><em>Muhim izoh (G.S. Landsberg va D. Halliday ta'kidlaganidek):</em> Ta'rifdagi <strong>"har qanday"</strong> so'zi hal qiluvchi ahamiyatga ega. Masalan, poyezd har 1 soatda 60 km yo'l bossa-yu, lekin birinchi yarim soatda 40 km, ikkinchi yarim soatda 20 km yurgan bo'lsa, bu tekis harakat emas. Tekis harakatda har bir soniya, millisekund yoki soatda ko'chishlar aynan teng bo'lishi shart.</p>
+    <p><em>Muhim izoh (G.S. Landsberg va D. Halliday ta'kidlaganidek):</em> Ta'rifdagi <strong>"har qanday"</strong> so'zi hal qiluvchi ahamiyatga ega. Masalan, poyezd har 1 soatda 60 km yo'l bossa-yu, lekin birinchi yarim soatda 40 km, ikkinchi yarim soatda 20 km yurgan bo'lsa, bu tekis harakat emas. Tekis harakatda har bir soniya yoki millisekundda ko'chishlar aynan teng bo'lishi shart.</p>
 
     <div class="sec-title">2. Tezlik vektori va uning fizik ma'nosi</div>
     <p>Harakatning jadalligini va yo'nalishini bir vaqtning o'zida xarakterlash uchun <strong>tezlik (<span class="vec">v</span>)</strong> deb ataluvchi vektor fizik kattalik kiritiladi.</p>
@@ -301,42 +289,37 @@ footer {
       <p>Tekis harakatda tezlik vektori ham moduli (son qiymati), ham yo'nalishi bo'yicha o'zgarmasdir: <strong><span class="vec">v</span> = const</strong>.</p>
     </div>
 
-    <p><strong>Tezlik birliklari (SI va amaliy birliklar):</strong></p>
     <ul>
-      <li>Xalqaro birliklar tizimida (SI) tezlik birligi — <strong>1 m/s</strong> (jism 1 sekundda 1 metr masofaga tekis ko'chsa, uning tezligi 1 m/s ga teng).</li>
-      <li>Amaliyotda ko'p ishlatiladigan <strong>km/soat</strong> birligini m/s ga o'tkazish formulasi:
-        <br><strong>1 km/soat = 1000 m / 3600 s = 1 / 3.6 m/s ≈ 0.278 m/s</strong>, aksincha <strong>1 m/s = 3.6 km/soat</strong>.</li>
+      <li>SI tizimida tezlik birligi — <strong>1 m/s</strong>.</li>
+      <li>Amaliy birliklarni o'tkazish: <strong>1 km/soat = 1 / 3.6 m/s ≈ 0.278 m/s</strong>, aksincha <strong>1 m/s = 3.6 km/soat</strong>.</li>
     </ul>
 
     <div class="sec-title">3. Harakat tenglamasi (Koordinataning vaqtga bog'liqligi)</div>
-    <p>Mexanikaning asosiy masalasini hal qilish — ya'ni istalgan <em>t</em> vaqt momentida jismning qayerda turganini topish uchun koordinata o'qini jism harakati yo'nalishi bo'ylab (masalan, OX o'qi bo'ylab) yo'naltiramiz.</p>
+    <p>Istalgan <em>t</em> vaqt momentida jismning qayerda turganini topish uchun koordinata o'qini harakat yo'nalishi bo'ylab (OX o'qi bo'ylab) yo'naltiramiz.</p>
 
     <div class="derivation">
       <div class="derivation-title">📐 Harakat tenglamasini keltirib chiqarish (2 usulda):</div>
       <p><strong>1-usul (Algebraik usul):</strong> OX o'qidagi ko'chish proyeksiyasi <em>s<sub>x</sub> = x − x<sub>0</sub></em> ekanligini va <em>v<sub>x</sub> = s<sub>x</sub> / t</em> formulasini birlashtiramiz:</p>
       <div class="formula-line">v<sub>x</sub> = (x − x<sub>0</sub>) / t &nbsp;⇒&nbsp; x − x<sub>0</sub> = v<sub>x</sub> · t</div>
       <div class="formula-line">x(t) = x<sub>0</sub> + v<sub>x</sub> · t</div>
-      <p><strong>2-usul (Diferensial va integral usul — D. Halliday uslubida):</strong> Oniy tezlik ta'rifiga ko'ra <em>v<sub>x</sub> = dx / dt</em>. Bundan <em>dx = v<sub>x</sub> dt</em>. Boshlang'ich <em>t<sub>0</sub> = 0</em> momentda koordinata <em>x<sub>0</sub></em>, ixtiyoriy <em>t</em> momentda <em>x</em> bo'lsa, <em>v<sub>x</sub> = const</em> uchun integrallaymiz:</p>
+      <p><strong>2-usul (Diferensial va integral usul — D. Halliday uslubida):</strong> Oniy tezlik ta'rifiga ko'ra <em>v<sub>x</sub> = dx / dt</em>, bundan <em>dx = v<sub>x</sub> dt</em>. Boshlang'ich <em>t<sub>0</sub> = 0</em> momentda koordinata <em>x<sub>0</sub></em>, ixtiyoriy <em>t</em> momentda <em>x</em> bo'lsa, <em>v<sub>x</sub> = const</em> uchun integrallaymiz:</p>
       <div class="formula-line">∫<sub>x₀</sub><sup>x</sup> dx = v<sub>x</sub> ∫<sub>0</sub><sup>t</sup> dt &nbsp;⇒&nbsp; x − x<sub>0</sub> = v<sub>x</sub> · t &nbsp;⇒&nbsp; x(t) = x<sub>0</sub> + v<sub>x</sub> · t</div>
     </div>
 
-    <p><strong>Proyeksiyalar ishorasi qoidasi:</strong></p>
     <ul>
-      <li>Agar jism OX o'qi yo'nalishida harakatlansa, <strong>v<sub>x</sub> > 0</strong> (musbat) bo'ladi va <em>x</em> koordinata ortib boradi.</li>
-      <li>Agar jism OX o'qiga qarama-qarshi harakatlansa, <strong>v<sub>x</sub> < 0</strong> (manfiy) bo'ladi va <em>x</em> koordinata kamayib boradi.</li>
-      <li>To'g'ri chiziqli bir tomonga harakatda bosib o'tilgan yo'l ko'chish moduliga teng: <strong>l = |s<sub>x</sub>| = |v<sub>x</sub>| · t</strong>.</li>
+      <li>Jism OX o'qi yo'nalishida harakatlansa <strong>v<sub>x</sub> > 0</strong>, qarama-qarshi harakatlansa <strong>v<sub>x</sub> < 0</strong> bo'ladi.</li>
+      <li>Bir tomonga to'g'ri chiziqli harakatda bosib o'tilgan yo'l ko'chish moduliga teng: <strong>l = |s<sub>x</sub>| = |v<sub>x</sub>| · t</strong>.</li>
     </ul>
 
     <div class="sec-title">4. Tezlik va koordinata grafiklari</div>
-    <p>Kinematikada jarayonlarni grafik usulda tahlil qilish juda qulay:</p>
     <ul>
-      <li><strong>Tezlik grafigi v<sub>x</sub>(t):</strong> <em>v<sub>x</sub> = const</em> bo'lgani uchun grafik vaqt o'qiga (t) parallel to'g'ri chiziqdan iborat. <em>v<sub>x</sub>(t)</em> chizig'i va vaqt o'qi orasida hosil bo'lgan to'g'ri to'rtburchakning <strong>yuzasi</strong> son jihatidan ko'chish proyeksiyasiga (<em>s<sub>x</sub> = v<sub>x</sub> · t</em>) teng!</li>
-      <li><strong>Koordinata grafigi x(t):</strong> <em>x(t) = x<sub>0</sub> + v<sub>x</sub> t</em> chiziqli funksiya bo'lgani uchun grafigi og'ma to'g'ri chiziq bo'ladi. Bu to'g'ri chiziqning vaqt o'qi bilan hosil qilgan burchak tangensi tezlikka teng: <strong>tg α = v<sub>x</sub></strong> (grafik qanchalik tik bo'lsa, tezlik shunchalik katta).</li>
+      <li><strong>Tezlik grafigi v<sub>x</sub>(t):</strong> <em>v<sub>x</sub> = const</em> bo'lgani uchun grafik vaqt o'qiga parallel to'g'ri chiziqdan iborat. Chiziq ostidagi to'g'ri to'rtburchak <strong>yuzasi</strong> ko'chish proyeksiyasiga (<em>s<sub>x</sub> = v<sub>x</sub> · t</em>) teng.</li>
+      <li><strong>Koordinata grafigi x(t):</strong> <em>x(t) = x<sub>0</sub> + v<sub>x</sub> t</em> chiziqli funksiya bo'lgani uchun grafigi og'ma to'g'ri chiziq bo'lib, qiyalik burchagi tangensi tezlikka teng: <strong>tg α = v<sub>x</sub></strong>.</li>
     </ul>
 
     <div class="sec-title">🔬 Interaktiv tajriba: Harakat va grafiklar bog'liqligi</div>
     <div class="sim-box">
-      <p style="font-size:0.88rem; margin-bottom:8px;">Boshlang'ich koordinata (<strong>x₀</strong>) va tezlikni (<strong>v<sub>x</sub></strong>) o'zgartirib, jism harakati hamda <strong>x(t)</strong> grafigi qanday chizilishini kuzating:</p>
+      <p style="font-size:0.88rem; margin-bottom:8px;">Boshlang'ich koordinata (<strong>x₀</strong>) va tezlikni (<strong>v<sub>x</sub></strong>) o'zgartirib, jism harakati hamda <strong>x(t)</strong> grafigini kuzating:</p>
       <canvas id="motionCanvas" width="660" height="310"></canvas>
 
       <div class="sim-controls">
@@ -351,7 +334,11 @@ footer {
       </div>
 
       <div class="sim-btns">
-            <div class="sec-title">✍️ Mavzuga oid masalalar va yechimlar</div>
+        <button class="btn" id="simPlay">⏸️ Pauza</button>
+        <button class="btn btn-sec" id="simReset">🔄 Qayta boshlash</button>
+      </div>
+    </div>
+    <div class="sec-title">✍️ Mavzuga oid masalalar va yechimlar</div>
 
     <div class="prob-item">
       <p><span class="badge b-easy">Oson</span><strong>1-masala:</strong> Tezligi 72 km/soat bo'lgan avtomobil 15 daqiqa davomida tekis harakatlanib qancha yo'l bosadi? Tezlikni m/s da ham ifodalang.</p>
@@ -370,9 +357,9 @@ footer {
       <div class="sol-body">
         <strong>Tahlil:</strong> Umumiy harakat tenglamasi <em>x(t) = x₀ + v<sub>x</sub>t</em> bilan solishtiramiz:<br>
         • Boshlang'ich koordinata: <strong>x₀ = 12 m</strong><br>
-        • Tezlik proyeksiyasi: <strong>v<sub>x</sub> = −4 m/s</strong> (ishorasi manfiy bo'lgani uchun jism OX o'qiga qarama-qarshi yo'nalishda harakatlanmoqda).<br>
-        • t = 5 s momentdagi koordinata: x(5) = 12 − 4 · 5 = 12 − 20 = <strong>−8 m</strong>.<br>
-        <strong>Javob:</strong> x₀ = 12 m; v<sub>x</sub> = −4 m/s (OX ga qarshi); x(5) = −8 m.
+        • Tezlik proyeksiyasi: <strong>v<sub>x</sub> = −4 m/s</strong> (ishorasi manfiy bo'lgani uchun OX o'qiga qarama-qarshi harakatlanmoqda).<br>
+        • t = 5 s momentdagi koordinata: x(5) = 12 − 4 · 5 = <strong>−8 m</strong>.<br>
+        <strong>Javob:</strong> x₀ = 12 m; v<sub>x</sub> = −4 m/s; x(5) = −8 m.
       </div>
     </div>
 
@@ -380,60 +367,58 @@ footer {
       <p><span class="badge b-med">O'rta</span><strong>3-masala:</strong> Ikki jismning harakat tenglamalari <em>x₁ = −20 + 6t</em> va <em>x₂ = 40 − 4t</em> (SI birliklarida) ko'rinishga ega. Ular qancha vaqtdan keyin va qayerda uchrashadilar?</p>
       <button class="sol-toggle" onclick="toggleSol(this)">👁️ Yechim va javob</button>
       <div class="sol-body">
-        <strong>Uchrashuv sharti:</strong> Jismlar uchrashgan paytda ularning koordinatalari teng bo'ladi: <em>x₁(t) = x₂(t)</em>.<br>
-        <strong>Tenglama tuzamiz:</strong> −20 + 6t = 40 − 4t<br>
-        6t + 4t = 40 + 20 ⇒ 10t = 60 ⇒ <strong>t = 6 s</strong>.<br>
-        <strong>Uchrashuv koordinatasi:</strong> x = −20 + 6 · 6 = −20 + 36 = <strong>16 m</strong> (tekshirish: 40 − 4 · 6 = 16 m).<br>
-        <strong>Javob:</strong> t = 6 s dan keyin, x = 16 m nuqtada uchrashadilar.
+        <strong>Uchrashuv sharti:</strong> <em>x₁(t) = x₂(t)</em> ⇒ −20 + 6t = 40 − 4t<br>
+        10t = 60 ⇒ <strong>t = 6 s</strong>.<br>
+        <strong>Uchrashuv koordinatasi:</strong> x = −20 + 6 · 6 = <strong>16 m</strong>.<br>
+        <strong>Javob:</strong> t = 6 s dan keyin, x = 16 m nuqtada.
       </div>
     </div>
 
     <div class="prob-item">
-      <p><span class="badge b-med">O'rta</span><strong>4-masala (S.E. Xaykin / Kalashnikov uslubida):</strong> Uzunligi 240 m bo'lgan poyezd 54 km/soat tezlik bilan tekis harakatlanib, uzunligi 360 m bo'lgan ko'prikdan necha sekundda to'liq o'tib ketadi?</p>
+      <p><span class="badge b-med">O'rta</span><strong>4-masala (Kalashnikov / Xaykin uslubida):</strong> Uzunligi 240 m bo'lgan poyezd 54 km/soat tezlik bilan tekis harakatlanib, uzunligi 360 m bo'lgan ko'prikdan necha sekundda to'liq o'tib ketadi?</p>
       <button class="sol-toggle" onclick="toggleSol(this)">👁️ Yechim va javob</button>
       <div class="sol-body">
-        <strong>Fizik tahlil:</strong> Poyezd ko'prikdan <em>to'liq</em> o'tib ketishi uchun uning boshi ko'prikka kirgan paytdan oxirgi vagoni ko'prikdan chiqib ketgunicha poyezd ham ko'prik uzunligini, ham o'z uzunligini bosib o'tishi kerak:<br>
-        s = L<sub>ko'prik</sub> + L<sub>poyezd</sub> = 360 m + 240 m = 600 m.<br>
-        Tezlik: v = 54 km/soat = 54 / 3.6 = 15 m/s.<br>
-        Vaqt: t = s / v = 600 / 15 = <strong>40 s</strong>.<br>
+        <strong>Fizik tahlil:</strong> Poyezd to'liq o'tishi uchun ko'prik va o'z uzunligi yig'indisiga teng yo'l bosadi: s = 360 + 240 = 600 m.<br>
+        Tezlik: v = 54 / 3.6 = 15 m/s.<br>
+        Vaqt: t = 600 / 15 = <strong>40 s</strong>.<br>
         <strong>Javob:</strong> 40 sekundda.
       </div>
     </div>
 
     <div class="prob-item">
-      <p><span class="badge b-hard">Murakkab</span><strong>5-masala (D. Halliday uslubida):</strong> Ikki avtomobil bir vaqtda bir shahardan ikkinchisiga qarab yo'lga chiqdi. Birinchi avtomobil butun yo'l davomida 60 km/soat o'zgarmas tezlik bilan yurdi. Ikkinchi avtomobil esa yo'lning birinchi yarmini 40 km/soat, ikkinchi yarmini 80 km/soat tezlik bilan bosib o'tdi. Qaysi avtomobil manzilga oldinroq yetib boradi?</p>
+      <p><span class="badge b-hard">Murakkab</span><strong>5-masala (D. Halliday uslubida):</strong> Ikki avtomobil bir vaqtda yo'lga chiqdi. 1-avtomobil butun yo'lni 60 km/soat tezlik bilan yurdi. 2-avtomobil esa yo'lning birinchi yarmini 40 km/soat, ikkinchi yarmini 80 km/soat tezlik bilan bosib o'tdi. Qaysi biri oldin yetib boradi?</p>
       <button class="sol-toggle" onclick="toggleSol(this)">👁️ Yechim va javob</button>
       <div class="sol-body">
-        <strong>Yechish:</strong> Umumiy masofani <em>2s</em> deb belgilaymiz.<br>
-        • 1-avtomobil sarflagan vaqt: t₁ = 2s / v₁ = 2s / 60 = <strong>s / 30</strong>.<br>
-        • 2-avtomobilning birinchi yarmiga ketgan vaqti: t₂' = s / 40; ikkinchi yarmiga ketgan vaqti: t₂'' = s / 80.<br>
-        • 2-avtomobilning umumiy vaqti: t₂ = s/40 + s/80 = 3s/80 = <strong>s / 26.67</strong>.<br>
-        Ko'rinib turibdiki, <em>s / 30 < s / 26.67</em>, ya'ni <strong>t₁ < t₂</strong> (2-avtomobilning o'rtacha tezligi 53.3 km/soat ga teng).<br>
-        <strong>Javob:</strong> Birinchi avtomobil oldinroq yetib boradi.
+        <strong>Yechish:</strong> Umumiy yo'l <em>2s</em> bo'lsin:<br>
+        • 1-avtomobil vaqti: t₁ = 2s / 60 = <strong>s / 30</strong>.<br>
+        • 2-avtomobil vaqti: t₂ = s/40 + s/80 = 3s/80 = <strong>s / 26.67</strong>.<br>
+        Chunki <em>t₁ < t₂</em>, 1-avtomobil oldin yetib boradi.<br>
+        <strong>Javob:</strong> Birinchi avtomobil.
       </div>
     </div>
+
     <div class="sec-title">📚 Foydalanilgan adabiyotlar</div>
     <ol>
-      <li><strong>P. Habibullayev, A. Boydedayev, A. Bahromov.</strong> <em>Fizika</em> (Umumta'lim maktablari va akademik litseylar uchun darslik).</li>
+      <li><strong>P. Habibullayev, A. Boydedayev, A. Bahromov.</strong> <em>Fizika</em> (Maktab va litseylar uchun darslik).</li>
       <li><strong>N.Sh. Turdiyev.</strong> <em>Fizika</em> (6–7-sinflar uchun darslik).</li>
-      <li><strong>M. O'lmasova.</strong> <em>Fizika: Mexanika va molekulyar fizika</em> (Abituriyentlar va talabalar uchun o'quv qo'llanma).</li>
-      <li><strong>G.S. Landsberg.</strong> <em>Elementar fizika darsligi. I tom: Mexanika, issiqlik, molekulyar fizika.</em></li>
-      <li><strong>S.G. Kalashnikov, S.E. Xaykin.</strong> <em>Umumiy fizika kursi: Mexanika</em> (Oliy o'quv yurtlari uchun darslik).</li>
-      <li><strong>David Halliday, Robert Resnick, Jearl Walker.</strong> <em>Fundamentals of Physics</em> (10th Edition, Wiley).</li>
+      <li><strong>M. O'lmasova.</strong> <em>Fizika: Mexanika va molekulyar fizika.</em></li>
+      <li><strong>G.S. Landsberg.</strong> <em>Elementar fizika darsligi. I tom.</em></li>
+      <li><strong>S.G. Kalashnikov, S.E. Xaykin.</strong> <em>Umumiy fizika kursi: Mexanika.</em></li>
+      <li><strong>David Halliday, Robert Resnick, Jearl Walker.</strong> <em>Fundamentals of Physics.</em></li>
     </ol>
 
     <div class="sec-title">📌 Asosiy formulalar</div>
     <div class="f-card">
       <strong><span class="vec">v</span> = <span class="vec">s</span> / t &nbsp;va&nbsp; v<sub>x</sub> = (x − x₀) / t</strong>
-      <span>To'g'ri chiziqli tekis harakat tezligi va uning OX o'qidagi proyeksiyasi (m/s)</span>
+      <span>To'g'ri chiziqli tekis harakat tezligi va proyeksiyasi (m/s)</span>
     </div>
     <div class="f-card">
       <strong>x(t) = x₀ + v<sub>x</sub> · t</strong>
-      <span>To'g'ri chiziqli tekis harakat tenglamasi (istalgan t vaqtdagi koordinata, m)</span>
+      <span>To'g'ri chiziqli tekis harakat tenglamasi (m)</span>
     </div>
     <div class="f-card">
       <strong>1 km/soat = 1/3.6 m/s &nbsp;|&nbsp; 1 m/s = 3.6 km/soat</strong>
-      <span>Tezlik o'lchov birliklarini o'zaro o'tkazish qoidasi</span>
+      <span>Tezlik birliklarini o'zaro o'tkazish</span>
     </div>
 
     <div class="nav-links">
@@ -459,11 +444,7 @@ function toggleSol(btn) {
 
 const canvas = document.getElementById('motionCanvas');
 const ctx = canvas.getContext('2d');
-
-let x0 = 0;
-let vx = 5;
-let t = 0;
-let running = true;
+let x0 = 0, vx = 5, t = 0, running = true;
 let pts = new Array();
 let lastTime = performance.now();
 
@@ -471,7 +452,6 @@ function getColors() {
   const s = getComputedStyle(document.documentElement);
   return {
     bg: s.getPropertyValue('--surface').trim() || '#ffffff',
-    soft: s.getPropertyValue('--surface-soft').trim() || '#f8fafc',
     text: s.getPropertyValue('--text').trim() || '#1e293b',
     accent: s.getPropertyValue('--accent').trim() || '#4f46e5',
     border: s.getPropertyValue('--border').trim() || '#cbd5e1'
@@ -484,9 +464,7 @@ function draw() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   const curX = x0 + vx * t;
-
-  const trackY = 58;
-  const trackL = 50, trackR = canvas.width - 50;
+  const trackY = 58, trackL = 50, trackR = canvas.width - 50;
   const trackMid = (trackL + trackR) / 2;
   const pxPerM = (trackR - trackL) / 100;
 
@@ -522,9 +500,7 @@ function draw() {
   ctx.fillText(`t = ${t.toFixed(1)} s   |   x(t) = ${curX.toFixed(1)} m   |   vₓ = ${vx} m/s`, 20, 22);
 
   const gL = 55, gR = canvas.width - 30, gT = 105, gB = canvas.height - 28;
-  const gMidY = (gT + gB) / 2;
-  const gW = gR - gL;
-  const gH = (gB - gT) / 2;
+  const gMidY = (gT + gB) / 2, gW = gR - gL, gH = (gB - gT) / 2;
 
   ctx.strokeStyle = col.border;
   ctx.lineWidth = 1.5;
@@ -546,11 +522,11 @@ function draw() {
     ctx.strokeStyle = col.accent;
     ctx.lineWidth = 2.6;
     ctx.beginPath();
-    for (let i = 0; i < pts.length; i++) {
-      const pt = pts.at(i);
+    let first = true;
+    for (const pt of pts) {
       const px = gL + (pt.t / 10) * gW;
       const py = gMidY - (Math.max(-50, Math.min(50, pt.x)) / 50) * gH;
-      if (i === 0) ctx.moveTo(px, py);
+      if (first) { ctx.moveTo(px, py); first = false; }
       else ctx.lineTo(px, py);
     }
     ctx.stroke();
@@ -560,13 +536,9 @@ function draw() {
 function loop(now) {
   const dt = Math.min((now - lastTime) / 1000, 0.05);
   lastTime = now;
-
   if (running) {
     t += dt;
-    if (t > 10) {
-      t = 0;
-      pts = new Array();
-    }
+    if (t > 10) { t = 0; pts = new Array(); }
     pts.push({ t: t, x: x0 + vx * t });
   }
   draw();
@@ -597,11 +569,5 @@ document.getElementById('simReset').addEventListener('click', resetSim);
 resetSim();
 requestAnimationFrame(loop);
 </script>
-
 </body>
 </html>
-
-        <button class="btn" id="simPlay">⏸️ Pauza</button>
-        <button class="btn btn-sec" id="simReset">🔄 Qayta boshlash</button>
-      </div>
-    </div>
