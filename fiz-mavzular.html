@@ -75,6 +75,7 @@ function openBob(idx) {
 function openMavzu(bobIdx, mIdx) {
   currentView = 'dars';
   const m = FIZIKA_MAVZULAR[bobIdx].mavzular[mIdx];
+
 if (m.url) { window.location.href = m.url; return; }
 
   document.getElementById('page-title').textContent = m.raqam + '-mavzu';
@@ -83,6 +84,7 @@ if (m.url) { window.location.href = m.url; return; }
   document.getElementById('app').innerHTML = `<div class="lesson-box"><h2 class="lesson-title">${m.raqam}. ${m.nomi}</h2><div>${m.nazariya}</div>${fHTML}${lHTML}</div>`;
   if (typeof initSimulations === 'function') initSimulations();
 }
+  
 function goBack() {
   if (currentView === 'dars') openBob(selectedBob);
   else if (currentView === 'mavzular') renderBoblar();
