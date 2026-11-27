@@ -90,7 +90,7 @@ header h1 {
 .menu-column {
   max-width: 480px;
   width: 100%;
-  margin: 2.5rem auto;
+  margin: 1.2remrem auto;
   padding: 0 1rem;
   display: flex;
   flex-direction: column;
@@ -146,6 +146,9 @@ footer {
     <button id="dark-toggle" class="dark-btn">🌙 Tun</button>
   </div>
 </header>
+<div style="width:100%; max-width:960px; margin:0.8rem auto 0; padding:0 1rem;">
+  <canvas id="owlCanvas" style="width:100%; height:130px; border-radius:16px; display:block; touch-action:none;"></canvas>
+</div>
 
 <div class="menu-column">
   <a href="fizika.html" class="menu-item">⚛️ Fizika</a>
@@ -160,6 +163,205 @@ footer {
     <a href="https://t.me" target="_blank">@Abdullayev2104</a>
   </div>
 </footer>
+<script>
+(function() {
+  const canvas = document.getElementById('owlCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let W = 600, H = 130;
+  const cell = 18;
+  let cols = 0, rows = 0;
+  let trail = new Array();
+
+  const palette = new Array('#22c55e', '#a855f7', '#38bdf8', '#ec4899', '#eab308', '#6366f1');
+
+  let owlX = 300, owlY = 65;
+  let targetX = 300, targetY = 65;
+  let wingPhase = 0;
+  let autoTime = 0;
+  let userActive = false;
+  let activeTimer = 0;
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    W = Math.max(300, Math.floor(rect.width));
+    H = 130;
+    canvas.width = W;
+    canvas.height = H;
+    cols = Math.ceil(W / cell);
+    rows = Math.ceil(H / cell);
+    if (!userActive) {
+      owlX = W / 2;
+      targetX = W / 2;
+    }
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function addTrail(x, y) {
+    const c = Math.floor(x / cell);
+    const r = Math.floor(y / cell);
+    for (let dc = -1; dc <= 1; dc++) {
+      for (let dr = -1; dr <= 1; dr++) {
+        if (Math.random() > 0.45) {
+          const nc = c + dc, nr = r + dr;
+          if (nc >= 0 && nc < cols && nr >= 0 && nr < rows) {
+            const color = palette.at(Math.floor(Math.random() * palette.length));
+            trail.push({ c: nc, r: nr, alpha: 0.9, color: color });
+          }
+        }
+      }
+    }
+    if (trail.length > 140) trail.splice(0, trail.length - 140);
+  }
+
+  function handleMove(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+    targetX = Math.max(30, Math.min(W - 30, x));
+    targetY = Math.max(28, Math.min(H - 25, y));
+    userActive = true;
+    activeTimer = 180;
+    addTrail(x, y);
+  }
+
+  canvas.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+  canvas.addEventListener('touchmove', (e) => {
+    const t = e.touches.item(0);
+    if (t) handleMove(t.clientX, t.clientY);
+  }, { passive: true });
+  canvas.addEventListener('touchstart', (e) => {
+    const t = e.touches.item(0);
+    if (t) handleMove(t.clientX, t.clientY);
+  }, { passive: true });
+
+  function drawOwl(x, y, flap, lookX, lookY) {
+    ctx.save();
+    ctx.translate(x, y);
+
+    const wingY = Math.sin(flap) * 11;
+
+    // Chap va o'ng qanotlar (qanot qoqish animatsiyasi)
+    ctx.fillStyle = '#4f46e5';
+    ctx.beginPath();
+    ctx.moveTo(-14, 0);
+    ctx.quadraticCurveTo(-34, -14 + wingY, -38, 4 + wingY);
+    ctx.quadraticCurveTo(-24, 12, -12, 8);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(14, 0);
+    ctx.quadraticCurveTo(34, -14 + wingY, 38, 4 + wingY);
+    ctx.quadraticCurveTo(24, 12, 12, 8);
+    ctx.fill();
+
+    // Tana
+    ctx.fillStyle = '#312e81';
+    ctx.beginPath();
+    ctx.ellipse(0, 2, 16, 19, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Qorin qismi
+    ctx.fillStyle = '#e0e7ff';
+    ctx.beginPath();
+    ctx.ellipse(0, 6, 10, 12, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Ko'zlar (oq doiralar)
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(-6.5, -5, 6.5, 0, Math.PI * 2);
+    ctx.arc(6.5, -5, 6.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Kursor tomonga qaraydigan ko'z qorachiqlari
+    const dx = Math.max(-2.5, Math.min(2.5, (lookX - x) * 0.03));
+    const dy = Math.max(-2.5, Math.min(2.5, (lookY - y) * 0.03));
+    ctx.fillStyle = '#0f172a';
+    ctx.beginPath();
+    ctx.arc(-6.5 + dx, -5 + dy, 3, 0, Math.PI * 2);
+    ctx.arc(6.5 + dx, -5 + dy, 3, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Tumshuq
+    ctx.fillStyle = '#f59e0b';
+    ctx.beginPath();
+    ctx.moveTo(-3, 0);
+    ctx.lineTo(3, 0);
+    ctx.lineTo(0, 5);
+    ctx.closePath();
+    ctx.fill();
+
+    // Akademik shapkacha (Magistr qalpog'i)
+    ctx.fillStyle = '#1e1b4b';
+    ctx.beginPath();
+    ctx.moveTo(0, -25);
+    ctx.lineTo(18, -19);
+    ctx.lineTo(0, -13);
+    ctx.lineTo(-18, -19);
+    ctx.closePath();
+    ctx.fill();
+
+    // Shapkacha popugi
+    ctx.strokeStyle = '#f59e0b';
+    ctx.lineWidth = 1.8;
+    ctx.beginPath();
+    ctx.moveTo(14, -18);
+    ctx.lineTo(16, -10);
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Nozik fon to'ri (katakchalar)
+    ctx.strokeStyle = 'rgba(148, 163, 184, 0.16)';
+    ctx.lineWidth = 1;
+    for (let c = 0; c <= cols; c++) {
+      ctx.beginPath(); ctx.moveTo(c * cell, 0); ctx.lineTo(c * cell, H); ctx.stroke();
+    }
+    for (let r = 0; r <= rows; r++) {
+      ctx.beginPath(); ctx.moveTo(0, r * cell); ctx.lineTo(W, r * cell); ctx.stroke();
+    }
+
+    // Rangli piksel izlarini chizish va so'ndirish
+    for (let i = trail.length - 1; i >= 0; i--) {
+      const p = trail.at(i);
+      ctx.globalAlpha = p.alpha;
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.c * cell + 1, p.r * cell + 1, cell - 2, cell - 2);
+      p.alpha -= 0.018;
+      if (p.alpha <= 0) trail.splice(i, 1);
+    }
+    ctx.globalAlpha = 1;
+
+    // Boyo'g'lining avtonom suzishi (kursor tegmasa ham o'zi uchib yuradi)
+    if (activeTimer > 0) {
+      activeTimer--;
+    } else {
+      userActive = false;
+      autoTime += 0.025;
+      targetX = W / 2 + Math.sin(autoTime) * (W * 0.32);
+      targetY = H / 2 + Math.cos(autoTime * 1.7) * 22;
+      if (Math.random() > 0.65) addTrail(owlX, owlY);
+    }
+
+    // Silliq harakatlanish va qanot qoqish
+    owlX += (targetX - owlX) * 0.06;
+    owlY += (targetY - owlY) * 0.06;
+    wingPhase += 0.22;
+
+    drawOwl(owlX, owlY, wingPhase, targetX, targetY);
+    requestAnimationFrame(loop);
+  }
+
+  requestAnimationFrame(loop);
+})();
+</script>
 
 </body>
 </html>
